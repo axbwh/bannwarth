@@ -1,0 +1,18 @@
+body {
+  margin: 0;
+  font-family: 'Roboto VF';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@font-face {
+  font-family: 'Roboto VF';
+  src: url('./fonts/Roboto-VF.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
