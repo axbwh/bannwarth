@@ -8,9 +8,46 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import styled, {createGlobalStyle} from "styled-components"
 
 import Header from "./header"
-import "./layout.css"
+import '../fonts/fonts.css'
+
+const GlobalStyle = createGlobalStyle`body{
+  padding: 0;
+  margin: 0;
+  font-family: 'Roboto VF';
+}
+`
+
+let Navwrap = styled.div`
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    padding: 30px;
+    transition: all 1s ${ease};
+    font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    pointer-events: all;
+  }
+
+  a:hover {
+    font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
+    letter-spacing: 2px;
+  }
+`
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -26,20 +63,12 @@ const Layout = ({ children }) => {
   return (
     <>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
+      <GlobalStyle/>
         <main>{children}</main>
         <footer>
-          © {new Date().getFullYear()}, Built with
+          © {new Date().getFullYear()}
           {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
         </footer>
-      </div>
     </>
   )
 }
