@@ -5,46 +5,35 @@ import Link from "gatsby-plugin-transition-link"
 
 const ease = "cubic-bezier(0.075, 0.82, 0.165, 1)"
 
-let Navwrap = styled.div`
-  position: fixed;
-  height: 100vh;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  flex-direction: column;
-  top: 0;
-  left: 0;
-  pointer-events: none;
+let NavLink = styled(Link)`
+position: fixed;
+top: 0;
+right: 0;
+text-decoration: none;
+color: inherit;
+font-size: 14px;
 
-  a {
-    text-decoration: none;
-    color: inherit;
-    padding: 30px;
-    transition: all 1s ${ease};
-    font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
-    writing-mode: vertical-rl;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    pointer-events: all;
-  }
+padding: 30px;
+transition: all 1s ${ease};
+font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
+letter-spacing: 1px;
+pointer-events: all;
 
-  a:hover {
-    font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
-    letter-spacing: 2px;
-  }
+&:hover {
+  font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
+  letter-spacing: 2px;
+}
 `
 
-const Nav = ({ children, to }) => (
-  <Navwrap>
-    <Link
+const Nav = ({ children, to, above }) => (
+    <NavLink
       to={to}
-      exit={{ length: 0.75 }}
+      exit={{ length: 0.75, zIndex : above ? 2 : 0}}
       onClick={Mouse.set}
       entry={{ length: 0 }}
     >
       {children}
-    </Link>
-  </Navwrap>
+    </NavLink>
 )
 
 export default Nav

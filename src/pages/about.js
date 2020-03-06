@@ -49,8 +49,8 @@ const About = ({ transitionStatus, entry, exit }) => {
         <SEO title="About" />
         <Content>
           <h1>About</h1>
-          <Nav to="/">
-            Home
+          <Nav to="/" above='false'>
+            go home
           </Nav>
         </Content>
       </Layout>
