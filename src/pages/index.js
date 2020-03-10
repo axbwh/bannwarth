@@ -2,10 +2,8 @@ import React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
-
-import Nav from "../components/nav"
 import Preview from "../components/preview"
+import Wrap from "../components/wrap"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -32,18 +30,16 @@ const IndexPage = () => {
   const projects = data.allProjectsJson.edges
 
   return (
-    <Layout>
-      <SEO title="Home" />
-      <h1>Home</h1>
-      <Nav to="/about">about me</Nav>
+    <Wrap>
+    <Layout title="Home" to="/about">
       {projects.map(({ node: p}) => {
         const imageData = p.images[0].childImageSharp.fluid
         return(
         <Preview slug={p.slug} title={p.title} date={p.date} imageData={imageData} />
         )
       })}
-      
     </Layout>
+    </Wrap>
   )
 }
 

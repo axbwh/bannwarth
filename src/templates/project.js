@@ -2,14 +2,11 @@ import React from "react"
 import { graphql } from "gatsby"
 import Image from 'gatsby-image'
 
-import styled from "styled-components"
-import { TransitionState } from "gatsby-plugin-transition-link"
-import { Spring } from "react-spring/renderprops"
+import Trans from '../components/trans'
 
+import styled from "styled-components"
 
 import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Nav from "../components/nav"
 
 export const query = graphql`
     query($slug: String!){
@@ -34,15 +31,17 @@ const ProjectTemplate = ({ data }) => {
   console.log(project)
 
   return (
-    <Layout>
-      <h1>{project.title}</h1>
-      <p>{project.date}</p>
-      <p>{project.description}</p>
-      {project.images.map((img, i) => {
-        const imageData = img.childImageSharp.fluid
-        return <Image fluid={imageData} key={`${project.title}-${i}`} alt={`${project.title}-${i}`} />
-      })}
-    </Layout>
+    <Trans>
+      <Layout title={project.title}>
+        <p>{project.title}</p>
+        <p>{project.date}</p>
+        <p>{project.description}</p>
+        {project.images.map((img, i) => {
+          const imageData = img.childImageSharp.fluid
+          return <Image fluid={imageData} key={`${project.title}-${i}`} alt={`${project.title}-${i}`} />
+        })}
+      </Layout>
+    </Trans>
   )
 }
 

@@ -8,9 +8,10 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 
 import Header from "./header"
+import SEO from "./seo"
 import "../fonts/fonts.css"
 
 const GlobalStyle = createGlobalStyle`body{
@@ -20,7 +21,19 @@ const GlobalStyle = createGlobalStyle`body{
 }
 `
 
-const Layout = ({ children }) => {
+const Footer = styled.footer`
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+
+  color: inherit;
+
+  font-size: 14px;
+  font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
+  letter-spacing: 1px;
+`
+
+const Layout = ({ title, to, children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -33,12 +46,11 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} />
+      <Header siteTitle={data.site.siteMetadata.title} to={to} />
+      <SEO title={title} />
       <GlobalStyle />
       <main>{children}</main>
-      <footer>
-        © {new Date().getFullYear()}
-      </footer>
+      <Footer>© {new Date().getFullYear()}</Footer>
     </>
   )
 }
