@@ -4,6 +4,7 @@ import { graphql, useStaticQuery } from "gatsby"
 import Layout from "../components/layout"
 import Preview from "../components/preview"
 import Wrap from "../components/wrap"
+import Titles from "../components/titles"
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -39,6 +40,7 @@ const IndexPage = () => {
         )
       })}
     </Layout>
+    <Titles titles={projects.map(({node: p}) => p.title)}/>
     </Wrap>
   )
 }
