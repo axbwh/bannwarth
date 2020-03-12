@@ -20,6 +20,25 @@
             "./images/thann-tall.png",
             "./images/thann-side.png"
         ]
+    },{
+        "title": "Dummy",
+        "slug": "dummy",
+        "date": "2017",
+        "description": "",
+        "video": "",
+        "images": [
+            "./images/thann-tall.png",
+            "./images/thann-side.png"
+        ]
+    },{
+        "title": "Dummyer",
+        "slug": "dummier",
+        "date": "2017",
+        "description": "",
+        "video": "",
+        "images": [
+            "./images/thann-side.png"
+        ]
     }
 
 ]
