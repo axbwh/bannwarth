@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react"
+import React, {useRef, useState, useEffect} from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
@@ -7,6 +7,8 @@ import Wrap from "../components/wrap"
 import Titles from "../components/titles"
 
 import throttle from 'lodash.throttle'
+
+let scrollTop = 0
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -32,7 +34,8 @@ const IndexPage = () => {
 
   const projects = data.allProjectsJson.edges
   const scrollRef = useRef(null)
-  const [scroll, setScroll] = useState(0)
+  const [scroll, setScroll] = useState(scrollTop)
+  
 
   //useRef to make throttle work
   const handleScroll = useRef(
@@ -47,6 +50,13 @@ const IndexPage = () => {
   const onScroll = () => {
     handleScroll()    
   }
+
+  useEffect(() => {
+    scrollRef.current.scrollTo(0, scrollTop)
+    return () => {
+      scrollTop = scrollRef.current.scrollTop
+    }
+  }, [])
 
   return (
     <Wrap scrollableNodeProps={{ ref: scrollRef, onScroll : onScroll }}>

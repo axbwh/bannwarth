@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, createRef, useState } from "react"
+import React, { useRef, useLayoutEffect, createRef, useState } from "react"
 import styled from "styled-components"
 import { useSpring, animated } from "react-spring"
 import anime from "animejs"
@@ -45,21 +45,17 @@ const Mask = styled(animated.div)`
   position: absolute;
   width: calc(80vw + 24px);
 `
-const clamp = (val, min, max) => Math.min(Math.max(val, min), max)
-
-const normalize = (val, min, max) => (clamp(val, min, max) - min) / (max - min)
 
 const axes = { x: 0, w: 0 }
 
 const Titles = ({ titles, scroll }) => {
-  const [offsets, setOffsets] = useState([])
-  const [props, setProps] = useSpring(() => ({
-    transform: `translateX(${0}%)`,
-  }))
-
   const refs = useRef(titles.map(() => createRef()))
-
+  const [offsets, setOffsets] = useState([])
   const [timeline, setTimeline] = useState()
+  const [props, setProps] = useSpring(() => ({
+    transform: `translateX(${-axes.x}%)`,
+  }))
+  
 
   const handleWidth = () => {
     axes.x = 0
@@ -77,9 +73,7 @@ const Titles = ({ titles, scroll }) => {
 
     off.reduce((acc, o, i) => {
       const duration = i < 1 ? 0.001 : 1
-
       tl.add({ x: (acc / whole) * 100, duration: duration })
-
       return acc + o
     }, 0)
 
@@ -87,7 +81,7 @@ const Titles = ({ titles, scroll }) => {
     setTimeline(tl)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     handleWidth()
   }, [])
 
