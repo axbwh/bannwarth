@@ -1,7 +1,9 @@
 import React, { useRef, useLayoutEffect, createRef, useState } from "react"
 import styled from "styled-components"
-import { useSpring, animated } from "react-spring"
+import { useSpring, animated, interpolate } from "react-spring"
 import anime from "animejs"
+import Preview from "./preview"
+import { clamp, normalize } from "./utils"
 
 const Wrap = styled.div`
   position: fixed;
@@ -27,16 +29,14 @@ const Wrap = styled.div`
     padding: 3vw;
     margin: 0px;
     color: #000;
+    text-shadow: 0 1px 100px rgba(255,255,255,0.12), 0 1px 50px rgba(255,255,255,0.12);
   }
 `
 
 const Stripe = styled(animated.div)`
   display: flex;
-  mix-blend-mode: overlay;
-`
-
-const Ghost = styled(Stripe)`
-opacity: 0.3;
+  /* mix-blend-mode: difference; */
+  opacity: 1;
 `
 
 const Mask = styled(animated.div)`
@@ -44,22 +44,42 @@ const Mask = styled(animated.div)`
   overflow: hidden;
   position: absolute;
   width: calc(80vw + 24px);
+  > div {
+    /* mix-blend-mode: saturation; */
+    opacity: 1;
+  }
 `
 
-const axes = { x: 0, w: 0 }
+const Crop = styled.div`
+  position: absolute;
+  overflow: hidden;
+  display: grid;
+  width: 60vw;
+  height: calc(60vw * 9 / 16);
+  left: 20vw;
+  box-sizing: border-box;
+`
 
-const Titles = ({ titles, scroll }) => {
-  const refs = useRef(titles.map(() => createRef()))
+const Prev = styled(animated.div)`
+
+`
+
+const axes = { x: 0, y: 0 }
+
+const Titles = ({ projects, scroll }) => {
+  const titleRefs = useRef(projects.map(() => createRef()))
   const [offsets, setOffsets] = useState([])
   const [timeline, setTimeline] = useState()
-  const [props, setProps] = useSpring(() => ({
-    transform: `translateX(${-axes.x}%)`,
-  }))
-  
 
-  const handleWidth = () => {
+  const [props, setProps] = useSpring(() => ({
+    x: `translateX(${-axes.x}%)`,
+    y: `translateY(${-axes.y}%)`,
+  }))
+
+  const handleSize = () => {
     axes.x = 0
-    const off = refs.current.map(ref => {
+    axes.y = 0
+    const off = titleRefs.current.map(ref => {
       return ref.current.getBoundingClientRect().width
     })
 
@@ -73,7 +93,7 @@ const Titles = ({ titles, scroll }) => {
 
     off.reduce((acc, o, i) => {
       const duration = i < 1 ? 0.001 : 1
-      tl.add({ x: (acc / whole) * 100, duration: duration })
+      tl.add({ x: (acc / whole) * 100, y: 100/projects.length * i,  duration: duration })
       return acc + o
     }, 0)
 
@@ -82,27 +102,39 @@ const Titles = ({ titles, scroll }) => {
   }
 
   useLayoutEffect(() => {
-    handleWidth()
+    handleSize()
   }, [])
 
   if (timeline) {
     timeline.seek(timeline.duration * scroll)
-    setProps({ transform: `translateX(${-axes.x}%)` })
+    setProps({ x: `translateX(${-axes.x}%)`, y: `translateY(${-axes.y}%)` })
   }
 
   return (
     <Wrap>
-      <Ghost style={props}>
-        {titles.map((t, i) => (
-          <h2 key={t} ref={refs.current[i]}>
-            {t}
+      {/* <Crop>
+      <Prev style={{transform: props.y }}>
+        {projects.map((p, i) => {
+          const imageData = p.images[0].childImageSharp.fluid
+          return (            
+              <Preview slug={p.slug} imageData={imageData} />
+          )
+        })}
+        </Prev>
+      </Crop> */}
+
+      <Stripe style={{ transform: props.x }}>
+        {projects.map((p, i) => (
+          <h2 key={p.title} ref={titleRefs.current[i]}>
+            {p.title}
           </h2>
         ))}
-      </Ghost>
+      </Stripe>
+
       <Mask>
-        <Stripe style={props}>
-          {titles.map((t, i) => (
-            <h2 key={`filled${t}`}>{t}</h2>
+        <Stripe style={{ transform: props.x }}>
+          {projects.map((p, i) => (
+            <h2 key={`filled${p.title}`}>{p.title}</h2>
           ))}
         </Stripe>
       </Mask>

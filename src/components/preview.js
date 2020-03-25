@@ -4,16 +4,17 @@ import styled from "styled-components"
 import Link from "gatsby-plugin-transition-link"
 import Image from "gatsby-image"
 
-const ProjectWrap = styled.div`
+const Project= styled(Link)`
   width: 100%;
-  padding: 100px 20vw;
-  box-sizing: border-box;
+  height: 100vh;
+  pointer-events: auto;
+  overflow: hidden;
+  display: block;
+  top: 0;
+  left: 0;
 
   
-  .gatsby-image-wrapper{
-    max-height: 80vh;
-    max-width: 60vw;
-    
+  .gatsby-image-wrapper{ 
   }
 
   a{
@@ -40,18 +41,14 @@ const ProjectWrap = styled.div`
 `
 
 const Preview = ({ slug, title, date, imageData }) => (
-  <ProjectWrap>
-    <Link
+    <Project
       to={`/${slug}`}
       exit={{ length: 0.75, zIndex: 0 }}
       onClick={Mouse.set}
       entry={{ length: 0 }}
     >
       <Image fluid={imageData} alt={title} />
-      <p>{date}</p>
-      {/* <h2>{title}</h2> */}
-    </Link>
-  </ProjectWrap>
+    </Project>
 )
 
 export default Preview

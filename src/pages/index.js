@@ -7,6 +7,12 @@ import Wrap from "../components/wrap"
 import Titles from "../components/titles"
 
 import throttle from 'lodash.throttle'
+import styled from "styled-components"
+
+const Dummy = styled.div`
+  height: 100vh;
+  width: 100vw;
+`
 
 let scrollTop = 0
 
@@ -65,9 +71,10 @@ const IndexPage = () => {
         const imageData = p.images[0].childImageSharp.fluid
         return(
         <Preview slug={p.slug} title={p.title} date={p.date} imageData={imageData} />
+        // <Dummy id={p.slug}/>
         )
       })}
-      <Titles scroll={scroll} titles={projects.map(({node: p}) => p.title)}/>
+      <Titles scroll={scroll} projects={projects.map(({node: p}) => p)}/>
     </Layout>
     </Wrap>
   )
