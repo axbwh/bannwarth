@@ -14,7 +14,12 @@ import Header from "./header"
 import SEO from "./seo"
 import "../fonts/fonts.css"
 
-const GlobalStyle = createGlobalStyle`body{
+const GlobalStyle = createGlobalStyle`
+*{
+  box-sizing: border-box;
+}
+
+body{
   padding: 0;
   margin: 0;
   font-family: 'Roboto VF';

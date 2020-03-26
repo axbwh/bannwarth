@@ -2,16 +2,20 @@ import React, {useRef, useState, useEffect} from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
-import Preview from "../components/preview"
 import Wrap from "../components/wrap"
-import Titles from "../components/titles"
+import Folio from "../components/folio"
 
 import throttle from 'lodash.throttle'
 import styled from "styled-components"
+import { useSpring, animated } from "react-spring"
 
 const Dummy = styled.div`
   height: 100vh;
   width: 100vw;
+  /* border: 1px red solid; */
+  &&:nth-child(2){
+    margin-top: -100vh;
+  }
 `
 
 let scrollTop = 0
@@ -64,17 +68,21 @@ const IndexPage = () => {
     }
   }, [])
 
+  const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
+
+  const [parallax, set] = useSpring(() => ({ xy: [0, 0], config: { mass: 10, tension: 550, friction: 140 } }))
+
   return (
-    <Wrap scrollableNodeProps={{ ref: scrollRef, onScroll : onScroll }}>
+    <Wrap scrollableNodeProps={{ ref: scrollRef, onScroll : onScroll, onMouseMove: ({ clientX: x, clientY: y }) => set({ xy: calc(x, y) }) }}>
     <Layout title="Home" to="/about">
+    <Folio scroll={scroll} projects={projects.map(({node: p}) => p)} parallax={parallax}/>
       {projects.map(({ node: p}) => {
         const imageData = p.images[0].childImageSharp.fluid
         return(
-        <Preview slug={p.slug} title={p.title} date={p.date} imageData={imageData} />
-        // <Dummy id={p.slug}/>
+        <Dummy key={p.slug} id={p.slug}/>
         )
       })}
-      <Titles scroll={scroll} projects={projects.map(({node: p}) => p)}/>
+      
     </Layout>
     </Wrap>
   )

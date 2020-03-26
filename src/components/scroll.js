@@ -1,0 +1,74 @@
+import React, { useRef, useLayoutEffect, useState } from "react"
+import { useSpring, animated } from "react-spring"
+import anime from "animejs"
+import styled from "styled-components"
+
+// const axes = { t: 0 }
+
+
+
+let Div = styled(animated.div)`
+    display: ${props => props.moveX ? 'inline-flex' : 'flex'};
+    flex-direction:${props => props.moveX ? 'row' : 'column'};
+`
+
+
+const Scroll = ({ children, scroll, moveX = false, ...props }) => {
+  const ref = useRef(null)
+  const axes = useRef({t: 0})
+  const [timeline, setTimeline] = useState()
+
+  const [spring, setSpring] = useSpring(() => ({
+    t: moveX ? `translateX(${-axes.current.t}%)` : `translateY(${-axes.current.t}%)`,
+  }))
+
+  const handleSize = () => {
+    // axes.current.t = 0
+
+    const sizes = Array.from(ref.current.childNodes).map(node => {
+      return moveX
+        ? node.getBoundingClientRect().width
+        : node.getBoundingClientRect().height
+    })
+
+    let total = sizes.reduce((acc, size) => acc + size)
+
+    const tl = anime.timeline({
+      targets: axes.current,
+      easing: "easeInOutCubic",
+      autoplay: false,
+    })
+
+    sizes.reduce((acc, o, i) => {
+      const duration = i < 1 ? 0.001 : 1
+      tl.add({ t: (acc / total) * 100, duration: duration })
+      return acc + o
+    }, 0)
+    tl.seek(tl.duration * scroll)
+    setTimeline(tl)
+    setSpring({
+        from: { t: moveX ? `translateX(${-axes.current.t}%)` : `translateY(${-axes.current.t}%)` },
+      })
+  }
+
+  useLayoutEffect(() => {
+    handleSize()
+  }, [])
+
+  if (timeline) {
+    timeline.seek(timeline.duration * scroll)
+    setSpring({
+      t: moveX ? `translateX(${-axes.current.t}%)` : `translateY(${-axes.current.t}%)`,
+    })
+  }
+
+  console.log(moveX ? '' : axes.current.t )
+
+  return (
+    <Div {...props} moveX={moveX} ref={ref} style={{ transform: spring.t }}>
+      {children}
+    </Div>
+  )
+}
+
+export default Scroll

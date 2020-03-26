@@ -28,7 +28,6 @@ export const query = graphql`
 
 const ProjectTemplate = ({ data }) => {
   const project = data.projectsJson
-  console.log(project)
 
   return (
     <Trans>
