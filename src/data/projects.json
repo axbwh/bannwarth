@@ -3,6 +3,7 @@
         "title": "Tessellation",
         "slug": "tessellation",
         "date": "2013 - 2020",
+        "tag": "Illustration",
         "description": "Inspired by the work of MC Escher...",
         "video": "./video/tesselations",
         "images": [
@@ -13,6 +14,7 @@
         "title": "3D Cartography",
         "slug": "thann",
         "date": "2017",
+        "tag": "data vis",
         "description": "",
         "video": "",
         "images": [
@@ -24,6 +26,7 @@
         "title": "Dummy",
         "slug": "dummy",
         "date": "2017",
+        "tag": "dummy",
         "description": "",
         "video": "",
         "images": [
@@ -34,6 +37,7 @@
         "title": "Dummyer",
         "slug": "dummier",
         "date": "2017",
+        "tag": "dum",
         "description": "",
         "video": "",
         "images": [

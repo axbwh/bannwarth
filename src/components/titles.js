@@ -42,7 +42,7 @@ const Wrap = styled(animated.div)`
 `
 
 
-const Titles = ({ projects, scroll, ...props }) => (
+const Titles = ({ projects, scroll, hoverIn, hoverOut, ...props }) => (
   <Wrap {...props}>
     <Title scroll={scroll} moveX="true">
       {projects.map((p, i) => (
@@ -61,6 +61,8 @@ const Titles = ({ projects, scroll, ...props }) => (
             onClick={Mouse.set}
             entry={{ length: 0 }}
             key={`title${i}`}
+            onMouseEnter={() => hoverIn(p.slug)}
+            onMouseLeave={hoverOut}            
           >
             {p.title}
           </Link>

@@ -7,7 +7,7 @@ import Folio from "../components/folio"
 
 import throttle from 'lodash.throttle'
 import styled from "styled-components"
-import { useSpring, animated } from "react-spring"
+import { useSpring } from "react-spring"
 
 const Dummy = styled.div`
   height: 100vh;
@@ -29,6 +29,7 @@ const IndexPage = () => {
             title
             slug
             date
+            tag
             images {
               childImageSharp {
                 fluid(maxWidth: 1920)  {

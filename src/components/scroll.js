@@ -62,7 +62,7 @@ const Scroll = ({ children, scroll, moveX = false, ...props }) => {
     })
   }
 
-  console.log(moveX ? '' : axes.current.t )
+  // console.log(moveX ? '' : axes.current.t )
 
   return (
     <Div {...props} moveX={moveX} ref={ref} style={{ transform: spring.t }}>
