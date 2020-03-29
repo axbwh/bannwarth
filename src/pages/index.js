@@ -30,6 +30,7 @@ const IndexPage = () => {
             slug
             date
             tag
+            prompt
             images {
               childImageSharp {
                 fluid(maxWidth: 1920)  {

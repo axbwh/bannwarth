@@ -4,6 +4,7 @@
         "slug": "tessellation",
         "date": "2013 - 2020",
         "tag": "Illustration",
+        "prompt": "view",
         "description": "Inspired by the work of MC Escher...",
         "video": "./video/tesselations",
         "images": [
@@ -15,6 +16,7 @@
         "slug": "thann",
         "date": "2017",
         "tag": "data vis",
+        "prompt": "view",
         "description": "",
         "video": "",
         "images": [
@@ -27,6 +29,7 @@
         "slug": "dummy",
         "date": "2017",
         "tag": "dummy",
+        "prompt": "view",
         "description": "",
         "video": "",
         "images": [
@@ -38,6 +41,7 @@
         "slug": "dummier",
         "date": "2017",
         "tag": "dum",
+        "prompt": "view",
         "description": "",
         "video": "",
         "images": [

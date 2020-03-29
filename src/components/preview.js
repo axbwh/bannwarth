@@ -16,13 +16,13 @@ const Project = styled(Link)`
   }
 `
 
-const int = (x, y, s) => `translate3d(${x * -0.03}px,${y * -0.03}px,0) scale(${s})`
+const int = (x, y) => `translate3d(${x * -0.03}px,${y * -0.03}px,0)`
 
 const Preview = ({ slug, title, imageData, parallax, hovered, ...props }) =>{ 
   
-  const [hover, set] = useSpring(() => ({ opacity: 0.5, scale: 1.05, config: { mass: 20, tension: 300, friction: 140 } }))
+  const [hover, set] = useSpring(() => ({ val: 0, config: { mass: 1, tension: 280, friction: 120 } }))
   
-  set({opacity: hovered === slug ? 1 : 0.5, scale: hovered === slug ? 1.01 : 1.05})
+  set({val: hovered === slug ? 1 : 0})
 
   return (
     <Project
@@ -32,10 +32,23 @@ const Preview = ({ slug, title, imageData, parallax, hovered, ...props }) =>{
       entry={{ length: 0 }}
       {...props}
     >
-      <animated.div style={{ transform: interpolate([parallax.xy, hover.scale], ([x, y], scale) => int(x, y, scale)) , opacity: hover.opacity }}>
-        <Image fluid={imageData} alt={title}  />
+      <animated.div style={{ transform: parallax.xy.interpolate(int) }}>
+        <animated.div
+          style={{
+            transform: hover.val.interpolate({
+              range: [0, 1],
+              output: [1.05, 1.01]
+            }).interpolate(s => `scale(${s})`),
+            opacity: hover.val.interpolate({
+              range: [0, 1],
+              output: [0.5, 1]
+            }),
+          }}
+        >
+          <Image fluid={imageData} alt={title} />
+        </animated.div>
       </animated.div>
     </Project>
-)}
+  )}
 
 export default Preview

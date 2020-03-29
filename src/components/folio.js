@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Preview from "./preview"
 import Scroll from "./scroll"
 import Titles from "./titles"
+import Link from './link'
 import { animated, useSpring } from "react-spring"
 import { romanize } from './utils'
 
@@ -37,7 +38,7 @@ const Date = styled.div`
   width: 20px;
   overflow: hidden;
   bottom: 0;
-  p {
+  p, a {
     display: block;
     writing-mode: vertical-lr;
     /* width: 20px; */
@@ -50,6 +51,8 @@ const Date = styled.div`
     white-space: nowrap;
     align-self: flex-end;
     text-transform: capitalize;
+    text-decoration: none;
+    color: inherit;
   }
 `
 
@@ -74,20 +77,36 @@ p{
 }
 `
 
+const View = styled(Date)`
+left: -30px;
+right: unset;
+a{
+  font-variation-settings: unset;
+  letter-spacing: unset;
+  text-transform: uppercase;
+}
+`
+
 
 const intDate = (x, y) => `translate3d(${x * 0.055}px,${y * 0.055}px,0)`
 const intTitle = (x, y) => `translate3d(${x * 0.085}px,${y *0.085}px,0)`
 const intImg = (x, y) => `translate3d(${x * - 0.005}px,${y * - 0.005}px,0)`
+const intView = (f) => `"wght" ${f}, "wdth" 85, "slnt" 0`
 
 const Folio = ({ projects, scroll, parallax }) => {
 
   const [hovered, set] = useState(null)
 
+  const [props, setProps] = useSpring(() => ({ factor: 0, config: { mass: 20, tension: 300, friction: 140 } }))
+  
+
   const hoverIn = slug => {
     set(slug)
+    setProps({factor : 1})
   }
   const hoverOut = () => {
     set(null)
+    setProps({factor : 0})
   }
   
   return (
@@ -114,6 +133,32 @@ const Folio = ({ projects, scroll, parallax }) => {
             ))}
           </Scroll>
         </Roman>
+        <View>
+          <Scroll style={{
+            fontVariationSettings:
+            props.factor.interpolate({
+              range: [0, 1],
+              output: [350, 1000]
+            }).interpolate(intView),
+            letterSpacing: props.factor.interpolate({
+              range: [0, 1],
+              output: [2, 4]
+            }).interpolate(f => `${f}px`)
+          }}
+          
+          scroll={scroll} moveX='true'>
+          {projects.map((p, i) => (
+          <Link
+            to={`/${p.slug}`}
+            key={`view${i}`}
+            onMouseEnter={() => hoverIn(p.slug)}
+            onMouseLeave={hoverOut}            
+          >
+            {p.prompt}
+          </Link>
+        ))}
+          </Scroll>
+        </View>
         <Img style={{ transform: parallax.xy.interpolate(intImg) }} >
           <Scroll scroll={scroll} >
             {projects.map((p, i) => {

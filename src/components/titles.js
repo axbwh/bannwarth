@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import Link from "gatsby-plugin-transition-link"
+import Link from "./link"
 import Scroll from './scroll'
 import * as Mouse from "./mouse"
 import { animated } from 'react-spring'
@@ -57,9 +57,6 @@ const Titles = ({ projects, scroll, hoverIn, hoverOut, ...props }) => (
         {projects.map((p, i) => (
           <Link
             to={`/${p.slug}`}
-            exit={{ length: 0.75, zIndex: 0 }}
-            onClick={Mouse.set}
-            entry={{ length: 0 }}
             key={`title${i}`}
             onMouseEnter={() => hoverIn(p.slug)}
             onMouseLeave={hoverOut}            

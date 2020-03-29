@@ -13,7 +13,7 @@ let Div = styled(animated.div)`
 `
 
 
-const Scroll = ({ children, scroll, moveX = false, ...props }) => {
+const Scroll = ({ children, scroll, moveX = false, style, ...props }) => {
   const ref = useRef(null)
   const axes = useRef({t: 0})
   const [timeline, setTimeline] = useState()
@@ -65,7 +65,7 @@ const Scroll = ({ children, scroll, moveX = false, ...props }) => {
   // console.log(moveX ? '' : axes.current.t )
 
   return (
-    <Div {...props} moveX={moveX} ref={ref} style={{ transform: spring.t }}>
+    <Div moveX={moveX} ref={ref} style={{ ...style, transform: spring.t }} {...props}>
       {children}
     </Div>
   )
