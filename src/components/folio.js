@@ -6,6 +6,8 @@ import Titles from "./titles"
 import Link from './link'
 import { animated, useSpring } from "react-spring"
 import { romanize } from './utils'
+import Bookmarks from './bookmarks'
+
 
 const Wrap = styled.div`
   position: sticky;
@@ -112,6 +114,7 @@ const Folio = ({ projects, scroll, parallax }) => {
   return (
     <Wrap>
       <Prev style={{ transform: parallax.xy.interpolate(intDate) }}>
+        {/* <Bookmarks scroll={scroll} projects={projects} /> */}
         <Date>
           <Scroll scroll={scroll} moveX='true'>
             {projects.map((p, i) => (
@@ -179,7 +182,7 @@ const Folio = ({ projects, scroll, parallax }) => {
         </Img>
       </Prev>
 
-      <Titles hoverIn={hoverIn} hoverOut={hoverOut} style={{ transform: parallax.xy.interpolate(intTitle) }} projects={projects} scroll={scroll} />
+      <Titles hoverIn={hoverIn} hoverOut={hoverOut} style={{ transform: parallax.xy.interpolate(intTitle) }} projects={projects} scroll={scroll} hover={props.factor} />
     </Wrap>
   )
 }

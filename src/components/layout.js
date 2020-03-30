@@ -38,7 +38,7 @@ const Footer = styled.footer`
   letter-spacing: 1px;
 `
 
-const Layout = ({ title, to, children }) => {
+const Layout = ({ title, to, children, parallax }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -51,7 +51,7 @@ const Layout = ({ title, to, children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} to={to} />
+      <Header siteTitle={data.site.siteMetadata.title} to={to} parallax={parallax}/>
       <SEO title={title} />
       <GlobalStyle />
       <main>{children}</main>

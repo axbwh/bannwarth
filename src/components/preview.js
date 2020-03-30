@@ -20,7 +20,7 @@ const int = (x, y) => `translate3d(${x * -0.03}px,${y * -0.03}px,0)`
 
 const Preview = ({ slug, title, imageData, parallax, hovered, ...props }) =>{ 
   
-  const [hover, set] = useSpring(() => ({ val: 0, config: { mass: 1, tension: 280, friction: 120 } }))
+  const [hover, set] = useSpring(() => ({ val: 0, config: { mass: 1, tension: 280, friction: 200 } }))
   
   set({val: hovered === slug ? 1 : 0})
 

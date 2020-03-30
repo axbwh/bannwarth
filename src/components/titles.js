@@ -15,11 +15,11 @@ a {
     min-width: 80vw;
     font-size: 6vw;
     line-height: 0.9em;
-    font-variation-settings: "wght" 1000, "wdth" 85, "slnt" 0;
-    letter-spacing: 1vw;
+    /* font-variation-settings: "wght" 1000, "wdth" 85, "slnt" 0; */
+    /* letter-spacing: 1vw; */
     padding-left: 3vw;
     margin: 0px;
-    color: #000;
+    color: inherit;
     /* text-shadow: 0 1px 100px rgba(255,255,255,0.12), 0 1px 50px rgba(255,255,255,0.12); */
     pointer-events: all;
     opacity: 0.2;
@@ -42,9 +42,26 @@ const Wrap = styled(animated.div)`
 `
 
 
-const Titles = ({ projects, scroll, hoverIn, hoverOut, ...props }) => (
+const Titles = ({ projects, scroll, hoverIn, hoverOut, hover, ...props }) => { 
+
+  let style = {
+    fontVariationSettings: hover
+      .interpolate({
+        range: [0, 1],
+        output: [1200, 800],
+      })
+      .interpolate(h => `"wght" ${h}, "wdth" 85, "slnt" 0`),
+      letterSpacing: hover
+      .interpolate({
+        range: [0, 1],
+        output: [1, 0.7],
+      })
+      .interpolate(h => `${h}vw`)
+  }
+
+ return (
   <Wrap {...props}>
-    <Title scroll={scroll} moveX="true">
+    <Title style={style} scroll={scroll} moveX="true">
       {projects.map((p, i) => (
         <a key={`hidden${i}`} href={`#${p.slug}`}>
           {p.title}
@@ -53,13 +70,17 @@ const Titles = ({ projects, scroll, hoverIn, hoverOut, ...props }) => (
     </Title>
 
     <Mask>
-      <Title scroll={scroll} moveX="true">
+      <Title
+        style={{...style}}
+        scroll={scroll}
+        moveX="true"
+      >
         {projects.map((p, i) => (
           <Link
             to={`/${p.slug}`}
             key={`title${i}`}
             onMouseEnter={() => hoverIn(p.slug)}
-            onMouseLeave={hoverOut}            
+            onMouseLeave={hoverOut}
           >
             {p.title}
           </Link>
@@ -68,5 +89,6 @@ const Titles = ({ projects, scroll, hoverIn, hoverOut, ...props }) => (
     </Mask>
   </Wrap>
 )
+        }
 
 export default Titles

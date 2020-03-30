@@ -33,7 +33,7 @@ const IndexPage = () => {
             prompt
             images {
               childImageSharp {
-                fluid(maxWidth: 1920)  {
+                fluid(maxWidth: 1920) {
                   ...GatsbyImageSharpFluid
                 }
               }
@@ -47,20 +47,21 @@ const IndexPage = () => {
   const projects = data.allProjectsJson.edges
   const scrollRef = useRef(null)
   const [scroll, setScroll] = useState(scrollTop)
-  
 
   //useRef to make throttle work
   const handleScroll = useRef(
     throttle(() => {
       if (scrollRef) {
-        let scrollProgress =  scrollRef.current.scrollTop / (scrollRef.current.scrollHeight - window.innerHeight)
+        let scrollProgress =
+          scrollRef.current.scrollTop /
+          (scrollRef.current.scrollHeight - window.innerHeight)
         setScroll(scrollProgress)
       }
     }, 50)
   ).current
 
   const onScroll = () => {
-    handleScroll()    
+    handleScroll()
   }
 
   useEffect(() => {
@@ -72,20 +73,30 @@ const IndexPage = () => {
 
   const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
 
-  const [parallax, set] = useSpring(() => ({ xy: [0, 0], config: { mass: 10, tension: 550, friction: 140 } }))
+  const [parallax, set] = useSpring(() => ({
+    xy: [0, 0],
+    config: { mass: 10, tension: 550, friction: 140 },
+  }))
 
   return (
-    <Wrap scrollableNodeProps={{ ref: scrollRef, onScroll : onScroll, onMouseMove: ({ clientX: x, clientY: y }) => set({ xy: calc(x, y) }) }}>
-    <Layout title="Home" to="/about">
-    <Folio scroll={scroll} projects={projects.map(({node: p}) => p)} parallax={parallax}/>
-      {projects.map(({ node: p}) => {
-        const imageData = p.images[0].childImageSharp.fluid
-        return(
-        <Dummy key={p.slug} id={p.slug}/>
-        )
-      })}
-      
-    </Layout>
+    <Wrap
+      scrollableNodeProps={{
+        ref: scrollRef,
+        onScroll: onScroll,
+        onMouseMove: ({ clientX: x, clientY: y }) => set({ xy: calc(x, y) }),
+      }}
+    >
+      <Layout title="Home" to="/about" parallax={parallax}>
+        <Folio
+          scroll={scroll}
+          projects={projects.map(({ node: p }) => p)}
+          parallax={parallax}
+        />
+        {projects.map(({ node: p }) => {
+          const imageData = p.images[0].childImageSharp.fluid
+          return <Dummy key={p.slug} id={p.slug} />
+        })}
+      </Layout>
     </Wrap>
   )
 }
