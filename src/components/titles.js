@@ -5,24 +5,26 @@ import Scroll from './scroll'
 import * as Mouse from "./mouse"
 import { animated } from 'react-spring'
 
+const navSize = 80;
 
 const Title = styled(Scroll)`
-  position: absolute;
 a {
     text-decoration: none;
     white-space: nowrap;
     text-transform: uppercase;
     min-width: 80vw;
     font-size: 6vw;
-    line-height: 0.9em;
-    /* font-variation-settings: "wght" 1000, "wdth" 85, "slnt" 0; */
-    /* letter-spacing: 1vw; */
+    line-height: 1em;
+    height: fit-content;
     padding-left: 3vw;
+    padding-bottom: 30px;
     margin: 0px;
     color: inherit;
-    /* text-shadow: 0 1px 100px rgba(255,255,255,0.12), 0 1px 50px rgba(255,255,255,0.12); */
     pointer-events: all;
     opacity: 0.2;
+    @media (max-width: 768px){
+      margin-top: calc(${ navSize }px);
+    }
   }
 `
 
@@ -30,6 +32,7 @@ const Mask = styled.div`
   display: flex;
   overflow: hidden;
   position: absolute;
+  top: 0px;
   height: 100vh;
   width: calc(80vw + 24px);
   a {
@@ -39,6 +42,14 @@ const Mask = styled.div`
 `
 const Wrap = styled(animated.div)`
   align-self: flex-start;
+  /* justify-self: center; */
+  position: relative;
+  display: inline-block;
+  padding-left: 30px;
+  z-index: 5;
+  @media (min-width: 768px){
+      position: absolute;
+    }
 `
 
 

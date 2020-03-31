@@ -8,6 +8,7 @@ import { animated, useSpring } from "react-spring"
 import { romanize } from './utils'
 import Bookmarks from './bookmarks'
 
+const navSize = 80;
 
 const Wrap = styled.div`
   position: sticky;
@@ -17,7 +18,9 @@ const Wrap = styled.div`
   left: 0;
   overflow: hidden;
   align-items: center;
-  justify-content: center;
+  @media (min-width: 768px) {
+    justify-content: center
+  }
   height: 100vh;
   width: 100vw;
   pointer-events: none;
@@ -30,9 +33,14 @@ const Img = styled(animated.div)`
 `
 
 const Prev = styled(animated.div)`
-  position: absolute;
+  position: relative;
+  display: block;
   width: 60vw;
   height: calc(60vw * 9 / 16);
+  @media (max-width: 768px) {
+    width: calc(100vw - 80px);
+    height: calc(100vh - ${navSize}px - 6vw - 30px - 10px);
+  }
 `
 const Date = styled.div`
   position: absolute;
@@ -40,6 +48,7 @@ const Date = styled.div`
   width: 20px;
   overflow: hidden;
   bottom: 0;
+  
   p, a {
     display: block;
     writing-mode: vertical-lr;
@@ -66,6 +75,9 @@ p{
 }
 `
 const Roman = styled(Tag)`
+@media (max-width: 768px) {
+    display: none;
+  }
 right: unset;
 left: -30px;
 height: 22px;
@@ -80,17 +92,20 @@ p{
 `
 
 const View = styled(Date)`
-left: -30px;
-right: unset;
-a{
-  font-variation-settings: unset;
-  letter-spacing: unset;
-  text-transform: uppercase;
-}
+  left: -30px;
+  right: unset;
+  @media (max-width: 768px) {
+    display: none;
+  }
+  a {
+    font-variation-settings: unset;
+    letter-spacing: unset;
+    text-transform: uppercase;
+  }
 `
 
 
-const intDate = (x, y) => `translate3d(${x * 0.055}px,${y * 0.055}px,0)`
+const intPrev = (x, y) => `translate3d(${x * 0.055}px,${y * 0.055}px,0)`
 const intTitle = (x, y) => `translate3d(${x * 0.085}px,${y *0.085}px,0)`
 const intImg = (x, y) => `translate3d(${x * - 0.005}px,${y * - 0.005}px,0)`
 const intView = (f) => `"wght" ${f}, "wdth" 85, "slnt" 0`
@@ -113,8 +128,9 @@ const Folio = ({ projects, scroll, parallax }) => {
   
   return (
     <Wrap>
-      <Prev style={{ transform: parallax.xy.interpolate(intDate) }}>
-        {/* <Bookmarks scroll={scroll} projects={projects} /> */}
+      <Bookmarks scroll={scroll} projects={projects}/>
+      <Titles hoverIn={hoverIn} hoverOut={hoverOut} style={{ transform: parallax.xy.interpolate(intTitle) }} projects={projects} scroll={scroll} hover={props.factor} />
+      <Prev style={{ transform: parallax.xy.interpolate(intPrev) }}>
         <Date>
           <Scroll scroll={scroll} moveX='true'>
             {projects.map((p, i) => (
@@ -181,8 +197,6 @@ const Folio = ({ projects, scroll, parallax }) => {
           </Scroll>
         </Img>
       </Prev>
-
-      <Titles hoverIn={hoverIn} hoverOut={hoverOut} style={{ transform: parallax.xy.interpolate(intTitle) }} projects={projects} scroll={scroll} hover={props.factor} />
     </Wrap>
   )
 }

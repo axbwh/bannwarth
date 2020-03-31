@@ -23,7 +23,7 @@ const Scroll = ({ children, scroll, moveX = false, style, ...props }) => {
   }))
 
   const handleSize = () => {
-    // axes.current.t = 0
+    axes.current.t = 0
 
     const sizes = Array.from(ref.current.childNodes).map(node => {
       return moveX
@@ -35,7 +35,7 @@ const Scroll = ({ children, scroll, moveX = false, style, ...props }) => {
 
     const tl = anime.timeline({
       targets: axes.current,
-      easing: "easeInOutCubic",
+      easing: "easeInOutQuint",
       autoplay: false,
     })
 
@@ -53,6 +53,10 @@ const Scroll = ({ children, scroll, moveX = false, style, ...props }) => {
 
   useLayoutEffect(() => {
     handleSize()
+    window.addEventListener('resize', handleSize)
+    return () => {
+      window.removeEventListener('resize', handleSize)
+    }
   }, [])
 
   if (timeline) {

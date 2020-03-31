@@ -60,6 +60,7 @@ const IndexPage = () => {
     }, 50)
   ).current
 
+
   const onScroll = () => {
     handleScroll()
   }

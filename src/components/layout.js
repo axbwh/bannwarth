@@ -55,7 +55,7 @@ const Layout = ({ title, to, children, parallax }) => {
       <SEO title={title} />
       <GlobalStyle />
       <main>{children}</main>
-      <Footer>© {new Date().getFullYear()}</Footer>
+      {/* <Footer>© {new Date().getFullYear()}</Footer> */}
     </>
   )
 }
