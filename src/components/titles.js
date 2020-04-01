@@ -1,113 +1,105 @@
-import React, { useRef, useLayoutEffect, createRef, useState } from "react"
+import React from "react"
 import styled from "styled-components"
-import { useSpring, animated } from "react-spring"
-import anime from "animejs"
+import Link from "./link"
+import Scroll from './scroll'
+import * as Mouse from "./mouse"
+import { animated } from 'react-spring'
 
-const Wrap = styled.div`
-  position: fixed;
-  display: flex;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  pointer-events: none;
-  z-index: 100;
+const navSize = 80;
 
-  h2 {
+const Title = styled(Scroll)`
+a {
+    text-decoration: none;
     white-space: nowrap;
     text-transform: uppercase;
-    box-sizing: border-box;
     min-width: 80vw;
     font-size: 6vw;
-    line-height: 0.9em;
-    font-variation-settings: "wght" 1000, "wdth" 85, "slnt" 0;
-    letter-spacing: 1vw;
-    padding: 3vw;
+    line-height: 1em;
+    height: fit-content;
+    padding-left: 3vw;
+    padding-bottom: 30px;
     margin: 0px;
-    color: #000;
+    color: inherit;
+    pointer-events: all;
+    opacity: 0.2;
+    @media (max-width: 768px){
+      margin-top: calc(${ navSize }px);
+    }
   }
 `
 
-const Stripe = styled(animated.div)`
-  display: flex;
-  mix-blend-mode: overlay;
-`
-
-const Ghost = styled(Stripe)`
-opacity: 0.3;
-`
-
-const Mask = styled(animated.div)`
+const Mask = styled.div`
   display: flex;
   overflow: hidden;
   position: absolute;
+  top: 0px;
+  height: 100vh;
   width: calc(80vw + 24px);
+  a {
+    /* mix-blend-mode: saturation; */
+    opacity: 1;
+  }
+`
+const Wrap = styled(animated.div)`
+  align-self: flex-start;
+  /* justify-self: center; */
+  position: relative;
+  display: inline-block;
+  padding-left: 30px;
+  z-index: 5;
+  @media (min-width: 768px){
+      position: absolute;
+    }
 `
 
-const axes = { x: 0, w: 0 }
 
-const Titles = ({ titles, scroll }) => {
-  const refs = useRef(titles.map(() => createRef()))
-  const [offsets, setOffsets] = useState([])
-  const [timeline, setTimeline] = useState()
-  const [props, setProps] = useSpring(() => ({
-    transform: `translateX(${-axes.x}%)`,
-  }))
-  
+const Titles = ({ projects, scroll, hoverIn, hoverOut, hover, ...props }) => { 
 
-  const handleWidth = () => {
-    axes.x = 0
-    const off = refs.current.map(ref => {
-      return ref.current.getBoundingClientRect().width
-    })
-
-    const tl = anime.timeline({
-      targets: axes,
-      easing: "easeInOutCubic",
-      autoplay: false,
-    })
-
-    let whole = off.reduce((acc, w) => acc + w)
-
-    off.reduce((acc, o, i) => {
-      const duration = i < 1 ? 0.001 : 1
-      tl.add({ x: (acc / whole) * 100, duration: duration })
-      return acc + o
-    }, 0)
-
-    setOffsets(off)
-    setTimeline(tl)
+  let style = {
+    fontVariationSettings: hover
+      .interpolate({
+        range: [0, 1],
+        output: [1200, 800],
+      })
+      .interpolate(h => `"wght" ${h}, "wdth" 85, "slnt" 0`),
+      letterSpacing: hover
+      .interpolate({
+        range: [0, 1],
+        output: [1, 0.7],
+      })
+      .interpolate(h => `${h}vw`)
   }
 
-  useLayoutEffect(() => {
-    handleWidth()
-  }, [])
+ return (
+  <Wrap {...props}>
+    <Title style={style} scroll={scroll} moveX="true">
+      {projects.map((p, i) => (
+        <a key={`hidden${i}`} href={`#${p.slug}`}>
+          {p.title}
+        </a>
+      ))}
+    </Title>
 
-  if (timeline) {
-    timeline.seek(timeline.duration * scroll)
-    setProps({ transform: `translateX(${-axes.x}%)` })
-  }
-
-  return (
-    <Wrap>
-      <Ghost style={props}>
-        {titles.map((t, i) => (
-          <h2 key={t} ref={refs.current[i]}>
-            {t}
-          </h2>
+    <Mask>
+      <Title
+        style={{...style}}
+        scroll={scroll}
+        moveX="true"
+      >
+        {projects.map((p, i) => (
+          <Link
+            to={`/${p.slug}`}
+            key={`title${i}`}
+            onMouseEnter={() => hoverIn(p.slug)}
+            onMouseLeave={hoverOut}
+          >
+            {p.title}
+          </Link>
         ))}
-      </Ghost>
-      <Mask>
-        <Stripe style={props}>
-          {titles.map((t, i) => (
-            <h2 key={`filled${t}`}>{t}</h2>
-          ))}
-        </Stripe>
-      </Mask>
-    </Wrap>
-  )
-}
+      </Title>
+    </Mask>
+  </Wrap>
+)
+        }
 
 export default Titles

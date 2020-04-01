@@ -14,7 +14,12 @@ import Header from "./header"
 import SEO from "./seo"
 import "../fonts/fonts.css"
 
-const GlobalStyle = createGlobalStyle`body{
+const GlobalStyle = createGlobalStyle`
+*{
+  box-sizing: border-box;
+}
+
+body{
   padding: 0;
   margin: 0;
   font-family: 'Roboto VF';
@@ -33,7 +38,7 @@ const Footer = styled.footer`
   letter-spacing: 1px;
 `
 
-const Layout = ({ title, to, children }) => {
+const Layout = ({ title, to, children, parallax }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -46,11 +51,11 @@ const Layout = ({ title, to, children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata.title} to={to} />
+      <Header siteTitle={data.site.siteMetadata.title} to={to} parallax={parallax}/>
       <SEO title={title} />
       <GlobalStyle />
       <main>{children}</main>
-      <Footer>© {new Date().getFullYear()}</Footer>
+      {/* <Footer>© {new Date().getFullYear()}</Footer> */}
     </>
   )
 }

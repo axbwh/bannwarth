@@ -6,6 +6,7 @@
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "animejs": "^3.1.0",
+    "d3-ease": "^1.0.6",
     "gatsby": "^2.19.7",
     "gatsby-image": "^2.2.39",
     "gatsby-plugin-manifest": "^2.2.39",
@@ -17,6 +18,7 @@
     "gatsby-source-filesystem": "^2.1.46",
     "gatsby-transformer-json": "^2.2.26",
     "gatsby-transformer-sharp": "^2.3.13",
+    "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
