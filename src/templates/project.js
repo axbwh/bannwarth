@@ -4,7 +4,7 @@ import Image from 'gatsby-image'
 
 import Trans from '../components/trans'
 
-import styled from "styled-components"
+// import styled from "styled-components"
 
 import Layout from "../components/layout"
 
