@@ -44,7 +44,7 @@ const Scroll = ({ children, scroll, moveX = false, style, ...props }) => {
       tl.add({ t: (acc / total) * 100, duration: duration })
       return acc + o
     }, 0)
-    tl.seek(tl.duration * scroll)
+    tl.seek(tl.duration * scroll.top)
     setTimeline(tl)
     setSpring({
         from: { t: moveX ? `translateX(${-axes.current.t}%)` : `translateY(${-axes.current.t}%)` },
@@ -60,7 +60,7 @@ const Scroll = ({ children, scroll, moveX = false, style, ...props }) => {
   }, [])
 
   if (timeline) {
-    timeline.seek(timeline.duration * scroll)
+    timeline.seek(timeline.duration * scroll.top)
     setSpring({
       t: moveX ? `translateX(${-axes.current.t}%)` : `translateY(${-axes.current.t}%)`,
     })

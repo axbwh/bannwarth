@@ -3,7 +3,7 @@ import styled from "styled-components"
 import anime from "animejs"
 import { animated, useSpring, interpolate } from "react-spring"
 import { romanize } from './utils'
-import debounce from 'lodash.debounce'
+import { easeExpOut } from 'd3-ease'
 
 const navSize = 79;
 
@@ -63,14 +63,17 @@ const Bookmarks = ({projects, scroll, ...props}) => {
 
   const [spring, setSpring] = useSpring(() => ({
     xy: [0, 0],
+    s: [0 , 0],
+    config : 	{ mass: 1, tension: 300, friction: 32 }
   }))
 
   const [stretch, setStretch] = useSpring(() => ({
-    s: [0, 0]
+    s: [0, 0],
+    config : 	{ mass: 1, tension: 300, friction: 12 }
   }))
 
-  const resetStretch = useRef(debounce(o => {setStretch(o) 
-  console.log('bounce')}, 50)).current
+  // const resetStretch = useRef(debounce(o => {setStretch(o) 
+  // console.log('bounce')}, 50)).current
 
 
   const handleSize = () => {
@@ -90,7 +93,7 @@ const Bookmarks = ({projects, scroll, ...props}) => {
       tl.add({ x: i < 1 ? [x, x] : x, y: i < 1 ? [y, y] : y, duration: duration })
     })
 
-    tl.seek(tl.duration * scroll)
+    tl.seek(tl.duration * scroll.top)
     setTimeline(tl)
   }
 
@@ -103,26 +106,19 @@ const Bookmarks = ({projects, scroll, ...props}) => {
   }, [])
 
   if (timeline) {
-    let oldX = axes.current.x, oldY = axes.current.y
+    timeline.seek(timeline.duration * scroll.top)
 
-    timeline.seek(timeline.duration * scroll)
+    let absAcc = easeExpOut(Math.abs(scroll.speed)) * 50
+    let acceleration = scroll.speed > 0 ? absAcc : -absAcc
 
-    let acceleration = [
-      (oldX - axes.current.x) / size.x * 270,
-      -(oldY - axes.current.y) / size.y * 270,
-    ]
-
-    setStretch({s: acceleration })
-    
-    resetStretch({s: [0, 0]})
-
-    setSpring({ xy: [axes.current.x, axes.current.y] })
+    setStretch({s: [spring.xy.getValue()[0] === axes.current.x ? 0 : acceleration, spring.xy.getValue()[1] === axes.current.y ? 0 : -acceleration ] })
+    setSpring(({ xy: [axes.current.x, axes.current.y] }))
   }
 
   
     return (
       <Wrap ref={ref} {...props}>
-        <Dot style={{transform: interpolate( [spring.xy, stretch.s], ([x ,y], [sx, sy]) => `translate(${x}px, ${y}px) skew(${sx}deg, ${sy}deg)`)}}/>
+        <Dot style={{transform: interpolate( [spring.xy, stretch.s], ([x ,y], [sx, sy]) => `translate(${x}px, ${y}px) skew(${sx}deg, ${sy}deg)`)  }}/>
         {projects.map((p, i) => (
           <a href={`#${p.slug}`}>{romanize(i+1)}</a>
         ))}

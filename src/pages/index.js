@@ -6,6 +6,7 @@ import Wrap from "../components/wrap"
 import Folio from "../components/folio"
 
 import throttle from 'lodash.throttle'
+import debounce from 'lodash.debounce'
 import styled from "styled-components"
 import { useSpring } from "react-spring"
 
@@ -46,23 +47,31 @@ const IndexPage = () => {
 
   const projects = data.allProjectsJson.edges
   const scrollRef = useRef(null)
-  const [scroll, setScroll] = useState(scrollTop)
+  const [scroll, setScroll] = useState({top: scrollTop, speed: 0})
 
   //useRef to make throttle work
-  const handleScroll = useRef(
+  const throttleScroll = useRef(
     throttle(() => {
       if (scrollRef) {
         let scrollProgress =
           scrollRef.current.scrollTop /
           (scrollRef.current.scrollHeight - window.innerHeight)
-        setScroll(scrollProgress)
+        setScroll(({top}) => ({top: scrollProgress, speed : top - scrollProgress}))
       }
     }, 50)
   ).current
 
+  const debounceScroll = useRef(
+    debounce(() => {
+        setScroll(({speed, ...prev}) => ({speed: 0, ...prev}))
+    }, 100)
+  ).current 
+
 
   const onScroll = () => {
-    handleScroll()
+    throttleScroll()
+    debounceScroll()
+
   }
 
   useEffect(() => {
