@@ -35,9 +35,20 @@ const Wrap = styled(animated.div)`
     color: inherit;
     text-decoration: none;
     padding: 30px;
+    text-align: center;
+    box-sizing: unset;
+    width: 20px;
     @media (max-width: 768px) {
       padding: 10px;
       text-align: center;
+    }
+    transition-property: font-variation-settings,  letter-spacing;
+    transition-duration: 0.6s;
+    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
+
+    &:hover{
+      font-variation-settings: "wght" 500, "wdth" 85, "slnt" 0;
+      letter-spacing: 2px;
     }
   }
 `
@@ -56,9 +67,8 @@ mix-blend-mode: difference;
 
 const Bookmarks = ({projects, scroll, ...props}) => {
   const ref = useRef(null)
-  const [size, setSize] = useState({x: 0, y: 0})
   const axes = useRef({x: 0, y:0})
-  // const [moveX, setMove] = useState(true)
+
   const [timeline, setTimeline] = useState()
 
   const [spring, setSpring] = useSpring(() => ({
@@ -72,13 +82,8 @@ const Bookmarks = ({projects, scroll, ...props}) => {
     config : 	{ mass: 1, tension: 300, friction: 12 }
   }))
 
-  // const resetStretch = useRef(debounce(o => {setStretch(o) 
-  // console.log('bounce')}, 50)).current
-
-
   const handleSize = () => {
     const bmarks = Array.from(ref.current.childNodes).slice(1)
-    setSize({x: ref.current.getBoundingClientRect().width, y: ref.current.getBoundingClientRect().height})
 
     const tl = anime.timeline({
       targets: axes.current,

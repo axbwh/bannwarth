@@ -50,6 +50,11 @@ const IndexPage = () => {
   const [scroll, setScroll] = useState({top: scrollTop, speed: 0})
 
   //useRef to make throttle work
+  const throttleMouse = useRef(
+    throttle((x, y) => set({ xy: calc(x, y) }), 100)
+  ).current
+  
+  
   const throttleScroll = useRef(
     throttle(() => {
       if (scrollRef) {
@@ -58,7 +63,7 @@ const IndexPage = () => {
           (scrollRef.current.scrollHeight - window.innerHeight)
         setScroll(({top}) => ({top: scrollProgress, speed : top - scrollProgress}))
       }
-    }, 50)
+    }, 100)
   ).current
 
   const debounceScroll = useRef(
@@ -93,7 +98,7 @@ const IndexPage = () => {
       scrollableNodeProps={{
         ref: scrollRef,
         onScroll: onScroll,
-        onMouseMove: ({ clientX: x, clientY: y }) => set({ xy: calc(x, y) }),
+        onMouseMove: ({ clientX: x, clientY: y }) => throttleMouse(x, y),
       }}
     >
       <Layout title="Home" to="/about" parallax={parallax}>
