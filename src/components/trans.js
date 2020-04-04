@@ -1,7 +1,6 @@
 import React from "react"
 import { Spring } from "react-spring/renderprops"
 import { TransitionState } from "gatsby-plugin-transition-link"
-import styled from "styled-components"
 import * as Mouse from "../components/mouse"
 import Wrap from '../components/wrap'
 

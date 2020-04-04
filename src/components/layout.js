@@ -8,7 +8,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import styled, { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components"
 
 import Header from "./header"
 import SEO from "./seo"
@@ -26,17 +26,7 @@ body{
 }
 `
 
-const Footer = styled.footer`
-  position: fixed;
-  right: 30px;
-  bottom: 30px;
 
-  color: inherit;
-
-  font-size: 14px;
-  font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
-  letter-spacing: 1px;
-`
 
 const Layout = ({ title, to, children, parallax }) => {
   const data = useStaticQuery(graphql`
@@ -55,7 +45,6 @@ const Layout = ({ title, to, children, parallax }) => {
       <SEO title={title} />
       <GlobalStyle />
       <main>{children}</main>
-      {/* <Footer>© {new Date().getFullYear()}</Footer> */}
     </>
   )
 }

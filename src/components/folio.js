@@ -1,14 +1,11 @@
-import React, { useRef, useLayoutEffect, createRef, useState } from "react"
+import React, { useRef, useLayoutEffect, useState } from "react"
 import styled from "styled-components"
 import Preview from "./preview"
-import Scroll from "./scroll"
 import Titles from "./titles"
-import Link from './link'
-import { animated, useSpring } from "react-spring"
-import { romanize } from './utils'
-import Bookmarks from './bookmarks'
-
-const navSize = 80;
+import { useSpring } from "react-spring"
+import Bookmarks from "./bookmarks"
+import anime from "animejs"
+import { easeExpOut } from 'd3-ease'
 
 const Wrap = styled.div`
   position: sticky;
@@ -19,7 +16,7 @@ const Wrap = styled.div`
   overflow: hidden;
   align-items: center;
   @media (min-width: 768px) {
-    justify-content: center
+    justify-content: center;
   }
   height: 100vh;
   width: 100vw;
@@ -27,176 +24,79 @@ const Wrap = styled.div`
   z-index: 100;
 `
 
-const Img = styled(animated.div)`
-  position: relative;
-  overflow: hidden;
-`
-
-const Prev = styled(animated.div)`
-  position: relative;
-  display: block;
-  width: 60vw;
-  height: calc(60vw * 9 / 16);
-  @media (max-width: 768px) {
-    width: calc(100vw - 80px);
-    height: calc(100vh - ${navSize}px - 6vw - 30px - 10px);
-  }
-`
-const Date = styled.div`
-  position: absolute;
-  right: -30px;
-  width: 20px;
-  overflow: hidden;
-  bottom: 0;
-  
-  p, a {
-    display: block;
-    writing-mode: vertical-lr;
-    /* width: 20px; */
-    line-height: 20px;
-    font-size: 14px;
-    font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
-    letter-spacing: 2px;
-    pointer-events: all;
-    margin: 0;
-    white-space: nowrap;
-    align-self: flex-end;
-    text-transform: capitalize;
-    text-decoration: none;
-    color: inherit;
-  }
-`
-
-const Tag = styled(Date)`
-top: 0;
-bottom: unset;
-p{
-  align-self: flex-start;
-}
-`
-const Roman = styled(Tag)`
-@media (max-width: 768px) {
-    display: none;
-  }
-right: unset;
-left: -30px;
-height: 22px;
-width: auto;
-p{
-  align-self: flex-end;
-  line-height: 22px;
-  font-size: 20px;
-  font-variation-settings: "wght" 1000, "wdth" 85, "slnt" 0;
-  writing-mode: unset;
-}
-`
-
-const View = styled(Date)`
-  left: -30px;
-  right: unset;
-  @media (max-width: 768px) {
-    display: none;
-  }
-  a {
-    font-variation-settings: unset;
-    letter-spacing: unset;
-    text-transform: uppercase;
-  }
-`
-
-
 const intPrev = (x, y) => `translate3d(${x * 0.055}px,${y * 0.055}px,0)`
-const intTitle = (x, y) => `translate3d(${x * 0.085}px,${y *0.085}px,0)`
-const intImg = (x, y) => `translate3d(${x * - 0.005}px,${y * - 0.005}px,0)`
-const intView = (f) => `"wght" ${f}, "wdth" 85, "slnt" 0`
+const intTitle = (x, y) => `translate3d(${x * 0.085}px,${y * 0.085}px,0)`
 
 const Folio = ({ projects, scroll, parallax }) => {
-
   const [hovered, set] = useState(null)
 
-  const [props, setProps] = useSpring(() => ({ factor: 0, config: { mass: 20, tension: 300, friction: 140 } }))
-  
+  const [props, setProps] = useSpring(() => ({
+    factor: 0,
+    config: { mass: 20, tension: 300, friction: 140 },
+  }))
+
+  const axes = useRef({ transform: 0, skew: 0 })
+
+  const [timeline, setTimeline] = useState()
+
+  const [spring, setSpring] = useSpring(() => ({
+    transform: -axes.current.transform,
+    skew: axes.current.skew,
+  }))
+
+  useLayoutEffect(() => {
+    const tl = anime.timeline({
+      targets: axes.current,
+      easing: "easeInOutQuint",
+      autoplay: false,
+    })
+
+    projects.forEach((p, i) => {
+      const duration = i < 1 ? 0.001 : 1
+      const trans = (100 / projects.length) * i
+      tl.add({ transform: i < 1 ? [trans, trans] : trans, duration: duration })
+    })
+    setTimeline(tl)
+  }, [projects])
 
   const hoverIn = slug => {
     set(slug)
-    setProps({factor : 1})
+    setProps({ factor: 1 })
   }
   const hoverOut = () => {
     set(null)
-    setProps({factor : 0})
+    setProps({ factor: 0 })
   }
-  
+
+  if (timeline) {
+    timeline.seek(timeline.duration * scroll.top)
+    let absSkew = easeExpOut(Math.abs(scroll.speed)) * 50
+    let skew = scroll.speed > 0 ? absSkew : -absSkew
+    setSpring({ transform: -axes.current.transform, skew: skew})
+  }
+
   return (
     <Wrap>
-      <Bookmarks scroll={scroll} projects={projects}/>
-      <Titles hoverIn={hoverIn} hoverOut={hoverOut} style={{ transform: parallax.xy.interpolate(intTitle) }} projects={projects} scroll={scroll} hover={props.factor} />
-      <Prev style={{ transform: parallax.xy.interpolate(intPrev) }}>
-        <Date>
-          <Scroll scroll={scroll} moveX='true'>
-            {projects.map((p, i) => (
-              <p key={`date${i}`}>{p.date}</p>
-            ))}
-          </Scroll>
-        </Date>
-        <Tag>
-          <Scroll scroll={scroll} moveX='true'>
-            {projects.map((p, i) => (
-              <p key={`tag${i}`}>{p.tag}</p>
-            ))}
-          </Scroll>
-        </Tag>
-        <Roman>
-          <Scroll scroll={scroll}>
-            {projects.map((p, i) => (
-              <p key={`roman${i}`}>{romanize(i + 1)}</p>
-            ))}
-          </Scroll>
-        </Roman>
-        <View>
-          <Scroll style={{
-            fontVariationSettings:
-            props.factor.interpolate({
-              range: [0, 1],
-              output: [350, 1000]
-            }).interpolate(intView),
-            letterSpacing: props.factor.interpolate({
-              range: [0, 1],
-              output: [2, 4]
-            }).interpolate(f => `${f}px`)
-          }}
-          
-          scroll={scroll} moveX='true'>
-          {projects.map((p, i) => (
-          <Link
-            to={`/${p.slug}`}
-            key={`view${i}`}
-            onMouseEnter={() => hoverIn(p.slug)}
-            onMouseLeave={hoverOut}            
-          >
-            {p.prompt}
-          </Link>
-        ))}
-          </Scroll>
-        </View>
-        <Img style={{ transform: parallax.xy.interpolate(intImg) }} >
-          <Scroll scroll={scroll} >
-            {projects.map((p, i) => {
-              const imageData = p.images[0].childImageSharp.fluid
-              return (
-                <Preview
-                  onMouseEnter={() => hoverIn(p.slug)}
-                  onMouseLeave={hoverOut}
-                  key={`prev${i}`}
-                  slug={p.slug}
-                  imageData={imageData}
-                  parallax={parallax}
-                  hovered={hovered}
-                />
-              )
-            })}
-          </Scroll>
-        </Img>
-      </Prev>
+      <Bookmarks scroll={scroll} projects={projects} />
+      <Titles
+        hoverIn={hoverIn}
+        hoverOut={hoverOut}
+        style={{ transform: parallax.xy.interpolate(intTitle) }}
+        projects={projects}
+        spring={spring}
+        hover={props.factor}
+      />
+      <Preview
+        hoverIn={hoverIn}
+        hoverOut={hoverOut}
+        style={{ transform: parallax.xy.interpolate(intPrev) }}
+        projects={projects}
+        spring={spring}
+        scroll={scroll}
+        hover={props.factor}
+        hovered={hovered}
+        parallax={parallax}
+      />
     </Wrap>
   )
 }

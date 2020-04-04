@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, createRef, useState } from "react"
+import React, { useRef, useLayoutEffect, useState } from "react"
 import styled from "styled-components"
 import anime from "animejs"
 import { animated, useSpring, interpolate } from "react-spring"
@@ -82,27 +82,27 @@ const Bookmarks = ({projects, scroll, ...props}) => {
     config : 	{ mass: 1, tension: 300, friction: 12 }
   }))
 
-  const handleSize = () => {
-    const bmarks = Array.from(ref.current.childNodes).slice(1)
 
-    const tl = anime.timeline({
-      targets: axes.current,
-      easing: "easeInOutQuint",
-      autoplay: false,
-    })
-
-    bmarks.forEach((e, i) => {
-      const duration = i < 1 ? 0.001 : 1
-      const x = e.offsetLeft + e.getBoundingClientRect().width /2
-      const y = e.offsetTop + e.getBoundingClientRect().height /2 
-      tl.add({ x: i < 1 ? [x, x] : x, y: i < 1 ? [y, y] : y, duration: duration })
-    })
-
-    tl.seek(tl.duration * scroll.top)
-    setTimeline(tl)
-  }
 
   useLayoutEffect(() => {
+    const handleSize = () => {
+      const bmarks = Array.from(ref.current.childNodes).slice(1)
+  
+      const tl = anime.timeline({
+        targets: axes.current,
+        easing: "easeInOutQuint",
+        autoplay: false,
+      })
+  
+      bmarks.forEach((e, i) => {
+        const duration = i < 1 ? 0.001 : 1
+        const x = e.offsetLeft + e.getBoundingClientRect().width /2
+        const y = e.offsetTop + e.getBoundingClientRect().height /2 
+        tl.add({ x: i < 1 ? [x, x] : x, y: i < 1 ? [y, y] : y, duration: duration })
+      })
+  
+      setTimeline(tl)
+    }
     handleSize()
     window.addEventListener('resize', handleSize)
     return () => {

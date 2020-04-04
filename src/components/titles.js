@@ -1,29 +1,28 @@
 import React from "react"
 import styled from "styled-components"
 import Link from "./link"
-import Scroll from './scroll'
-import * as Mouse from "./mouse"
-import { animated } from 'react-spring'
+import { animated } from "react-spring"
+import Slide from "./slide"
 
-const navSize = 80;
+const navSize = 80
 
-const Title = styled(Scroll)`
-a {
+const Title = styled(Slide)`
+  height: 1em;
+  a {
     text-decoration: none;
     white-space: nowrap;
     text-transform: uppercase;
     min-width: 80vw;
     font-size: 6vw;
     line-height: 1em;
-    height: fit-content;
     padding-left: 3vw;
     padding-bottom: 30px;
     margin: 0px;
     color: inherit;
     pointer-events: all;
     opacity: 0.2;
-    @media (max-width: 768px){
-      margin-top: calc(${ navSize }px);
+    @media (max-width: 768px) {
+      margin-top: calc(${navSize}px);
     }
   }
 `
@@ -47,14 +46,12 @@ const Wrap = styled(animated.div)`
   display: inline-block;
   padding-left: 30px;
   z-index: 5;
-  @media (min-width: 768px){
-      position: absolute;
-    }
+  @media (min-width: 768px) {
+    position: absolute;
+  }
 `
 
-
-const Titles = ({ projects, scroll, hoverIn, hoverOut, hover, ...props }) => { 
-
+const Titles = ({ projects, spring, hoverIn, hoverOut, hover, ...props }) => {
   let style = {
     fontVariationSettings: hover
       .interpolate({
@@ -62,44 +59,39 @@ const Titles = ({ projects, scroll, hoverIn, hoverOut, hover, ...props }) => {
         output: [1200, 800],
       })
       .interpolate(h => `"wght" ${h}, "wdth" 85, "slnt" 0`),
-      letterSpacing: hover
+    letterSpacing: hover
       .interpolate({
         range: [0, 1],
         output: [1, 0.7],
       })
-      .interpolate(h => `${h}vw`)
+      .interpolate(h => `${h}vw`),
   }
 
- return (
-  <Wrap {...props}>
-    <Title style={style} scroll={scroll} moveX="true">
-      {projects.map((p, i) => (
-        <a key={`hidden${i}`} href={`#${p.slug}`}>
-          {p.title}
-        </a>
-      ))}
-    </Title>
-
-    <Mask>
-      <Title
-        style={{...style}}
-        scroll={scroll}
-        moveX="true"
-      >
+  return (
+    <Wrap {...props}>
+      <Title style={style} spring={spring} moveX="true" doesSkew="true">
         {projects.map((p, i) => (
-          <Link
-            to={`/${p.slug}`}
-            key={`title${i}`}
-            onMouseEnter={() => hoverIn(p.slug)}
-            onMouseLeave={hoverOut}
-          >
+          <a key={`hidden${i}`} href={`#${p.slug}`}>
             {p.title}
-          </Link>
+          </a>
         ))}
       </Title>
-    </Mask>
-  </Wrap>
-)
-        }
+      <Mask>
+        <Title style={style} spring={spring} moveX="true" doesSkew="true">
+          {projects.map((p, i) => (
+            <Link
+              to={`/${p.slug}`}
+              key={`title${i}`}
+              onMouseEnter={() => hoverIn(p.slug)}
+              onMouseLeave={hoverOut}
+            >
+              {p.title}
+            </Link>
+          ))}
+        </Title>
+      </Mask>
+    </Wrap>
+  )
+}
 
 export default Titles

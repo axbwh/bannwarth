@@ -76,13 +76,13 @@ const IndexPage = () => {
   const onScroll = () => {
     throttleScroll()
     debounceScroll()
-
   }
 
   useEffect(() => {
-    scrollRef.current.scrollTo(0, scrollTop)
+    let ref = scrollRef.current
+    ref.scrollTo(0, scrollTop)
     return () => {
-      scrollTop = scrollRef.current.scrollTop
+      scrollTop = ref.scrollTop
     }
   }, [])
 
@@ -108,7 +108,6 @@ const IndexPage = () => {
           parallax={parallax}
         />
         {projects.map(({ node: p }) => {
-          const imageData = p.images[0].childImageSharp.fluid
           return <Dummy key={p.slug} id={p.slug} />
         })}
       </Layout>

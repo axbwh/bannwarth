@@ -12,13 +12,26 @@ let Content = styled.div`
   height: 100%;
 `
 
+const Footer = styled.footer`
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
 
-const About = ({}) => {
+  color: inherit;
+
+  font-size: 14px;
+  font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
+  letter-spacing: 1px;
+`
+
+
+const About = () => {
   return (
     <Trans black>
       <Layout title='About'>
-        {/* <Content>
-        </Content> */}
+        <Content>
+          <Footer>© {new Date().getFullYear()}</Footer>
+        </Content>
       </Layout>
     </Trans>
   )
