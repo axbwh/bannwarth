@@ -1,33 +1,34 @@
-import React, { useRef, useLayoutEffect, useState } from "react"
+import React, { useRef, useLayoutEffect, useState, useEffect } from "react"
 import styled from "styled-components"
 import anime from "animejs"
 import { animated, useSpring, interpolate } from "react-spring"
-import { romanize } from './utils'
+import { romanize, design } from './utils'
 import { easeExpOut } from 'd3-ease'
+import {ProjLink} from '../components/link'
 
-const navSize = 79;
 
 const Wrap = styled(animated.div)`
   display: flex;
   flex-direction: row;
-  width: calc(60vw + 60px);
+  position: absolute;
+  width: calc(100vw - (${design.gutter} * 2) + 60px);
+  
+  left: ${design.gutter};
   top: 0px;
 
   @media (max-width: 768px) {
     display: inline-flex;
     flex-direction: column;
     width: 40px;
-    height: calc(100vh - ${navSize}px - 6vw - 30px);
-    top: calc(${navSize}px + 6vw + 30px - 10px);
+    height: calc(100vh - ${design.navSize}px - 6vw - 30px);
+    top: calc(${design.navSize}px + 6vw + 30px - 10px);
     left: 0px;
   }
-
   justify-content: space-between;
-  position: absolute;
   z-index: 10;
-  background-color: #fff;
   a {
     pointer-events: all;
+    z-index: 1;
     line-height: 22px;
     font-size: 14px;
     font-variation-settings: "wght" 1000, "wdth" 85, "slnt" 0;
@@ -62,10 +63,13 @@ top: -12.5px;
 /* border-radius: 50% 50%; */
 background-color: #fff;
 mix-blend-mode: difference;
-
+z-index: 2;
+&:first-of-type{
+  z-index: 0;
+}
 `
 
-const Bookmarks = ({projects, scroll, ...props}) => {
+const Bookmarks = ({projects, scroll, index = -1 , ...props}) => {
   const ref = useRef(null)
   const axes = useRef({x: 0, y:0})
 
@@ -82,12 +86,10 @@ const Bookmarks = ({projects, scroll, ...props}) => {
     config : 	{ mass: 1, tension: 300, friction: 12 }
   }))
 
-
-
   useLayoutEffect(() => {
     const handleSize = () => {
-      const bmarks = Array.from(ref.current.childNodes).slice(1)
-  
+      const bmarks = Array.from(ref.current.querySelectorAll('a'))
+
       const tl = anime.timeline({
         targets: axes.current,
         easing: "easeInOutQuint",
@@ -100,9 +102,9 @@ const Bookmarks = ({projects, scroll, ...props}) => {
         const y = e.offsetTop + e.getBoundingClientRect().height /2 
         tl.add({ x: i < 1 ? [x, x] : x, y: i < 1 ? [y, y] : y, duration: duration })
       })
-  
       setTimeline(tl)
     }
+
     handleSize()
     window.addEventListener('resize', handleSize)
     return () => {
@@ -110,23 +112,36 @@ const Bookmarks = ({projects, scroll, ...props}) => {
     }
   }, [])
 
-  if (timeline) {
-    timeline.seek(timeline.duration * scroll.top)
+  useEffect( () => {
+    if(timeline) {
+      if(index > -1){
+        timeline.seek(timeline.duration * (1 / (projects.length - 1) * index ))
+      }else{
+        timeline.seek(timeline.duration * scroll.top)
+      }
+      setSpring(({ xy: [axes.current.x, axes.current.y], immediate : true}))
+    }
+  }, [timeline])
 
-    let absAcc = easeExpOut(Math.abs(scroll.speed)) * 50
-    let acceleration = scroll.speed > 0 ? absAcc : -absAcc
-
-    setStretch({s: [spring.xy.getValue()[0] === axes.current.x ? 0 : acceleration, spring.xy.getValue()[1] === axes.current.y ? 0 : -acceleration ] })
-    setSpring(({ xy: [axes.current.x, axes.current.y] }))
-  }
-
+  useEffect( () => {
+    if (timeline) {
+        timeline.seek(timeline.duration * scroll.top)
+        let absAcc = easeExpOut(Math.abs(scroll.speed)) * 50
+        let acceleration = scroll.speed > 0 ? absAcc : -absAcc
+        setStretch({s: [spring.xy.getValue()[0] === axes.current.x ? 0 : acceleration, spring.xy.getValue()[1] === axes.current.y ? 0 : -acceleration ] })
+        setSpring(({ xy: [axes.current.x, axes.current.y], immediate : false}))
+    }
+  }, [scroll])
   
     return (
       <Wrap ref={ref} {...props}>
         <Dot style={{transform: interpolate( [spring.xy, stretch.s], ([x ,y], [sx, sy]) => `translate(${x}px, ${y}px) skew(${sx}deg, ${sy}deg)`)  }}/>
-        {projects.map((p, i) => (
-          <a href={`#${p.slug}`}>{romanize(i+1)}</a>
-        ))}
+        <Dot style={{transform: interpolate( [spring.xy, stretch.s], ([x ,y], [sx, sy]) => `translate(${x}px, ${y}px) skew(${sx}deg, ${sy}deg)`)  }}/>
+        {projects.map((p, i) => index > -1 ? (
+          <ProjLink to={`/${p.slug}`}
+          key={`booklink${i}`}>{romanize(i+1)}</ProjLink>
+        ) : <a key={`bookmark${i}`} href={`#${p.slug}`}>{romanize(i+1)}</a>
+        )}
       </Wrap>
     )
 }

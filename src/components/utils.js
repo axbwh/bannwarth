@@ -27,4 +27,12 @@ const romanize = (num) => {
     return str;
   }
 
-export {clamp, normalize, romanize}
+  const design = {
+    white: { fg: '#000' , bg: '#fff' } ,
+    black: { fg: '#fff' , bg: '#000' },
+    grey: { fg: '#000' , bg: '#ebebeb' },
+    navSize: 79,
+    gutter: '20vw'
+  }
+
+export {clamp, normalize, romanize, design}

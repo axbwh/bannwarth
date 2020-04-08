@@ -4,10 +4,8 @@ import Link from "gatsby-plugin-transition-link"
 import { animated } from "react-spring"
 import Thumbnail from "./thumbnail"
 import Slide from './slide'
-import { romanize } from './utils'
+import { romanize, design } from './utils'
 import Scroll from './scroll'
-
-const navSize = 80
 
 const Img = styled(animated.div)`
   position: relative;
@@ -21,7 +19,7 @@ const Prev = styled(animated.div)`
   height: calc(60vw * 9 / 16);
   @media (max-width: 768px) {
     width: calc(100vw - 80px);
-    height: calc(100vh - ${navSize}px - 6vw - 30px - 10px);
+    height: calc(100vh - ${design.navSize}px - 6vw - 30px - 10px);
   }
 `
 const Date = styled.div`
@@ -101,7 +99,7 @@ const Preview = ({ projects, spring, scroll, parallax, hoverIn, hoverOut, hover,
     <Tag>
       <Slide spring={spring} moveX="true">
         {projects.map((p, i) => (
-          <p key={`tag${i}`}>{p.tag}</p>
+          <p key={`tag${i}`}>{p.tags[0]}</p>
         ))}
       </Slide>
     </Tag>

@@ -15,4 +15,16 @@ const Link = ({children, ...props}) => (
   </TransitionLink>
 )
 
+const ProjLink = ({children, ...props}) => (
+  <TransitionLink
+    exit={{ state: { stay: true }, length: 0.75, zIndex: 0 }}
+    onClick={Mouse.set}
+    entry={{ length: 0 }}
+    {...props}
+  >
+    {children}
+  </TransitionLink>
+)
+
 export default Link
+export { ProjLink }

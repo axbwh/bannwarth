@@ -5,7 +5,7 @@ import Titles from "./titles"
 import { useSpring } from "react-spring"
 import Bookmarks from "./bookmarks"
 import anime from "animejs"
-import { easeExpOut } from 'd3-ease'
+import { easeCubicOut } from 'd3-ease'
 
 const Wrap = styled.div`
   position: sticky;
@@ -70,7 +70,7 @@ const Folio = ({ projects, scroll, parallax }) => {
 
   if (timeline) {
     timeline.seek(timeline.duration * scroll.top)
-    let absSkew = easeExpOut(Math.abs(scroll.speed)) * 50
+    let absSkew = easeCubicOut(Math.abs(scroll.speed)) * 50
     let skew = scroll.speed > 0 ? absSkew : -absSkew
     setSpring({ transform: -axes.current.transform, skew: skew})
   }

@@ -3,7 +3,7 @@
         "title": "Tessellation",
         "slug": "tessellation",
         "date": "2013 - 2020",
-        "tag": "Illustration",
+        "tags": ["Illustration", "Creative Coding"],
         "prompt": "view",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "video": "./video/tesselations",
@@ -15,7 +15,7 @@
         "title": "3D Cartography",
         "slug": "thann",
         "date": "2017",
-        "tag": "data vis",
+        "tags": [ "data vis", "data mining", "procedural modelling", "Rendering"],
         "prompt": "view",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "video": "",
@@ -24,11 +24,12 @@
             "./images/thann-tall.png",
             "./images/thann-side.png"
         ]
-    },{
+    },
+    {
         "title": "Dummy",
         "slug": "dummy",
         "date": "2017",
-        "tag": "dummy",
+        "tags": [ "dummy"],
         "prompt": "view",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "video": "",
@@ -36,11 +37,12 @@
             "./images/thann-tall.png",
             "./images/thann-side.png"
         ]
-    },{
+    },
+    {
         "title": "Dummyer",
         "slug": "dummier",
         "date": "2017",
-        "tag": "dum",
+        "tags": [ "dum"],
         "prompt": "view",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "video": "",
@@ -48,5 +50,4 @@
             "./images/thann-side.png"
         ]
     }
-
 ]

@@ -52,7 +52,7 @@ const Header = ({ siteTitle, to = "/" }) => (
         onClick={Mouse.set}
         entry={{ length: 0 }}
       >
-        {to === "/" ? "go home" : "about me"}
+        {to === "/" ? "Work" : "About"}
       </Link>
     </Nav>
   </header>

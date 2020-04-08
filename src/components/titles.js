@@ -3,8 +3,8 @@ import styled from "styled-components"
 import Link from "./link"
 import { animated } from "react-spring"
 import Slide from "./slide"
+import { design } from "./utils"
 
-const navSize = 80
 
 const Title = styled(Slide)`
   height: 1em;
@@ -22,8 +22,9 @@ const Title = styled(Slide)`
     pointer-events: all;
     opacity: 0.2;
     @media (max-width: 768px) {
-      margin-top: calc(${navSize}px);
+      margin-top: calc(${design.navSize}px);
     }
+    font-weight: bold;
   }
 `
 
@@ -56,7 +57,7 @@ const Titles = ({ projects, spring, hoverIn, hoverOut, hover, ...props }) => {
     fontVariationSettings: hover
       .interpolate({
         range: [0, 1],
-        output: [1200, 800],
+        output: [1200, 680],
       })
       .interpolate(h => `"wght" ${h}, "wdth" 85, "slnt" 0`),
     letterSpacing: hover

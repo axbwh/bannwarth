@@ -13,6 +13,7 @@ import { createGlobalStyle } from "styled-components"
 import Header from "./header"
 import SEO from "./seo"
 import "../fonts/fonts.css"
+import Trans from "./trans"
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -27,8 +28,7 @@ body{
 `
 
 
-
-const Layout = ({ title, to, children, parallax }) => {
+const Layout = ({ title, to, children, parallax, ...rest }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -40,11 +40,15 @@ const Layout = ({ title, to, children, parallax }) => {
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} to={to} parallax={parallax}/>
+    <>    
       <SEO title={title} />
       <GlobalStyle />
-      <main>{children}</main>
+      <Trans {...rest}>
+        <Header siteTitle={data.site.siteMetadata.title} to={to} parallax={parallax}/>
+        <main>
+        {children}
+        </main>
+      </Trans>
     </>
   )
 }
