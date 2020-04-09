@@ -148,7 +148,7 @@ const ProjectTemplate = ({ data }) => {
   }))
 
   return (
-      <Layout title={project.title} color={design.grey} setScroll={setScroll} setParallax={setParallax}>
+      <Layout to={`/#${project.slug}`} title={project.title} color={design.grey} setScroll={setScroll} setParallax={setParallax}>
       <Booknav scroll={scroll} projects={projects} index={index} />
         <Wrap style={{ transform: parallax.xy.interpolate(intWrap) }}>
           <Title>

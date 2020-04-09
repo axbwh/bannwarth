@@ -2,7 +2,6 @@ import React, {useRef, useState, useEffect} from "react"
 import { graphql, useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
-import Wrap from "../components/wrap"
 import Folio from "../components/folio"
 
 import styled from "styled-components"

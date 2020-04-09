@@ -1,8 +1,7 @@
-import Link from "gatsby-plugin-transition-link"
+import Link from "./link"
 import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
-import * as Mouse from "./mouse"
 
 const ease = "cubic-bezier(0.075, 0.82, 0.165, 1)"
 
@@ -35,28 +34,26 @@ let Nav = styled.div`
   }
 `
 
-const Header = ({ siteTitle, to = "/" }) => (
+const Header = ({ siteTitle, to = "/" }) => {
+    const stay = to === "/" ? { instay : true } : { outstay: true }
+  return (
   <header>
     <Nav>
       <Link
-        to="/"
-        exit={{ length: 0.75, zIndex: 2 }}
-        onClick={Mouse.set}
-        entry={{ length: 0 }}
+        to={to}
+        {...stay}
       >
         {siteTitle}
       </Link>
       <Link
         to={to}
-        exit={{ length: 0.75, zIndex: to === "/" ? 2 : 0 }}
-        onClick={Mouse.set}
-        entry={{ length: 0 }}
+        {...stay}
       >
-        {to === "/" ? "Work" : "About"}
+        {to === "/about" ? "About" : "Work"}
       </Link>
     </Nav>
   </header>
-)
+)}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,

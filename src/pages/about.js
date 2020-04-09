@@ -34,13 +34,11 @@ const About = () => {
     config: { mass: 10, tension: 550, friction: 140 },
   }))
   return (
-    <Trans color={design.black} setScroll={setScroll} setParallax={setParallax}>
-      <Layout title='About'>
+      <Layout title='About' color={design.black} setScroll={setScroll} setParallax={setParallax}>
         <Content>
           <Footer>© {new Date().getFullYear()}</Footer>
         </Content>
       </Layout>
-    </Trans>
   )
 }
 

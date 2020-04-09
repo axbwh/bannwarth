@@ -28,7 +28,7 @@ body{
 `
 
 
-const Layout = ({ title, to, children, parallax, ...rest }) => {
+const Layout = ({ title, to, toHash, children, parallax, ...rest }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -44,7 +44,7 @@ const Layout = ({ title, to, children, parallax, ...rest }) => {
       <SEO title={title} />
       <GlobalStyle />
       <Trans {...rest}>
-        <Header siteTitle={data.site.siteMetadata.title} to={to} parallax={parallax}/>
+        <Header siteTitle={data.site.siteMetadata.title} to={to} toHash={toHash} parallax={parallax}/>
         <main>
         {children}
         </main>

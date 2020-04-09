@@ -7,12 +7,13 @@ import Wrap from '../components/wrap'
 const Trans = ({ children, ...rest }) => {
   return (
   <TransitionState>
-    {({ mount, transitionStatus, exit}) => {
+    {({ mount, transitionStatus, entry, exit}) => {
       let to = {
         clipPath: `circle(${mount ? Mouse.pos.r : 0}px at ${Mouse.pos.x}px ${Mouse.pos.y}px)`,
       }
-
-      if(exit.state.stay && transitionStatus === 'exiting' ){
+      
+      if(exit.state.stay && transitionStatus === 'exiting' || entry.state.stay && (transitionStatus === 'entering' || transitionStatus === "entered") ){
+        // console.log(entry.state.stay, transitionStatus)
         to = {
           clipPath: `circle(${Mouse.pos.r}px at ${Mouse.pos.x}px ${Mouse.pos.y}px)`,
         }

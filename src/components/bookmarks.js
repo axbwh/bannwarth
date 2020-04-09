@@ -4,7 +4,7 @@ import anime from "animejs"
 import { animated, useSpring, interpolate } from "react-spring"
 import { romanize, design } from './utils'
 import { easeExpOut } from 'd3-ease'
-import {ProjLink} from '../components/link'
+import Link from '../components/link'
 
 
 const Wrap = styled(animated.div)`
@@ -138,8 +138,8 @@ const Bookmarks = ({projects, scroll, index = -1 , ...props}) => {
         <Dot style={{transform: interpolate( [spring.xy, stretch.s], ([x ,y], [sx, sy]) => `translate(${x}px, ${y}px) skew(${sx}deg, ${sy}deg)`)  }}/>
         <Dot style={{transform: interpolate( [spring.xy, stretch.s], ([x ,y], [sx, sy]) => `translate(${x}px, ${y}px) skew(${sx}deg, ${sy}deg)`)  }}/>
         {projects.map((p, i) => index > -1 ? (
-          <ProjLink to={`/${p.slug}`}
-          key={`booklink${i}`}>{romanize(i+1)}</ProjLink>
+          <Link outstay={true} to={`/${p.slug}`}
+          key={`booklink${i}`}>{romanize(i+1)}</Link>
         ) : <a key={`bookmark${i}`} href={`#${p.slug}`}>{romanize(i+1)}</a>
         )}
       </Wrap>
