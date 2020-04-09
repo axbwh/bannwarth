@@ -1,7 +1,6 @@
 import React from "react"
-import * as Mouse from "./mouse"
 import styled from "styled-components"
-import Link from "gatsby-plugin-transition-link"
+import Link from "./link"
 import Image from "gatsby-image"
 import { animated, useSpring } from "react-spring"
 
@@ -26,9 +25,6 @@ const Thumbnail = ({ slug, title, imageData, parallax, hovered, ...props }) =>{
   return (
     <Project
       to={`/${slug}`}
-      exit={{ length: 0.75, zIndex: 0 }}
-      onClick={Mouse.set}
-      entry={{ length: 0 }}
       {...props}
     >
       <animated.div style={{ transform: parallax.xy.interpolate(int) }}>

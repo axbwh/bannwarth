@@ -69,7 +69,7 @@ z-index: 2;
 }
 `
 
-const Bookmarks = ({projects, scroll, index = -1 , ...props}) => {
+const Bookmarks = ({projects, scroll, index = -1 , setClip, ...props}) => {
   const ref = useRef(null)
   const axes = useRef({x: 0, y:0})
 
@@ -138,7 +138,8 @@ const Bookmarks = ({projects, scroll, index = -1 , ...props}) => {
         <Dot style={{transform: interpolate( [spring.xy, stretch.s], ([x ,y], [sx, sy]) => `translate(${x}px, ${y}px) skew(${sx}deg, ${sy}deg)`)  }}/>
         <Dot style={{transform: interpolate( [spring.xy, stretch.s], ([x ,y], [sx, sy]) => `translate(${x}px, ${y}px) skew(${sx}deg, ${sy}deg)`)  }}/>
         {projects.map((p, i) => index > -1 ? (
-          <Link outstay={true} to={`/${p.slug}`}
+          <Link to={`/${p.slug}`}
+          setClip={setClip}
           key={`booklink${i}`}>{romanize(i+1)}</Link>
         ) : <a key={`bookmark${i}`} href={`#${p.slug}`}>{romanize(i+1)}</a>
         )}

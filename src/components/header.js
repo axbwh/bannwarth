@@ -34,20 +34,20 @@ let Nav = styled.div`
   }
 `
 
-const Header = ({ siteTitle, to = "/" }) => {
-    const stay = to === "/" ? { instay : true } : { outstay: true }
+const Header = ({ siteTitle, to = "/", setClip }) => {
   return (
   <header>
     <Nav>
       <Link
-        to={to}
-        {...stay}
+        to={'/'}
+        setClip={setClip}
       >
         {siteTitle}
       </Link>
+
       <Link
+        setClip={setClip}
         to={to}
-        {...stay}
       >
         {to === "/about" ? "About" : "Work"}
       </Link>

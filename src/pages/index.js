@@ -1,5 +1,6 @@
-import React, {useRef, useState, useEffect} from "react"
+import React, { useState, useRef} from "react"
 import { graphql, useStaticQuery } from "gatsby"
+import * as Mouse from '../components/mouse'
 
 import Layout from "../components/layout"
 import Folio from "../components/folio"
@@ -15,8 +16,6 @@ const Dummy = styled.div`
     margin-top: -100vh;
   }
 `
-
-let scrollTop = 0
 
 
 const IndexPage = () => {
@@ -42,20 +41,21 @@ const IndexPage = () => {
       }
     }
   `)
-
   const projects = data.allProjectsJson.edges.map(p => p.node)
-  const [scroll, setScroll] = useState({top: scrollTop, speed: 0})
+  const [scroll, setScroll] = useState({top: 0, speed: 0})
   const [parallax, setParallax] = useSpring(() => ({
     xy: [0, 0],
     config: { mass: 10, tension: 550, friction: 140 },
   }))
 
+  const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(Mouse.pos.r), mask: Mouse.calc(Mouse.pos.r)}))
   return (
-      <Layout title="Home" to="/about" parallax={parallax} setScroll={setScroll} setParallax={setParallax}>
+      <Layout title="Home" to="/about" parallax={parallax} clip={clip} setClip={setClip} setScroll={setScroll} setParallax={setParallax}>
         <Folio
           scroll={scroll}
           projects={projects}
           parallax={parallax}
+          setClip={setClip}
         />
         {projects.map( p => {
           return <Dummy key={p.slug} id={p.slug} />

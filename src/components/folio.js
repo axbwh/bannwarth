@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useState } from "react"
+import React, { useRef, useLayoutEffect, useState, useEffect } from "react"
 import styled from "styled-components"
 import Preview from "./preview"
 import Titles from "./titles"
@@ -27,7 +27,7 @@ const Wrap = styled.div`
 const intPrev = (x, y) => `translate3d(${x * 0.055}px,${y * 0.055}px,0)`
 const intTitle = (x, y) => `translate3d(${x * 0.085}px,${y * 0.085}px,0)`
 
-const Folio = ({ projects, scroll, parallax }) => {
+const Folio = ({ projects, scroll, parallax, setClip }) => {
   const [hovered, set] = useState(null)
 
   const [props, setProps] = useSpring(() => ({
@@ -68,16 +68,26 @@ const Folio = ({ projects, scroll, parallax }) => {
     setProps({ factor: 0 })
   }
 
-  if (timeline) {
-    timeline.seek(timeline.duration * scroll.top)
-    let absSkew = easeCubicOut(Math.abs(scroll.speed)) * 50
-    let skew = scroll.speed > 0 ? absSkew : -absSkew
-    setSpring({ transform: -axes.current.transform, skew: skew})
-  }
+  useLayoutEffect(() => {
+    if(timeline){
+      timeline.seek(timeline.duration * scroll.top)
+      setSpring({ transform: -axes.current.transform, immediate : true})
+    }
+  }, [timeline])
+
+  useEffect(() => {
+    if (timeline) {
+      timeline.seek(timeline.duration * scroll.top)
+      let absSkew = easeCubicOut(Math.abs(scroll.speed)) * 50
+      let skew = scroll.speed > 0 ? absSkew : -absSkew
+      setSpring({ transform: -axes.current.transform, skew: skew, immediate : false})
+    }
+  }, [scroll])
+
 
   return (
     <Wrap>
-      <Bookmarks scroll={scroll} projects={projects} />
+      <Bookmarks scroll={scroll} projects={projects} setClip={setClip}/>
       <Titles
         hoverIn={hoverIn}
         hoverOut={hoverOut}
@@ -85,6 +95,7 @@ const Folio = ({ projects, scroll, parallax }) => {
         projects={projects}
         spring={spring}
         hover={props.factor}
+        setClip={setClip}
       />
       <Preview
         hoverIn={hoverIn}
@@ -96,6 +107,7 @@ const Folio = ({ projects, scroll, parallax }) => {
         hover={props.factor}
         hovered={hovered}
         parallax={parallax}
+        setClip={setClip}
       />
     </Wrap>
   )

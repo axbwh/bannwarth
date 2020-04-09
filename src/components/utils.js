@@ -28,9 +28,8 @@ const romanize = (num) => {
   }
 
   const design = {
-    white: { fg: '#000' , bg: '#fff' } ,
-    black: { fg: '#fff' , bg: '#000' },
-    grey: { fg: '#000' , bg: '#ebebeb' },
+    white: { fg: '#111' , bg: '#fff' } ,
+    black: { fg: '#fff' , bg: '#111' },
     navSize: 79,
     gutter: '20vw'
   }

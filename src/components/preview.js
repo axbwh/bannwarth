@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import Link from "gatsby-plugin-transition-link"
+import Link from "./link"
 import { animated } from "react-spring"
 import Thumbnail from "./thumbnail"
 import Slide from './slide'
@@ -87,7 +87,7 @@ const View = styled(Date)`
 const intImg = (x, y) => `translate3d(${x * -0.005}px,${y * -0.005}px,0)`
 const intView = f => `"wght" ${f}, "wdth" 85, "slnt" 0`
 
-const Preview = ({ projects, spring, scroll, parallax, hoverIn, hoverOut, hover, hovered, ...props }) => (
+const Preview = ({ projects, spring, scroll, parallax, hoverIn, hoverOut, hover, hovered, setClip, ...props }) => (
   <Prev {...props}>
     <Date>
       <Slide spring={spring} moveX="true">
@@ -135,6 +135,7 @@ const Preview = ({ projects, spring, scroll, parallax, hoverIn, hoverOut, hover,
             key={`view${i}`}
             onMouseEnter={() => hoverIn(p.slug)}
             onMouseLeave={hoverOut}
+            setClip={setClip}
           >
             {p.prompt}
           </Link>
@@ -154,6 +155,7 @@ const Preview = ({ projects, spring, scroll, parallax, hoverIn, hoverOut, hover,
               imageData={imageData}
               parallax={parallax}
               hovered={hovered}
+              setClip={setClip}
             />
           )
         })}

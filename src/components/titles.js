@@ -52,7 +52,7 @@ const Wrap = styled(animated.div)`
   }
 `
 
-const Titles = ({ projects, spring, hoverIn, hoverOut, hover, ...props }) => {
+const Titles = ({ projects, spring, hoverIn, hoverOut, hover, setClip, ...props }) => {
   let style = {
     fontVariationSettings: hover
       .interpolate({
@@ -85,6 +85,7 @@ const Titles = ({ projects, spring, hoverIn, hoverOut, hover, ...props }) => {
               key={`title${i}`}
               onMouseEnter={() => hoverIn(p.slug)}
               onMouseLeave={hoverOut}
+              setClip={setClip}
             >
               {p.title}
             </Link>

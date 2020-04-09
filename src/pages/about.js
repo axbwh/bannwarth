@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Layout from "../components/layout"
-import Trans from '../components/trans'
+import * as Mouse from '../components/mouse'
 import {useSpring} from 'react-spring'
 
 import styled from "styled-components"
@@ -33,8 +33,11 @@ const About = () => {
     xy: [0, 0],
     config: { mass: 10, tension: 550, friction: 140 },
   }))
+  
+  const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(0)}))
+
   return (
-      <Layout title='About' color={design.black} setScroll={setScroll} setParallax={setParallax}>
+      <Layout title='About' clip={clip} setClip={setClip} color={design.black} setScroll={setScroll} setParallax={setParallax}>
         <Content>
           <Footer>© {new Date().getFullYear()}</Footer>
         </Content>

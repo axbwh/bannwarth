@@ -1,22 +1,42 @@
 
 import React from 'react'
-import TransitionLink from "gatsby-plugin-transition-link"
 import * as Mouse from "./mouse"
-import { Link as RawLink } from 'gatsby'
+import { navigate } from "gatsby"
+import styled from 'styled-components'
+
+let RawLink = styled.a`
+cursor: pointer;
+`
+const Link = ({children, to, setClip,  ...props}) => {
+  const handleClick = (e) => {
+    e.preventDefault()
+    Mouse.set(e)
+
+    const options = to.includes('/#') || to === '/' ? { to : async (next, cancel) => {
+      await next ({ mask: Mouse.calc(Mouse.pos.r), config: { immediate : true, duration: 0} })
+      await next ({ mask: Mouse.calc(0), config: { immediate : false, duration: 300 }})
+    }} : { to : async (next, cancel) => {
+      await next ({ trim: Mouse.calc(0), config: { immediate : true, duration: 0 } })
+      await next ({ trim: Mouse.calc(Mouse.pos.r), config: { immediate : false, duration: 300 }})
+    }}
 
 
-const Link = ({children, instay = false, outstay = false, ...props}) => (
-  // <TransitionLink
-  //   exit={{ state: { stay: outstay }, length: 0.75, zIndex: instay ? 2 : 0 }}
-  //   onClick={Mouse.set}
-  //   entry={{ state: { stay: instay }, length: 0 }}
-  //   {...props}
-  // >
-  //   {children}
-  // </TransitionLink>
-  <RawLink onClick={Mouse.set} {...props}>
+    setClip({ ...options, onRest: () => {
+      navigate(to)
+    }})
+
+    setTimeout( () => {
+      
+    }, 750)
+    
+    
+    
+  }
+  
+  return (
+  <RawLink onClick={handleClick} href={to} {...props}>
     {children}
   </RawLink>
-)
+)}
 
 export default Link

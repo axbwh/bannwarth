@@ -14,6 +14,7 @@ import Header from "./header"
 import SEO from "./seo"
 import "../fonts/fonts.css"
 import Trans from "./trans"
+import { design } from "./utils"
 
 const GlobalStyle = createGlobalStyle`
 *{
@@ -24,11 +25,13 @@ body{
   padding: 0;
   margin: 0;
   font-family: 'Roboto VF';
+  background-color:${design.black.bg};
 }
 `
 
 
-const Layout = ({ title, to, toHash, children, parallax, ...rest }) => {
+
+const Layout = ({ title, to, children, parallax, setClip, ...rest }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -43,8 +46,8 @@ const Layout = ({ title, to, toHash, children, parallax, ...rest }) => {
     <>    
       <SEO title={title} />
       <GlobalStyle />
-      <Trans {...rest}>
-        <Header siteTitle={data.site.siteMetadata.title} to={to} toHash={toHash} parallax={parallax}/>
+      <Trans setClip={setClip} {...rest}>
+        <Header siteTitle={data.site.siteMetadata.title} setClip={setClip} to={to} parallax={parallax}/>
         <main>
         {children}
         </main>

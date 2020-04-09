@@ -1,32 +1,33 @@
-import React from "react"
-import { Spring } from "react-spring/renderprops"
-import { TransitionState } from "gatsby-plugin-transition-link"
+import React, { useEffect } from "react"
 import * as Mouse from "../components/mouse"
 import Wrap from '../components/wrap'
+import { useSpring, animated } from "react-spring"
+import styled from "styled-components"
+import { design } from './utils'
 
-const Trans = ({ children, ...rest }) => {
+const Mask = styled(animated.div)`
+  width: 100vw;
+  height: 100vh;
+`
+
+const Trim = styled(Mask)`
+position : absolute;
+background-color: ${design.black.bg};
+z-index: 10;
+top: 0;
+left: 0;
+`
+
+const Trans = ({ children, clip, setClip, ...rest }) => {
+  setClip({ mask: Mouse.calc(Mouse.pos.r), trim: Mouse.calc(0) })
   return (
-  <TransitionState>
-    {({ mount, transitionStatus, entry, exit}) => {
-      let to = {
-        clipPath: `circle(${mount ? Mouse.pos.r : 0}px at ${Mouse.pos.x}px ${Mouse.pos.y}px)`,
-      }
-      
-      if(exit.state.stay && transitionStatus === 'exiting' || entry.state.stay && (transitionStatus === 'entering' || transitionStatus === "entered") ){
-        // console.log(entry.state.stay, transitionStatus)
-        to = {
-          clipPath: `circle(${Mouse.pos.r}px at ${Mouse.pos.x}px ${Mouse.pos.y}px)`,
-        }
-      }
-
-      return (<Spring
-        to={to}
-      >
-        
-        {props => <Wrap style={props} {...rest}>{children}</Wrap>}
-      </Spring>
-    )}}
-  </TransitionState>
-)}
+    <>
+      <Mask style={{clipPath : clip.mask}}>        
+        <Wrap setClip={setClip} {...rest}>{children}</Wrap>}
+      </Mask>
+      <Trim style={{clipPath : clip.trim}}/>
+    </>
+        )
+}
 
 export default Trans

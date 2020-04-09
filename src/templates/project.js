@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image"
 import { animated, useSpring } from "react-spring"
-import Trans from "../components/trans"
 import Bookmarks from "../components/bookmarks"
+import * as Mouse from '../components/mouse'
 
 import styled from "styled-components"
 
@@ -147,9 +147,11 @@ const ProjectTemplate = ({ data }) => {
     config: { mass: 10, tension: 550, friction: 140 },
   }))
 
+  const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(0)}))
+
   return (
-      <Layout to={`/#${project.slug}`} title={project.title} color={design.grey} setScroll={setScroll} setParallax={setParallax}>
-      <Booknav scroll={scroll} projects={projects} index={index} />
+      <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} color={design.white} setScroll={setScroll} setParallax={setParallax}>
+      <Booknav setClip={setClip} scroll={scroll} projects={projects} index={index} />
         <Wrap style={{ transform: parallax.xy.interpolate(intWrap) }}>
           <Title>
             <animated.h1

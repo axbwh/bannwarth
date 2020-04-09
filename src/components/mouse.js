@@ -19,4 +19,6 @@ let pos = {
   r: getRad(0, 0)
 }
 
-export {set, pos}
+const calc = r => `circle(${r}px at ${pos.x}px ${pos.y}px)`
+
+export {set, calc, pos}

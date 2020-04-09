@@ -8,7 +8,3 @@
 // exports.shouldUpdateScroll = () => {
 //     return false;
 //   };
-
-exports.onPreRouteUpdate = ({ location }) => {
-    console.log(location)
-  }
