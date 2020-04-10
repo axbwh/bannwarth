@@ -27,14 +27,15 @@ const Footer = styled.footer`
 `
 let scrollTop = 0
 
-const About = () => {
+const About = ({location : {state}}) => {
   const [scroll, setScroll] = useState({top: scrollTop, speed: 0})
   const [parallax, setParallax] = useSpring(() => ({
     xy: [0, 0],
     config: { mass: 10, tension: 550, friction: 140 },
   }))
   
-  const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(0)}))
+  const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(state?.linked ? 0 : Mouse.pos.r)}))
+  
 
   return (
       <Layout title='About' clip={clip} setClip={setClip} color={design.black} setScroll={setScroll} setParallax={setParallax}>

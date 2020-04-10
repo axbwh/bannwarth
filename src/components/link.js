@@ -22,14 +22,8 @@ const Link = ({children, to, setClip,  ...props}) => {
 
 
     setClip({ ...options, onRest: () => {
-      navigate(to)
-    }})
-
-    setTimeout( () => {
-      
-    }, 750)
-    
-    
+      navigate(to, { state: {linked: true}})
+    }})   
     
   }
   

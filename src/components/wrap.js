@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useLayoutEffect } from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
 import SimpleBar from "simplebar-react"
 import "simplebar/dist/simplebar.min.css"
@@ -33,14 +33,14 @@ const Wrap = ({children, color = design.white, setScroll, setParallax, ...props}
         let scrollProgress =
           scrollRef.current.scrollTop /
           (scrollRef.current.scrollHeight - window.innerHeight)
-        setScroll(({top = scrollProgress}) => ({top: scrollProgress, speed : top - scrollProgress}))
+        setScroll(({top = scrollProgress}) => ({top: scrollProgress, speed : top - scrollProgress, set: true}))
       }
     }, 100)
   ).current
 
   const debounceScroll = useRef(
     debounce(() => {
-        setScroll(({speed = 0, top = 0}) => ({speed: 0, top }))
+        setScroll(({speed = 0, top = 0, set = false}) => ({speed: 0, top: top, set: set }))
     }, 100)
   ).current 
 

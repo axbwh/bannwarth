@@ -3,9 +3,9 @@ import { useSpring, animated } from "react-spring"
 import anime from "animejs"
 import styled from "styled-components"
 
-let Div = styled(animated.div)`
-  display: ${props => (props.moveX ? "inline-flex" : "flex")};
-  flex-direction: ${props => (props.moveX ? "row" : "column")};
+const Div = styled(({ moveX, passRef, ...rest }) =><animated.div ref={passRef} {...rest} />)`
+  display: ${props => props.moveX ? "inline-flex" : "flex"};
+  flex-direction: ${props => props.moveX ? "row" : "column"};
 `
 
 const Scroll = ({ children, scroll, moveX = false, style, ...props }) => {
@@ -50,34 +50,20 @@ const Scroll = ({ children, scroll, moveX = false, style, ...props }) => {
 
   useEffect( () => {
     if (timeline) {
-      console.log('scroll', scroll.top)
+      console.log('scroll', scroll.set)
       timeline.seek(timeline.duration * scroll.top)
       setSpring({
         x: `translateX(${-axes.current.x}px) `,
         y: `translateY(${-axes.current.y}px) `,
-        immediate: false,
+        immediate: !scroll.set,
       })
     }
-  }, [scroll])
-
-  useEffect (() => {
-    if (timeline) {
-      console.log('timeline', scroll.top)
-      timeline.seek(timeline.duration * scroll.top)
-      setSpring({
-        x: `translateX(${-axes.current.x}px) `,
-        y: `translateY(${-axes.current.y}px) `,
-        immediate: true,
-      })
-    }
-  }, [timeline])
-
-  
+  }, [scroll, timeline, setSpring])  
 
   return (
     <Div
       moveX={moveX}
-      ref={ref}
+      passRef={ref}
       style={{ ...style, transform: moveX ? spring.x : spring.y }}
       {...props}
     >

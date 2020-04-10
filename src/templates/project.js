@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, {useState} from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image"
 import { animated, useSpring } from "react-spring"
@@ -96,7 +96,7 @@ const Title = styled(animated.h1)`
   }
 `
 
-const Desc = styled(animated.p)`
+const Desc = styled(animated.div)`
   font-size: 14px;
   font-weight: 500;
   line-height:1.5;
@@ -132,22 +132,22 @@ const Booknav = styled(Bookmarks)`
 
 const intWrap = (x, y) => `translate3d(${x * 0.025}px,${y * 0.025}px,0)`
 const intTitle = (x, y) => `translate3d(${x * 0.005}px,${y * 0.005}px,0)`
-const intImg = (x, y) => `translate3d(${x * 0.01}px,${y * 0.01}px,0) scale(1.1)`
+// const intImg = (x, y) => `translate3d(${x * 0.01}px,${y * 0.01}px,0) scale(1.1)`
 
-const ProjectTemplate = ({ data }) => {
+const ProjectTemplate = ({ data, location : {state} }) => {
   
   const projects = data.all.edges.map(e => e.node)
   const project = data.project
 
   const index = projects.map(p => p.slug).indexOf(project.slug)
   
-  const [scroll, setScroll] = useSpring(() => ({top: 0, speed: 0, config: { mass: 20, tension: 550, friction: 140 }}))
+  const [scroll, setScroll] = useState(() => ({top: 0, speed: 0, set: false}))
   const [parallax, setParallax] = useSpring(() => ({
     xy: [0, 0],
     config: { mass: 10, tension: 550, friction: 140 },
   }))
 
-  const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(0)}))
+  const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(state?.linked ? 0 : Mouse.pos.r)}))
 
   return (
       <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} color={design.white} setScroll={setScroll} setParallax={setParallax}>

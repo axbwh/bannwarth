@@ -1,7 +1,7 @@
-import React, { useEffect } from "react"
+import React from "react"
 import * as Mouse from "../components/mouse"
 import Wrap from '../components/wrap'
-import { useSpring, animated } from "react-spring"
+import { animated } from "react-spring"
 import styled from "styled-components"
 import { design } from './utils'
 
@@ -23,7 +23,7 @@ const Trans = ({ children, clip, setClip, ...rest }) => {
   return (
     <>
       <Mask style={{clipPath : clip.mask}}>        
-        <Wrap setClip={setClip} {...rest}>{children}</Wrap>}
+        <Wrap {...rest}>{children}</Wrap>}
       </Mask>
       <Trim style={{clipPath : clip.trim}}/>
     </>

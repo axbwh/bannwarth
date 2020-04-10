@@ -4,9 +4,9 @@ import { animated, interpolate } from 'react-spring'
 
 
 
-let Div = styled(animated.div)`
-    display: ${props => props.moveX ? 'inline-flex' : 'flex'};
-    flex-direction:${props => props.moveX ? 'row' : 'column'};
+const Div = styled(({moveX, ...rest}) => <animated.div {...rest} />)`
+  display: ${props => props.moveX ? "inline-flex" : "flex"};
+  flex-direction: ${props => props.moveX ? "row" : "column"};
 `
 
 const Slide = ({ children, spring, moveX = false, doesSkew = false, style, ...props }) => {
