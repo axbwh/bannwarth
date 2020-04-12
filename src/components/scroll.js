@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useState, useEffect } from "react"
+import React, { useRef, useLayoutEffect, useState, useEffect, useCallback } from "react"
 import { useSpring, animated } from "react-spring"
 import anime from "animejs"
 import styled from "styled-components"
@@ -12,6 +12,7 @@ const Scroll = ({ children, scroll, moveX = false, style, ...props }) => {
   const ref = useRef(null)
   const axes = useRef({ x: 0, y: 0 })
   const [timeline, setTimeline] = useState()
+  const [ready, setReady] = useState(false)
 
   const [spring, setSpring] = useSpring(() => ({
     x: `translateX(${-axes.current.x}px) `,
@@ -48,17 +49,28 @@ const Scroll = ({ children, scroll, moveX = false, style, ...props }) => {
     }
   }, [])
 
-  useEffect( () => {
+  useEffect(() => {
     if (timeline) {
-      console.log('scroll', scroll.set)
       timeline.seek(timeline.duration * scroll.top)
-      setSpring({
-        x: `translateX(${-axes.current.x}px) `,
-        y: `translateY(${-axes.current.y}px) `,
-        immediate: !scroll.set,
-      })
+      if (!ready && scroll.render) {
+        setSpring({
+          x: `translateX(${-axes.current.x}px) `,
+          y: `translateY(${-axes.current.y}px) `,
+          immediate: true,
+          onRest: () => {
+            setSpring({ immediate: false, onRest: undefined })
+            setReady(true)
+          },
+        })
+      } else {
+        setSpring({
+          x: `translateX(${-axes.current.x}px) `,
+          y: `translateY(${-axes.current.y}px) `,
+        })
+      }
     }
-  }, [scroll, timeline, setSpring])  
+  }, [scroll, timeline, setSpring, ready, setReady])
+
 
   return (
     <Div

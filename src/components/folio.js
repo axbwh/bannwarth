@@ -29,6 +29,7 @@ const intTitle = (x, y) => `translate3d(${x * 0.085}px,${y * 0.085}px,0)`
 
 const Folio = ({ projects, scroll, parallax, setClip }) => {
   const [hovered, set] = useState(null)
+  const [ready, setReady] = useState(false)
 
   const [props, setProps] = useSpring(() => ({
     factor: 0,
@@ -68,22 +69,28 @@ const Folio = ({ projects, scroll, parallax, setClip }) => {
     setProps({ factor: 0 })
   }
 
-  useLayoutEffect(() => {
-    if(timeline){
-      timeline.seek(timeline.duration * scroll.top)
-      setSpring({ transform: -axes.current.transform, immediate : true})
-    }
-  }, [timeline])
-
   useEffect(() => {
     if (timeline) {
       timeline.seek(timeline.duration * scroll.top)
-      let absSkew = easeCubicOut(Math.abs(scroll.speed)) * 50
-      let skew = scroll.speed > 0 ? absSkew : -absSkew
-      setSpring({ transform: -axes.current.transform, skew: skew, immediate : false})
+      if (!ready && scroll.render) {
+        setSpring({
+          transform: -axes.current.transform,
+          immediate: true,
+          onRest: () => {
+            setSpring({ immediate: false, onRest: undefined })
+            setReady(true)
+          },
+        })
+      } else {
+        timeline.seek(timeline.duration * scroll.top)
+        let absSkew = easeCubicOut(Math.abs(scroll.speed)) * 50
+        let skew = scroll.speed > 0 ? absSkew : -absSkew
+        setSpring({
+          transform: -axes.current.transform, skew: skew,
+        })
+      }
     }
-  }, [scroll])
-
+  }, [scroll, timeline, setSpring, ready, setReady])
 
   return (
     <Wrap>

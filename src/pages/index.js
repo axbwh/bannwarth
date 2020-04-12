@@ -18,7 +18,7 @@ const Dummy = styled.div`
 `
 
 
-const IndexPage = ({location : {state}}) => {
+const IndexPage = ({location : {state}, location}) => {
   const data = useStaticQuery(graphql`
     {
       allProjectsJson {
@@ -41,15 +41,16 @@ const IndexPage = ({location : {state}}) => {
       }
     }
   `)
+
   const projects = data.allProjectsJson.edges.map(p => p.node)
-  const [scroll, setScroll] = useState({top: 0, speed: 0, set: false})
+  const [scroll, setScroll] = useState({top: 0, speed: 0, render : location.hash ? false : true})
   const [parallax, setParallax] = useSpring(() => ({
     xy: [0, 0],
     config: { mass: 10, tension: 550, friction: 140 },
   }))
   
-
   const [clip, setClip] = useSpring( () => ({trim: Mouse.calc( state?.linked ? Mouse.pos.r : 0), mask: Mouse.calc(Mouse.pos.r)}))
+
   return (
       <Layout title="Home" to="/about" parallax={parallax} clip={clip} setClip={setClip} setScroll={setScroll} setParallax={setParallax}>
         <Folio

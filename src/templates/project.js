@@ -55,7 +55,7 @@ const Wrap = styled(animated.div)`
   }
 `
 
-const Title = styled(animated.h1)`
+const Title = styled(animated.div)`
   align-self: center;
   display: flex;
   flex-direction: column;
@@ -141,7 +141,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
 
   const index = projects.map(p => p.slug).indexOf(project.slug)
   
-  const [scroll, setScroll] = useState(() => ({top: 0, speed: 0, set: false}))
+  const [scroll, setScroll] = useState(() => ({top: 0, speed: 0}))
   const [parallax, setParallax] = useSpring(() => ({
     xy: [0, 0],
     config: { mass: 10, tension: 550, friction: 140 },
@@ -164,8 +164,8 @@ const ProjectTemplate = ({ data, location : {state} }) => {
           <hr/>
           <Desc>
             <ul>
-              {project.tags.map(tag => (
-                <li>{tag}</li>
+              {project.tags.map((tag, i) => (
+                <li key={`tag${i}`}>{tag}</li>
               ))}
             </ul>
             <p>{project.description}</p>
@@ -174,7 +174,9 @@ const ProjectTemplate = ({ data, location : {state} }) => {
           {project.images.map((img, i) => {
             const imageData = img.childImageSharp.fluid
             return (
-              <Frame>
+              <Frame
+                key={`frame-${i}`}
+              >
                 <animated.div
                   style={{ transform: parallax.xy.interpolate(intTitle) }}
                 >

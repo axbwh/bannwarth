@@ -72,6 +72,7 @@ z-index: 2;
 const Bookmarks = ({projects, scroll, index = -1 , setClip, ...props}) => {
   const ref = useRef(null)
   const axes = useRef({x: 0, y:0})
+  const [ready, setReady] = useState(false)
 
   const [timeline, setTimeline] = useState()
 
@@ -112,26 +113,33 @@ const Bookmarks = ({projects, scroll, index = -1 , setClip, ...props}) => {
     }
   }, [])
 
-  useEffect( () => {
-    if(timeline) {
-      if(index > -1){
-        timeline.seek(timeline.duration * (1 / (projects.length - 1) * index ))
-      }else{
-        timeline.seek(timeline.duration * scroll.top)
-      }
-      setSpring(({ xy: [axes.current.x, axes.current.y], immediate : true}))
-    }
-  }, [timeline])
-
-  useEffect( () => {
+  useEffect(() => {
     if (timeline) {
+      if (index > -1) {
+        timeline.seek(timeline.duration * ((1 / (projects.length - 1)) * index))
+        setSpring({ xy: [axes.current.x, axes.current.y], immediate: true })
+      } else {
         timeline.seek(timeline.duration * scroll.top)
-        let absAcc = easeExpOut(Math.abs(scroll.speed)) * 50
-        let acceleration = scroll.speed > 0 ? absAcc : -absAcc
-        setStretch({s: [spring.xy.getValue()[0] === axes.current.x ? 0 : acceleration, spring.xy.getValue()[1] === axes.current.y ? 0 : -acceleration ] })
-        setSpring(({ xy: [axes.current.x, axes.current.y], immediate : false}))
+        if (!ready && scroll.render) {
+          setSpring({
+            xy: [axes.current.x, axes.current.y],
+            immediate: true,
+            onRest: () => {
+              setSpring({ immediate: false, onRest: undefined })
+              setReady(true)
+            },
+          })
+        } else {
+          let absAcc = easeExpOut(Math.abs(scroll.speed)) * 50
+          let acceleration = scroll.speed > 0 ? absAcc : -absAcc
+          setStretch({s: [spring.xy.getValue()[0] === axes.current.x ? 0 : acceleration, spring.xy.getValue()[1] === axes.current.y ? 0 : -acceleration ] })
+          setSpring(({ xy: [axes.current.x, axes.current.y], immediate : false}))
+        }
+      }
     }
-  }, [scroll])
+  }, [scroll, timeline, setSpring, setStretch, ready, setReady])
+
+
   
     return (
       <Wrap ref={ref} {...props}>
