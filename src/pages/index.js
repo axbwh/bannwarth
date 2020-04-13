@@ -4,6 +4,8 @@ import * as Mouse from '../components/mouse'
 
 import Layout from "../components/layout"
 import Folio from "../components/folio"
+import Header from "../components/Header"
+import Bookmarks from "../components/bookmarks"
 
 import styled from "styled-components"
 import { useSpring } from "react-spring"
@@ -11,12 +13,7 @@ import { useSpring } from "react-spring"
 const Dummy = styled.div`
   height: 100vh;
   width: 100vw;
-  /* border: 1px red solid; */
-  &&:nth-child(2){
-    margin-top: -100vh;
-  }
 `
-
 
 const IndexPage = ({location : {state}, location}) => {
   const data = useStaticQuery(graphql`
@@ -52,7 +49,10 @@ const IndexPage = ({location : {state}, location}) => {
   const [clip, setClip] = useSpring( () => ({trim: Mouse.calc( state?.linked ? Mouse.pos.r : 0), mask: Mouse.calc(Mouse.pos.r)}))
 
   return (
-      <Layout title="Home" to="/about"  parallax={parallax} clip={clip} setClip={setClip} setScroll={setScroll} setParallax={setParallax}>
+      <Layout title="Home" clip={clip} setClip={setClip} setScroll={setScroll} setParallax={setParallax}>
+        <Header setClip={setClip} to="/about" top={projects[0].slug} parallax={parallax}>
+          <Bookmarks scroll={scroll} projects={projects} setClip={setClip}/>
+        </Header>
         <Folio
           scroll={scroll}
           projects={projects}

@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import Layout from "../components/layout"
 import * as Mouse from '../components/mouse'
 import {useSpring} from 'react-spring'
+import Header from "../components/Header"
 
 import styled from "styled-components"
 import { design } from "../components/utils"
@@ -16,8 +17,8 @@ let Content = styled.div`
 
 const Footer = styled.footer`
   position: fixed;
-  right: 30px;
-  bottom: 30px;
+  right: var(--nav-padding);
+  bottom: var(--nav-padding);
 
   color: inherit;
 
@@ -39,6 +40,7 @@ const About = ({location : {state}}) => {
 
   return (
       <Layout title='About' clip={clip} setClip={setClip} color={design.black} setScroll={setScroll} setParallax={setParallax}>
+        <Header setClip={setClip} parallax={parallax}/>
         <Content>
           <Footer>© {new Date().getFullYear()}</Footer>
         </Content>

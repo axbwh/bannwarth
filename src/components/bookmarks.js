@@ -10,8 +10,12 @@ import Link from '../components/link'
 const Wrap = styled(animated.div)`
   display: flex;
   flex-direction: row;
-  position: absolute;
+
+  position: sticky;
+  align-self: center;
+
   width: calc(100vw - (${design.gutter} * 2) + 60px);
+  margin-top: calc( -1 * var(--nav-size));
   
   left: ${design.gutter};
   top: 0px;
@@ -20,10 +24,11 @@ const Wrap = styled(animated.div)`
     display: inline-flex;
     flex-direction: column;
     width: 40px;
-    height: calc(100vh - ${design.navSize}px - 6vw - 30px);
-    top: calc(${design.navSize}px + 6vw + 30px - 10px);
+    height: calc(100vh - var(--nav-size) - 6vw);
+    top: calc(var(--nav-size) + 6vw - 10px);
     left: 0px;
   }
+
   justify-content: space-between;
   z-index: 10;
   a {
@@ -35,7 +40,7 @@ const Wrap = styled(animated.div)`
     writing-mode: unset;
     color: inherit;
     text-decoration: none;
-    padding: 30px;
+    padding: var(--nav-padding);
     text-align: center;
     box-sizing: unset;
     width: 20px;

@@ -7,7 +7,6 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
 import { createGlobalStyle } from "styled-components"
 
 import Header from "./header"
@@ -17,6 +16,15 @@ import Trans from "./trans"
 import { design } from "./utils"
 
 const GlobalStyle = createGlobalStyle`
+:root{
+  --nav-padding: 30px;
+  --nav-size: calc( var(--nav-padding) * 2 + 19px);
+
+  @media (max-width: 768px) {
+    --nav-padding: 15px;
+  }
+
+}
 *{
   box-sizing: border-box;
 }
@@ -31,23 +39,12 @@ body{
 
 
 
-const Layout = ({ title, to, children, parallax, setClip, ...rest }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
+const Layout = ({ title, to, top, children, parallax, setClip, ...rest }) => {
   return (
     <>    
       <SEO title={title} />
       <GlobalStyle />
       <Trans setClip={setClip} {...rest}>
-        <Header siteTitle={data.site.siteMetadata.title} setClip={setClip} to={to} parallax={parallax}/>
         <main>
         {children}
         </main>

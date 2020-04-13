@@ -3,9 +3,10 @@ import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
 import { design } from './utils'
+import { useStaticQuery, graphql } from "gatsby"
 
 let Nav = styled.div`
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
@@ -13,6 +14,7 @@ let Nav = styled.div`
   flex-direction: row;
   justify-content: space-between;
   z-index: 10;
+  pointer-events: none;
 
   a {
     text-decoration: none;
@@ -22,7 +24,7 @@ let Nav = styled.div`
     font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
     letter-spacing: 1px;
 
-    padding: 30px;
+    padding: var(--nav-padding);
     transition: all 1s ${design.ease};
     pointer-events: all;
 
@@ -32,28 +34,45 @@ let Nav = styled.div`
     }
   }
 `
+const Abs = styled.div`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+`
 
-const Header = ({ siteTitle, to = "/", setClip }) => {
-  return (
-  <header>
-    <Nav>
-      {to === "/about" ? <a href='#' title='Top of Page'>{siteTitle}</a> :
-      <Link
-        to={'/'}
-        setClip={setClip}
-      >
-        {siteTitle}
-      </Link>
+const Header = ({ to = "/", setClip, top, children }) => {
+  const data = useStaticQuery(graphql`
+  query SiteTitleQuery {
+    site {
+      siteMetadata {
+        title
       }
+    }
+  }
+`)
+  const siteTitle = data.site.siteMetadata.title
 
-      <Link
-        setClip={setClip}
-        to={to}
-      >
-        {to === "/about" ? "About" : "Work"}
-      </Link>
-    </Nav>
-  </header>
+  return (
+    <Abs>
+      <Nav>
+        {top ? <a href={`#${top}`} title='Top of Page'>{siteTitle}</a> :
+        <Link
+          to={'/'}
+          setClip={setClip}
+        >
+          {siteTitle}
+        </Link>
+        }
+
+        <Link
+          setClip={setClip}
+          to={to}
+        >
+          {to === "/about" ? "About" : "Work"}
+        </Link>
+      </Nav>
+      {children}
+    </Abs>
 )}
 
 Header.propTypes = {

@@ -9,14 +9,15 @@ import { design } from "./utils"
 
 
 let Wrapping = styled(SimpleBar)`
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100vw;
   height: 100vh;
   background-color: #fff;
   ${ props => `background-color: ${props.color.bg};
   color: ${props.color.fg};`}
+  position: fixed;
+  main{
+    position: relative;
+  }
 `
 
 const Wrap = ({children, color = design.white, setScroll, setParallax, ...props}) => {

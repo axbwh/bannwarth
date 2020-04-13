@@ -3,9 +3,14 @@ import styled from "styled-components"
 import Preview from "./preview"
 import Titles from "./titles"
 import { useSpring } from "react-spring"
-import Bookmarks from "./bookmarks"
 import anime from "animejs"
 import { easeCubicOut } from 'd3-ease'
+
+const Abs = styled.div`
+  height: 100%;
+  width: 100%;
+  position: absolute;
+`
 
 const Wrap = styled.div`
   position: sticky;
@@ -86,37 +91,39 @@ const Folio = ({ projects, scroll, parallax, setClip }) => {
         let absSkew = easeCubicOut(Math.abs(scroll.speed)) * 50
         let skew = scroll.speed > 0 ? absSkew : -absSkew
         setSpring({
-          transform: -axes.current.transform, skew: skew,
+          transform: -axes.current.transform,
+          skew: skew,
         })
       }
     }
   }, [scroll, timeline, setSpring, ready, setReady])
 
   return (
-    <Wrap>
-      <Bookmarks scroll={scroll} projects={projects} setClip={setClip}/>
-      <Titles
-        hoverIn={hoverIn}
-        hoverOut={hoverOut}
-        style={{ transform: parallax.xy.interpolate(intTitle) }}
-        projects={projects}
-        spring={spring}
-        hover={props.factor}
-        setClip={setClip}
-      />
-      <Preview
-        hoverIn={hoverIn}
-        hoverOut={hoverOut}
-        style={{ transform: parallax.xy.interpolate(intPrev) }}
-        projects={projects}
-        spring={spring}
-        scroll={scroll}
-        hover={props.factor}
-        hovered={hovered}
-        parallax={parallax}
-        setClip={setClip}
-      />
-    </Wrap>
+    <Abs>
+      <Wrap>
+        <Titles
+          hoverIn={hoverIn}
+          hoverOut={hoverOut}
+          style={{ transform: parallax.xy.interpolate(intTitle) }}
+          projects={projects}
+          spring={spring}
+          hover={props.factor}
+          setClip={setClip}
+        />
+        <Preview
+          hoverIn={hoverIn}
+          hoverOut={hoverOut}
+          style={{ transform: parallax.xy.interpolate(intPrev) }}
+          projects={projects}
+          spring={spring}
+          scroll={scroll}
+          hover={props.factor}
+          hovered={hovered}
+          parallax={parallax}
+          setClip={setClip}
+        />
+      </Wrap>
+    </Abs>
   )
 }
 

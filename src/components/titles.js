@@ -22,7 +22,7 @@ const Title = styled(Slide)`
     pointer-events: all;
     opacity: 0.2;
     @media (max-width: 768px) {
-      margin-top: calc(${design.navSize}px);
+      margin-top: calc(var(--nav-size));
     }
     font-weight: bold;
   }

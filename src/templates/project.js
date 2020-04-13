@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image"
 import { animated, useSpring } from "react-spring"
+import Header from "../components/Header"
 import Bookmarks from "../components/bookmarks"
 import * as Mouse from '../components/mouse'
 
@@ -42,7 +43,7 @@ export const query = graphql`
 
 const Wrap = styled.div`
   > div {
-    padding-top: ${design.navSize}px;
+    padding-top: var(--nav-size);
     padding-left: 20vw;
     padding-right: 20vw;
     display: flex;
@@ -130,8 +131,7 @@ const Frame = styled.div`
 `
 
 const Booknav = styled(Bookmarks)`
-  position: sticky;
-  align-self: center;
+  
 `
 
 const Next = styled(Link)`
@@ -146,7 +146,7 @@ const Next = styled(Link)`
     font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
     letter-spacing: 1px;
 
-    padding: 30px;
+    padding: var(--nav-padding);
     transition: all 1s ${design.ease};
     pointer-events: all;
     display: block;
@@ -178,7 +178,10 @@ const ProjectTemplate = ({ data, location : {state} }) => {
 
   return (
       <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} color={design.white} setScroll={setScroll} setParallax={setParallax}>
-      <Booknav setClip={setClip} scroll={scroll} projects={projects} index={index} />
+      
+      <Header setClip={setClip} parallax={parallax}>
+        <Booknav setClip={setClip} scroll={scroll} projects={projects} index={index} />
+      </Header>
       <Next setClip={setClip} to={`/${projects[index < projects.length -1 ?  index+1 : 0].slug}`}>Next Project</Next>
         <Wrap>
           <animated.div style={{ transform: parallax.xy.interpolate(intWrap) }}>

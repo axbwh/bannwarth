@@ -30,9 +30,9 @@ const romanize = (num) => {
   const design = {
     white: { fg: '#111' , bg: '#fff' } ,
     black: { fg: '#fff' , bg: '#111' },
-    navSize: 79,
+    nav: { size: 79, padding: 30},
     gutter: '20vw',
-    ease: "cubic-bezier(0.075, 0.82, 0.165, 1)"
+    ease: "cubic-bezier(0.075, 0.82, 0.165, 1)",
   }
 
 export {clamp, normalize, romanize, design}
