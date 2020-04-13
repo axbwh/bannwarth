@@ -52,7 +52,7 @@ const IndexPage = ({location : {state}, location}) => {
   const [clip, setClip] = useSpring( () => ({trim: Mouse.calc( state?.linked ? Mouse.pos.r : 0), mask: Mouse.calc(Mouse.pos.r)}))
 
   return (
-      <Layout title="Home" to="/about" parallax={parallax} clip={clip} setClip={setClip} setScroll={setScroll} setParallax={setParallax}>
+      <Layout title="Home" to="/about"  parallax={parallax} clip={clip} setClip={setClip} setScroll={setScroll} setParallax={setParallax}>
         <Folio
           scroll={scroll}
           projects={projects}

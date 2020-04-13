@@ -2,8 +2,7 @@ import Link from "./link"
 import PropTypes from "prop-types"
 import React from "react"
 import styled from "styled-components"
-
-const ease = "cubic-bezier(0.075, 0.82, 0.165, 1)"
+import { design } from './utils'
 
 let Nav = styled.div`
   position: fixed;
@@ -24,7 +23,7 @@ let Nav = styled.div`
     letter-spacing: 1px;
 
     padding: 30px;
-    transition: all 1s ${ease};
+    transition: all 1s ${design.ease};
     pointer-events: all;
 
     &:hover {
@@ -38,12 +37,14 @@ const Header = ({ siteTitle, to = "/", setClip }) => {
   return (
   <header>
     <Nav>
+      {to === "/about" ? <a href='#' title='Top of Page'>{siteTitle}</a> :
       <Link
         to={'/'}
         setClip={setClip}
       >
         {siteTitle}
       </Link>
+      }
 
       <Link
         setClip={setClip}

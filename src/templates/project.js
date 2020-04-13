@@ -8,6 +8,7 @@ import * as Mouse from '../components/mouse'
 import styled from "styled-components"
 
 import Layout from "../components/layout"
+import Link from '../components/link'
 import { design } from "../components/utils"
 
 
@@ -39,14 +40,17 @@ export const query = graphql`
     }
 `
 
-const Wrap = styled(animated.div)`
-  padding-top: ${design.navSize}px;
-  padding-left: 20vw;
-  padding-right: 20vw;
-  display: flex;
-  flex-direction: column;
-  /* margin-bottom: -200px; */
-  hr{
+const Wrap = styled.div`
+  > div {
+    padding-top: ${design.navSize}px;
+    padding-left: 20vw;
+    padding-right: 20vw;
+    display: flex;
+    flex-direction: column;
+  }
+  width: 100vw;
+  overflow: hidden;
+  hr {
     border: 1px solid ${design.white.fg};
     align-self: center;
     width: 100vw;
@@ -130,9 +134,32 @@ const Booknav = styled(Bookmarks)`
   align-self: center;
 `
 
+const Next = styled(Link)`
+    text-decoration: none;
+    color: inherit;
+    position: fixed;
+    right : 0;
+    bottom: 0;
+    z-index: 2;
+
+    font-size: 14px;
+    font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
+    letter-spacing: 1px;
+
+    padding: 30px;
+    transition: all 1s ${design.ease};
+    pointer-events: all;
+    display: block;
+
+    &:hover {
+      font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
+      letter-spacing: 2px;
+    }
+`
+
 const intWrap = (x, y) => `translate3d(${x * 0.025}px,${y * 0.025}px,0)`
 const intTitle = (x, y) => `translate3d(${x * 0.005}px,${y * 0.005}px,0)`
-// const intImg = (x, y) => `translate3d(${x * 0.01}px,${y * 0.01}px,0) scale(1.1)`
+const intHr = (x, y) => `translate3d(${x * -0.025}px,${y * -0.01}px,0) scale(1.1)`
 
 const ProjectTemplate = ({ data, location : {state} }) => {
   
@@ -152,43 +179,44 @@ const ProjectTemplate = ({ data, location : {state} }) => {
   return (
       <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} color={design.white} setScroll={setScroll} setParallax={setParallax}>
       <Booknav setClip={setClip} scroll={scroll} projects={projects} index={index} />
-        <Wrap style={{ transform: parallax.xy.interpolate(intWrap) }}>
-          <Title>
-            <animated.h1
-              style={{ transform: parallax.xy.interpolate(intTitle) }}
-            >
-              {project.title}
-            </animated.h1>
-            <p>{project.date}</p>
-          </Title>
-          <hr/>
-          <Desc>
-            <ul>
-              {project.tags.map((tag, i) => (
-                <li key={`tag${i}`}>{tag}</li>
-              ))}
-            </ul>
-            <p>{project.description}</p>
-          </Desc>
-          <hr/>
-          {project.images.map((img, i) => {
-            const imageData = img.childImageSharp.fluid
-            return (
-              <Frame
-                key={`frame-${i}`}
-              >
-                <animated.div
-                  style={{ transform: parallax.xy.interpolate(intTitle) }}
+      <Next setClip={setClip} to={`/${projects[index < projects.length -1 ?  index+1 : 0].slug}`}>Next Project</Next>
+        <Wrap>
+          <animated.div style={{ transform: parallax.xy.interpolate(intWrap) }}>
+            <Title>
+              <animated.h1 style={{ transform: parallax.xy.interpolate(intTitle) }}>
+                {project.title}
+              </animated.h1 >
+              <p>{project.date}</p>
+            </Title>
+            <animated.hr style={{ transform: parallax.xy.interpolate(intHr) }}/>
+            <Desc>
+              <ul>
+                {project.tags.map((tag, i) => (
+                  <li key={`tag${i}`}>{tag}</li>
+                ))}
+              </ul>
+              <p>{project.description}</p>
+            </Desc>
+            <animated.hr style={{ transform: parallax.xy.interpolate(intHr) }}/>
+            {project.images.map((img, i) => {
+              const imageData = img.childImageSharp.fluid
+              return (
+                <Frame
+                  key={`frame-${i}`}
                 >
-                  <Image
-                    fluid={imageData}
-                    key={`${project.title}-${i}`}
-                    alt={`${project.title}-${i}`}
-                  />
-                </animated.div>
-              </Frame>
-            )
-          })}
+                  <animated.div
+                    style={{ transform: parallax.xy.interpolate(intTitle) }}
+                  >
+                    <Image
+                      fluid={imageData}
+                      key={`${project.title}-${i}`}
+                      alt={`${project.title}-${i}`}
+                    />
+                  </animated.div>
+                </Frame>
+              )
+            })}
+          </animated.div>
         </Wrap>
       </Layout>
   )
