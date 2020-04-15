@@ -44,19 +44,25 @@ export const query = graphql`
 const Wrap = styled.div`
   > div {
     padding-top: var(--nav-size);
-    padding-left: 20vw;
-    padding-right: 20vw;
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
     display: flex;
     flex-direction: column;
   }
+
   width: 100vw;
   overflow: hidden;
+  
   hr {
     border: 1px solid ${design.white.fg};
     align-self: center;
     width: 100vw;
     opacity: 0.5;
     margin: 80px 0;
+    @media (max-width: 768px) {
+      margin: 30px 0;
+      border: 0px;
+    }
   }
 `
 
@@ -69,6 +75,9 @@ const Title = styled(animated.div)`
   *{
     margin : 0;
   }
+  @media (max-width: 768px) {
+      align-self: flex-end;
+    }
   h1 {
     height: 1em;
     text-decoration: none;
@@ -105,33 +114,42 @@ const Desc = styled(animated.div)`
   font-size: 14px;
   font-weight: 500;
   line-height:1.5;
-  margin: 0px 0 0px 0;
+  letter-spacing: 0.08em;
+  margin: 0px;
   width: 100%;
   display: flex;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+      flex-direction: column;
+      padding-left: 10px;
+    }
 
   ul{
     list-style-type: none;
     padding: 0;
     margin: 0;
     text-transform: capitalize;
+    @media (max-width: 768px) {
+    margin-bottom : 30px;
+    }
   }
   p{
     max-width: 50%;
     align-self: right;
     margin: 0;
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }  
   }
 `
 
 const Frame = styled.div`
   overflow: hidden;
   margin-bottom: 150px;
-  div{
-  }
-`
-
-const Booknav = styled(Bookmarks)`
-  
+  @media (max-width: 768px) {
+    margin-bottom: 40px;
+  } 
 `
 
 const Next = styled(Link)`
@@ -145,6 +163,7 @@ const Next = styled(Link)`
     font-size: 14px;
     font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
     letter-spacing: 1px;
+    line-height: 20px;
 
     padding: var(--nav-padding);
     transition: all 1s ${design.ease};
@@ -155,6 +174,11 @@ const Next = styled(Link)`
       font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
       letter-spacing: 2px;
     }
+    @media (max-width: 768px) {
+      writing-mode: vertical-lr;
+      padding: calc((var(--gutter) - 20px) / 2);
+      padding-bottom: var(--nav-padding);
+    }    
 `
 
 const intWrap = (x, y) => `translate3d(${x * 0.025}px,${y * 0.025}px,0)`
@@ -180,7 +204,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
       <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} color={design.white} setScroll={setScroll} setParallax={setParallax}>
       
       <Header setClip={setClip} parallax={parallax}>
-        <Booknav setClip={setClip} scroll={scroll} projects={projects} index={index} />
+        <Bookmarks setClip={setClip} scroll={scroll} projects={projects} index={index} />
       </Header>
       <Next setClip={setClip} to={`/${projects[index < projects.length -1 ?  index+1 : 0].slug}`}>Next Project</Next>
         <Wrap>

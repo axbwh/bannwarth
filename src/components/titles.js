@@ -3,7 +3,6 @@ import styled from "styled-components"
 import Link from "./link"
 import { animated } from "react-spring"
 import Slide from "./slide"
-import { design } from "./utils"
 
 
 const Title = styled(Slide)`
@@ -43,12 +42,16 @@ const Mask = styled.div`
 const Wrap = styled(animated.div)`
   align-self: flex-start;
   /* justify-self: center; */
-  position: relative;
+  position: absolute;
   display: inline-block;
   padding-left: 30px;
   z-index: 5;
-  @media (min-width: 768px) {
-    position: absolute;
+  
+  @media (max-width: 768px) {
+    position: relative;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    
   }
 `
 

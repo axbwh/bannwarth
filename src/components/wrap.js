@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useLayoutEffect } from "react"
+import React, { useRef } from "react"
 import styled from "styled-components"
 import SimpleBar from "simplebar-react"
 import "simplebar/dist/simplebar.min.css"

@@ -14,18 +14,18 @@ const Wrap = styled(animated.div)`
   position: sticky;
   align-self: center;
 
-  width: calc(100vw - (${design.gutter} * 2) + 60px);
+  width: calc(100vw - (var(--gutter) * 2) + 60px);
   margin-top: calc( -1 * var(--nav-size));
   
-  left: ${design.gutter};
+  left: var(--gutter);
   top: 0px;
 
   @media (max-width: 768px) {
     display: inline-flex;
     flex-direction: column;
     width: 40px;
-    height: calc(100vh - var(--nav-size) - 6vw);
-    top: calc(var(--nav-size) + 6vw - 10px);
+    height: calc(100vh - var(--nav-size) - 6vw - 35px);
+    top: calc(var(--nav-size) + 6vw - 10px + 35px);
     left: 0px;
   }
 

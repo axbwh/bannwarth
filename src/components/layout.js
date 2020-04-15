@@ -19,9 +19,11 @@ const GlobalStyle = createGlobalStyle`
 :root{
   --nav-padding: 30px;
   --nav-size: calc( var(--nav-padding) * 2 + 19px);
+  --gutter: 20vw;
 
   @media (max-width: 768px) {
     --nav-padding: 15px;
+    --gutter: 40px;
   }
 
 }
