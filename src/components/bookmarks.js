@@ -2,7 +2,7 @@ import React, { useRef, useLayoutEffect, useState, useEffect } from "react"
 import styled from "styled-components"
 import anime from "animejs"
 import { animated, useSpring, interpolate } from "react-spring"
-import { romanize, design } from './utils'
+import { romanize } from './utils'
 import { easeExpOut } from 'd3-ease'
 import Link from '../components/link'
 
@@ -142,7 +142,7 @@ const Bookmarks = ({projects, scroll, index = -1 , setClip, ...props}) => {
         }
       }
     }
-  }, [scroll, timeline, setSpring, setStretch, ready, setReady])
+  }, [scroll, timeline, setSpring, setStretch, ready, setReady, index, projects])
 
 
   

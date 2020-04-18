@@ -1,30 +1,36 @@
 import React, { useState } from "react"
-import Layout from "../components/layout"
-import * as Mouse from '../components/mouse'
-import {useSpring} from 'react-spring'
-import Header from "../components/Header"
-
+import { useSpring, animated } from "react-spring"
 import styled from "styled-components"
+
+import * as Mouse from "../components/mouse"
 import { design } from "../components/utils"
 
-let Content = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-`
+import Layout from "../components/layout"
+import Header from "../components/Header"
+import { Title, Desc, Wrap, intWrap, intTitle } from "../components/styles"
+
 
 const Footer = styled.footer`
   position: fixed;
-  right: var(--nav-padding);
-  bottom: var(--nav-padding);
-
   color: inherit;
+  bottom: 0px;
+  right: 0px;
 
   font-size: 14px;
   font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
   letter-spacing: 1px;
+  line-height: 20px;
+
+    padding: var(--nav-padding);
+    transition: all 1s ${design.ease};
+    pointer-events: all;
+    display: block;
+    
+    @media (max-width: 768px) {
+      writing-mode: vertical-lr;
+      padding: calc((var(--gutter) - 20px) / 2);
+      padding-bottom: var(--nav-padding);
+    } 
 `
 let scrollTop = 0
 
@@ -41,9 +47,25 @@ const About = ({location : {state}}) => {
   return (
       <Layout title='About' clip={clip} setClip={setClip} color={design.black} setScroll={setScroll} setParallax={setParallax}>
         <Header setClip={setClip} parallax={parallax}/>
-        <Content>
+        <Wrap>
+          <animated.div style={{ transform: parallax.xy.interpolate(intWrap) }}>
+            <Title>
+              <animated.h1 style={{ transform: parallax.xy.interpolate(intTitle) }}>Alex Bannwarth</animated.h1>
+              <h2>Designer & Digital Artist</h2> 
+            </Title>
+            <hr/>
+            <Desc>
+              <ul>
+                <li><a href="https://www.instagram.com/bannwarth.design/" target='_blank' rel="noopener noreferrer">Instagram</a></li>
+                <li><a href="https://vimeo.com/user18232035" target='_blank' rel="noopener noreferrer">Vimeo</a></li>
+                <li><a href="mailto:alex@bannwarth.design">alex@bannwarth.design</a></li>
+              </ul>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </Desc>
+            <hr/>
+          </animated.div>
           <Footer>© {new Date().getFullYear()}</Footer>
-        </Content>
+        </Wrap>
       </Layout>
   )
 }

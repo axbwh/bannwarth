@@ -9,7 +9,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import { createGlobalStyle } from "styled-components"
 
-import Header from "./header"
 import SEO from "./seo"
 import "../fonts/fonts.css"
 import Trans from "./trans"

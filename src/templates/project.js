@@ -11,6 +11,7 @@ import styled from "styled-components"
 import Layout from "../components/layout"
 import Link from '../components/link'
 import { design } from "../components/utils"
+import { Title, Desc, Wrap } from "../components/styles"
 
 
 export const query = graphql`
@@ -40,110 +41,6 @@ export const query = graphql`
         }
     }
 `
-
-const Wrap = styled.div`
-  > div {
-    padding-top: var(--nav-size);
-    padding-left: var(--gutter);
-    padding-right: var(--gutter);
-    display: flex;
-    flex-direction: column;
-  }
-
-  width: 100vw;
-  overflow: hidden;
-  
-  hr {
-    border: 1px solid ${design.white.fg};
-    align-self: center;
-    width: 100vw;
-    opacity: 0.5;
-    margin: 80px 0;
-    @media (max-width: 768px) {
-      margin: 30px 0;
-      border: 0px;
-    }
-  }
-`
-
-const Title = styled(animated.div)`
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  width: fit-content;
-  margin: 50px 0 0 0;
-  *{
-    margin : 0;
-  }
-  @media (max-width: 768px) {
-      align-self: flex-end;
-    }
-  h1 {
-    height: 1em;
-    text-decoration: none;
-    white-space: nowrap;
-    text-transform: uppercase;
-    font-size: 6vw;
-    line-height: 1em;
-    color: inherit;
-    font-variation-settings: "wght" 1200, "wdth" 85, "slnt" 0;
-    letter-spacing: 1vw;
-  }
-  div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  h2{
-    /* line-height: 22px; */
-    font-size: 20px;
-    font-variation-settings: "wght" 1000, "wdth" 85, "slnt" 0;
-  }
-
-  p {
-    margin: 0;
-    align-self: flex-end;
-    font-size: 14px;
-    font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
-    letter-spacing: 2px;
-    padding-right: 1vw;
-  }
-`
-
-const Desc = styled(animated.div)`
-  font-size: 14px;
-  font-weight: 500;
-  line-height:1.5;
-  letter-spacing: 0.08em;
-  margin: 0px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-
-  @media (max-width: 768px) {
-      flex-direction: column;
-      padding-left: 10px;
-    }
-
-  ul{
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    text-transform: capitalize;
-    @media (max-width: 768px) {
-    margin-bottom : 30px;
-    }
-  }
-  p{
-    max-width: 50%;
-    align-self: right;
-    margin: 0;
-    @media (max-width: 768px) {
-      max-width: 100%;
-    }  
-  }
-`
-
 const Frame = styled.div`
   overflow: hidden;
   margin-bottom: 150px;
@@ -213,7 +110,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
               <animated.h1 style={{ transform: parallax.xy.interpolate(intTitle) }}>
                 {project.title}
               </animated.h1 >
-              <p>{project.date}</p>
+              <h2>{project.date}</h2>
             </Title>
             <animated.hr style={{ transform: parallax.xy.interpolate(intHr) }}/>
             <Desc>

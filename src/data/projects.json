@@ -1,5 +1,19 @@
 [
     {
+        "title": "CG Art",
+        "slug": "cgart",
+        "date": "2017 - 2018",
+        "tags": ["procedural modelling", "rendering", "sculpting"],
+        "prompt": "view",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "video": "",
+        "images": [
+            "./images/plate.png",
+            "./images/marbeled.png",
+            "./images/goldwax.png"
+        ]
+    },
+    {
         "title": "Tessellation",
         "slug": "tessellation",
         "date": "2013 - 2020",
@@ -8,46 +22,53 @@
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "video": "./video/tesselations",
         "images": [
-            "./images/snakefox.png"
+            "./images/snakefox.png",
+            "./images/frogs.png"
         ]
     },
     {
-        "title": "3D Cartography",
-        "slug": "thann",
+        "title": "Diorama",
+        "slug": "diorama",
+        "date": "2017",
+        "tags": ["procedural modelling", "Rendering"],
+        "prompt": "view",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+        "video": "",
+        "images": [
+            "./images/thann-side.png",
+            "./images/thann-top.png",
+            "./images/thann-tall.png"
+        ]
+    },
+    {
+        "title": "Cartography",
+        "slug": "cartography",
         "date": "2017",
         "tags": [ "data vis", "data mining", "procedural modelling", "Rendering"],
         "prompt": "view",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "video": "",
         "images": [
-            "./images/thann-top.png",
-            "./images/thann-tall.png",
-            "./images/thann-side.png"
+            "./images/us_mx_meteor_hollow.png",
+            "./images/us_mx_meteor_rings.png",
+            "./images/us_mx_meteor.png",
+            "./images/us_patriotic.png",
+            "./images/nz_seismic.png",
+            "./images/nz_seismic_voronoi.png"
         ]
     },
     {
-        "title": "Dummy",
-        "slug": "dummy",
-        "date": "2017",
-        "tags": [ "dummy"],
+        "title": "Psychoactive",
+        "slug": "psychoactive",
+        "date": "2019",
+        "tags": [ "Branding", "Creative Lead", "Copywriting"],
         "prompt": "view",
         "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         "video": "",
         "images": [
-            "./images/thann-tall.png",
-            "./images/thann-side.png"
-        ]
-    },
-    {
-        "title": "Dummyer",
-        "slug": "dummier",
-        "date": "2017",
-        "tags": [ "dum"],
-        "prompt": "view",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "video": "",
-        "images": [
-            "./images/thann-side.png"
+            "./images/frogs.png",
+            "./images/tadpole.png",
+            "./images/dither.png"
         ]
     }
 ]

@@ -4,7 +4,7 @@ import Link from "./link"
 import { animated } from "react-spring"
 import Thumbnail from "./thumbnail"
 import Slide from './slide'
-import { romanize, design } from './utils'
+import { romanize } from './utils'
 import Scroll from './scroll'
 
 const Img = styled(animated.div)`

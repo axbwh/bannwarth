@@ -14,9 +14,9 @@ const set = e => {
 }
 
 let pos = {
-  x: window.innerWidth / 2,
-  y: window.innerHeight / 2,
-  r: getRad(0, 0)
+  x: typeof window !== 'undefined' ? window.innerWidth / 2 : 0,
+  y: typeof window !== 'undefined' ? window.innerHeight / 2 : 0,
+  r: typeof window !== 'undefined' ? getRad(0, 0) : 2250
 }
 
 const calc = r => `circle(${r}px at ${pos.x}px ${pos.y}px)`

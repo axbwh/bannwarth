@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useState, useEffect, useCallback } from "react"
+import React, { useRef, useLayoutEffect, useState, useEffect } from "react"
 import { useSpring, animated } from "react-spring"
 import anime from "animejs"
 import styled from "styled-components"

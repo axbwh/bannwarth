@@ -1,4 +1,5 @@
 import React, { useRef } from "react"
+import {isMobile} from 'react-device-detect'
 import styled from "styled-components"
 import SimpleBar from "simplebar-react"
 import "simplebar/dist/simplebar.min.css"
@@ -52,6 +53,12 @@ const Wrap = ({children, color = design.white, setScroll, setParallax, ...props}
     
   }
 
+  const onMouseMove = ({ clientX: x, clientY: y }) => {
+    if (!isMobile) {
+      throttleMouse(x, y)
+    }
+  }
+
   const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]
 
   return (
@@ -60,7 +67,7 @@ const Wrap = ({children, color = design.white, setScroll, setParallax, ...props}
     scrollableNodeProps={{
       ref: scrollRef,
       onScroll: onScroll,
-      onMouseMove: ({ clientX: x, clientY: y }) => throttleMouse(x, y),
+      onMouseMove: onMouseMove,
     }}
     {...props}>
       {children}
