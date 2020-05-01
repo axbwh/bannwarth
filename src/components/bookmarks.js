@@ -10,7 +10,7 @@ import Link from '../components/link'
 const Wrap = styled(animated.div)`
   display: flex;
   flex-direction: row;
-
+  position: -webkit-sticky;
   position: sticky;
   align-self: center;
 
@@ -21,10 +21,9 @@ const Wrap = styled(animated.div)`
   top: 0px;
 
   @media (max-width: 768px) {
-    display: inline-flex;
     flex-direction: column;
     width: 40px;
-    height: calc(100vh - var(--nav-size) - 6vw - 35px);
+    height: calc((100 * var(--vh)) - var(--nav-size) - 6vw - 35px);
     top: calc(var(--nav-size) + 6vw - 10px + 35px);
     left: 0px;
   }

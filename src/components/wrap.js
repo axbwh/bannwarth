@@ -11,7 +11,7 @@ import { design } from "./utils"
 
 let Wrapping = styled(SimpleBar)`
   width: 100vw;
-  height: 100vh;
+  height: calc(100 * var(--vh));
   background-color: #fff;
   ${ props => `background-color: ${props.color.bg};
   color: ${props.color.fg};`}
@@ -31,7 +31,6 @@ const Wrap = ({children, color = design.white, setScroll, setParallax, ...props}
   
   const throttleScroll = useRef(
     throttle(() => {
-      console.log('onscroll', scrollRef.current.scrollTop)
       if (scrollRef) {
         let scrollProgress =
           scrollRef.current.scrollTop /
@@ -64,6 +63,7 @@ const Wrap = ({children, color = design.white, setScroll, setParallax, ...props}
   return (
     <Wrapping
     color={color}
+    autoHide={false}
     scrollableNodeProps={{
       ref: scrollRef,
       onScroll: onScroll,

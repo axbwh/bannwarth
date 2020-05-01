@@ -18,7 +18,7 @@ const Prev = styled(animated.div)`
   width: calc(100vw - var(--gutter) * 2);
   height: calc( (100vw - var(--gutter) * 2) * 9 / 16);
   @media (max-width: 768px) {
-    height: calc(100vh - var(--nav-size) - 6vw - 10px - 35px);
+    height: calc((100 * var(--vh)) - var(--nav-size) - 6vw - 10px - 35px);
   }
 `
 const Date = styled.div`

@@ -32,7 +32,7 @@ const Mask = styled.div`
   overflow: hidden;
   position: absolute;
   top: 0px;
-  height: 100vh;
+  height: calc(100 * var(--vh));
   width: calc(80vw + 24px);
   a {
     /* mix-blend-mode: saturation; */

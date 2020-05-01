@@ -2,6 +2,7 @@ import React, {useState} from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image"
 import { animated, useSpring } from "react-spring"
+import parse from 'html-react-parser'
 import Header from "../components/Header"
 import Bookmarks from "../components/bookmarks"
 import * as Mouse from '../components/mouse'
@@ -34,7 +35,7 @@ export const query = graphql`
             images {
                 childImageSharp { 
                     fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid
+                        ...GatsbyImageSharpFluid_withWebp_tracedSVG
                     }
                 }
             }
@@ -119,7 +120,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
                   <li key={`tag${i}`}>{tag}</li>
                 ))}
               </ul>
-              <p>{project.description}</p>
+              <p>{parse(project.description)}</p>
             </Desc>
             <animated.hr style={{ transform: parallax.xy.interpolate(intHr) }}/>
             {project.images.map((img, i) => {
@@ -135,6 +136,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
                       fluid={imageData}
                       key={`${project.title}-${i}`}
                       alt={`${project.title}-${i}`}
+                      loading='eager'
                     />
                   </animated.div>
                 </Frame>

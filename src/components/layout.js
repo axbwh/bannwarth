@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useLayoutEffect } from "react"
 import PropTypes from "prop-types"
 import { createGlobalStyle } from "styled-components"
 
@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
   --nav-padding: 30px;
   --nav-size: calc( var(--nav-padding) * 2 + 19px);
   --gutter: 20vw;
+  --vh: 1vh;
 
   @media (max-width: 768px) {
     --nav-padding: 15px;
@@ -41,6 +42,22 @@ body{
 
 
 const Layout = ({ title, to, top, children, parallax, setClip, ...rest }) => {
+
+  useLayoutEffect(() => {
+    const handleHeight = () => {
+      const vHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+      const vWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+      const vh = vHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    handleHeight()
+    window.addEventListener("resize", handleHeight)
+    return () => {
+      window.removeEventListener("resize", handleHeight)
+    }
+  }, [])
+
   return (
     <>    
       <SEO title={title} />

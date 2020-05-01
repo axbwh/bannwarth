@@ -13,6 +13,10 @@ const set = e => {
   pos.r = getRad(pos.x, pos.y)
 }
 
+const setRad = () => {
+  pos.r = getRad(pos.x, pos.y)
+}
+
 let pos = {
   x: typeof window !== 'undefined' ? window.innerWidth / 2 : 0,
   y: typeof window !== 'undefined' ? window.innerHeight / 2 : 0,
@@ -21,4 +25,4 @@ let pos = {
 
 const calc = r => `circle(${r}px at ${pos.x}px ${pos.y}px)`
 
-export {set, calc, pos}
+export {set, calc, pos, setRad}

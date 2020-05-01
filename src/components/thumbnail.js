@@ -40,7 +40,7 @@ const Thumbnail = ({ slug, title, imageData, parallax, hovered, ...props }) =>{
             }),
           }}
         >
-          <Image fluid={imageData} alt={title} />
+          <Image loading='eager' fluid={imageData} alt={title} />
         </animated.div>
       </animated.div>
     </Project>

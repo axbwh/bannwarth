@@ -57,12 +57,6 @@ const Desc = styled(animated.div)`
     transition-property: font-variation-settings, letter-spacing;
     transition-duration: 0.6s;
     transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    padding: 10px;
-
-    &:hover {
-      font-variation-settings: "wght" 500, "wdth" 85, "slnt" 0;
-      letter-spacing: 2px;
-    }
   }
 
   @media (max-width: 768px) {
@@ -76,11 +70,26 @@ const Desc = styled(animated.div)`
     margin: 0;
     text-transform: capitalize;
     line-height: 30px;
+    a {
+    padding: 10px;
+
+    &:hover {
+      font-variation-settings: "wght" 500, "wdth" 85, "slnt" 0;
+      letter-spacing: 2px;
+    }
+  }
+
     @media (max-width: 768px) {
       margin-bottom: 30px;
     }
   }
   p {
+    a{
+      font-variation-settings: "wght" 500, "wdth" 85, "slnt" 15;
+      &:hover {
+      font-variation-settings: "wght" 300, "wdth" 89, "slnt" 15;
+    }
+    }
     max-width: 50%;
     align-self: right;
     margin: 0;

@@ -13,6 +13,7 @@ const Abs = styled.div`
 `
 
 const Wrap = styled.div`
+  position: -webkit-sticky;
   position: sticky;
   display: flex;
   flex-direction: column;
@@ -23,7 +24,7 @@ const Wrap = styled.div`
   @media (min-width: 768px) {
     justify-content: center;
   }
-  height: 100vh;
+  height: calc(100 * var(--vh));
   width: 100vw;
   pointer-events: none;
   z-index: 100;

@@ -11,7 +11,7 @@ import styled from "styled-components"
 import { useSpring } from "react-spring"
 
 const Dummy = styled.div`
-  height: 100vh;
+  height:  calc(100 * var(--vh));
   width: 100vw;
 `
 
@@ -29,7 +29,7 @@ const IndexPage = ({location : {state}, location}) => {
             images {
               childImageSharp {
                 fluid(maxWidth: 1920) {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
                 }
               }
             }

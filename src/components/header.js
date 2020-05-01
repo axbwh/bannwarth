@@ -6,6 +6,7 @@ import { design } from './utils'
 import { useStaticQuery, graphql } from "gatsby"
 
 let Nav = styled.div`
+  position: -webkit-sticky;
   position: sticky;
   top: 0;
   left: 0;
