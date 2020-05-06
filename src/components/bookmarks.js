@@ -81,7 +81,7 @@ const Bookmarks = ({projects, scroll, index = -1 , setClip, ...props}) => {
   const [timeline, setTimeline] = useState()
 
   const [spring, setSpring] = useSpring(() => ({
-    xy: [0, 0],
+    xy: [-13, -13],
     s: [0 , 0],
     config : 	{ mass: 1, tension: 300, friction: 32 }
   }))
@@ -91,7 +91,7 @@ const Bookmarks = ({projects, scroll, index = -1 , setClip, ...props}) => {
     config : 	{ mass: 1, tension: 300, friction: 12 }
   }))
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const handleSize = () => {
       const bmarks = Array.from(ref.current.querySelectorAll('a'))
 
