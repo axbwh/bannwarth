@@ -13,10 +13,10 @@ const Link = ({children, to, setClip,  ...props}) => {
     Mouse.set(e)
 
     const options = to.includes('/#') || to === '/' ? { to : async (next, cancel) => {
-      await next ({ mask: Mouse.calc(Mouse.pos.r), config: { immediate : true, duration: 0} })
+      await next ({ mask: Mouse.calc(Mouse.pos.r), config: { immediate : true, duration: 0.0001} })
       await next ({ mask: Mouse.calc(0), config: { immediate : false, duration: 300 }})
     }} : { to : async (next, cancel) => {
-      await next ({ trim: Mouse.calc(0), config: { immediate : true, duration: 0 } })
+      await next ({ trim: Mouse.calc(0), config: { immediate : true, duration: 0.0001 } })
       await next ({ trim: Mouse.calc(Mouse.pos.r), config: { immediate : false, duration: 300 }})
     }}
 

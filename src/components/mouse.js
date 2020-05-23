@@ -23,6 +23,6 @@ let pos = {
   r: typeof window !== 'undefined' ? getRad(0, 0) : 2250
 }
 
-const calc = r => `circle(${r}px at ${pos.x}px ${pos.y}px)`
+const calc = r => [pos.x, pos.y, r]
 
 export {set, calc, pos, setRad}
