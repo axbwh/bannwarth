@@ -16,6 +16,7 @@ let Nav = styled.div`
   justify-content: space-between;
   z-index: 10;
   pointer-events: none;
+  background-color: ${props => props.color.bg};
 
   a {
     text-decoration: none;
@@ -41,7 +42,7 @@ const Abs = styled.div`
   position: absolute;
 `
 
-const Header = ({ to = "/", setClip, top, children }) => {
+const Header = ({ to = "/", setClip, top, color= design.white , children }) => {
   const data = useStaticQuery(graphql`
   query SiteTitleQuery {
     site {
@@ -55,7 +56,7 @@ const Header = ({ to = "/", setClip, top, children }) => {
 
   return (
     <Abs>
-      <Nav>
+      <Nav color={color}>
         {top ? <a href={`#${top}`} title='Top of Page'>{siteTitle}</a> :
         <Link
           to={'/'}

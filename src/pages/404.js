@@ -25,7 +25,7 @@ const NotFoundPage = ({location : {state}}) => {
 
   return (
       <Layout title='404: Not found' clip={clip} setClip={setClip} color={design.black} setScroll={setScroll} setParallax={setParallax}>
-        <Header setClip={setClip} parallax={parallax}/>
+        <Header setClip={setClip} parallax={parallax} color={design.black}/>
           <Wrap>
             <animated.div style={{ transform: parallax.xy.interpolate(intWrap) }}>
               <Title>            

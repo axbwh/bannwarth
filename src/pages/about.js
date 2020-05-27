@@ -46,7 +46,7 @@ const About = ({location : {state}}) => {
 
   return (
       <Layout title='About' clip={clip} setClip={setClip} color={design.black} setScroll={setScroll} setParallax={setParallax}>
-        <Header setClip={setClip} parallax={parallax}/>
+        <Header setClip={setClip} parallax={parallax} color={design.black}/>
         <Wrap>
           <animated.div style={{ transform: parallax.xy.interpolate(intWrap) }}>
             <Title>
@@ -60,7 +60,11 @@ const About = ({location : {state}}) => {
                 <li><a href="https://vimeo.com/user18232035" target='_blank' rel="noopener noreferrer">Vimeo</a></li>
                 <li><a href="mailto:alex@bannwarth.design">alex@bannwarth.design</a></li>
               </ul>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+              <div>
+                <p>Hello, I’m Alex Bannwarth, a designer and digital artist living in Wellington, New Zealand, by way of Alsace, France.</p>
+                <p>I’m passionate about creating beautiful digital products and experiences, from brand strategy through to design, illustration, animation and development.</p>
+                <p>Available for freelance and hire.</p>
+              </div>
             </Desc>
             <hr/>
           </animated.div>

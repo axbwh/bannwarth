@@ -71,30 +71,43 @@ const Desc = styled(animated.div)`
     text-transform: capitalize;
     line-height: 30px;
     a {
-    padding: 10px;
+      padding: 10px 0;
 
-    &:hover {
-      font-variation-settings: "wght" 500, "wdth" 85, "slnt" 0;
-      letter-spacing: 2px;
+      &:hover {
+        font-variation-settings: "wght" 500, "wdth" 85, "slnt" 0;
+        letter-spacing: 2px;
+      }
     }
-  }
 
     @media (max-width: 768px) {
       margin-bottom: 30px;
     }
   }
   p {
-    a{
+    a {
       font-variation-settings: "wght" 500, "wdth" 85, "slnt" 15;
       &:hover {
-      font-variation-settings: "wght" 300, "wdth" 89, "slnt" 15;
-    }
+        font-variation-settings: "wght" 300, "wdth" 89, "slnt" 15;
+      }
     }
     max-width: 50%;
     align-self: right;
     margin: 0;
     @media (max-width: 768px) {
       max-width: 100%;
+    }
+  }
+
+  div {
+    display: relative;
+    align-self: right;
+    max-width: 50%;
+    @media (max-width: 768px) {
+      max-width: 100%;
+    }
+    p {
+      max-width: 100%;
+      padding-bottom: 10px;
     }
   }
 `

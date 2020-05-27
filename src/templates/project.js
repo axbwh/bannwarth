@@ -1,6 +1,7 @@
 import React, {useState} from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image"
+import ReactPlayer from 'react-player'
 import { animated, useSpring } from "react-spring"
 import parse from 'html-react-parser'
 import Header from "../components/Header"
@@ -30,7 +31,10 @@ export const query = graphql`
             title
             date
             description
-            video
+            videos { 
+              url
+              ratio
+             }
             tags
             images {
                 childImageSharp { 
@@ -48,6 +52,20 @@ const Frame = styled.div`
   @media (max-width: 768px) {
     margin-bottom: 40px;
   } 
+`
+
+const Player = styled(ReactPlayer)`
+  position: absolute;
+  top: 0;
+  left: 0;
+`
+
+const Vid = styled(Frame)`
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  @media (max-width: 768px) {
+    padding-top: ${props => props.ratio};
+  }
 `
 
 const Next = styled(Link)`
@@ -123,15 +141,24 @@ const ProjectTemplate = ({ data, location : {state} }) => {
               <p>{parse(project.description)}</p>
             </Desc>
             <animated.hr style={{ transform: parallax.xy.interpolate(intHr) }}/>
+            {
+              project.videos.map((vid, i) => {
+                return (
+                  <Vid key={`vidframe-${i}`} ratio={vid.ratio}>
+                    <Player
+                    url={vid.url}
+                    width='100%'
+                    height='100%'
+                    />
+                </Vid>
+                )
+              })
+            }
             {project.images.map((img, i) => {
               const imageData = img.childImageSharp.fluid
               return (
-                <Frame
-                  key={`frame-${i}`}
-                >
-                  <animated.div
-                    style={{ transform: parallax.xy.interpolate(intTitle) }}
-                  >
+                <Frame key={`frame-${i}`} >
+                  <animated.div style={{ transform: parallax.xy.interpolate(intTitle) }}>
                     <Image
                       fluid={imageData}
                       key={`${project.title}-${i}`}

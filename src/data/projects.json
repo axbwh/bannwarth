@@ -5,8 +5,8 @@
         "date": "2017 - 2018",
         "tags": ["procedural modelling", "rendering", "sculpting"],
         "prompt": "view",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "video": "",
+        "description": "Drawing inspiration from both natural and architectural formations, patterns and motifs, a mixture of digital sculpture and procedural modelling was employed in the creation of these intricate illustrations. Each artwork looks to reconstruct, remix and re-contextualise such structures into surreal yet seemingly photoreal cg renders.",
+        "videos": [],
         "images": [
             "./images/plate.png",
             "./images/marbeled.png",
@@ -20,7 +20,9 @@
         "tags": ["Illustration", "Creative Coding"],
         "prompt": "view",
         "description": "Inspired by Dutch graphic artist M. C. Escher’s <i>Regular Division of the Plane</i> series, this project sets out to explore how computer automation can assist in the design of complex figurative tessellations. In a synthesis of creative coding and digital illustration, these artworks were produced with the help of custom built instancing and real time drawing assists, letting me visualise the entire pattern as I draw. This project is ongoing as I continue to refine my workflow and find new ways of creating these seamlessly interlocking patterns.",
-        "video": "./video/tesselations",
+        "videos": [
+            { "url": "https://vimeo.com/65880130", "ratio": "100%"}
+        ],
         "images": [
             "./images/snakefox.png",
             "./images/frogs.png"
@@ -33,7 +35,7 @@
         "tags": ["procedural modelling", "Rendering"],
         "prompt": "view",
         "description": "Created as part of my master’s thesis research <i>Exploratory Three Dimensional Cartographic Visualisation of Geolocated Datasets</i>, this project combines height maps from NASA’s <i>ASTER Global Digital Elevation Model</i> with vector maps from <i>OpenStreetMap.</i> After being processed in a geographic information system, the data was used to procedurally model a digital topographic diorama of Thann - the place I was born.",
-        "video": "",
+        "videos": [],
         "images": [
             "./images/thann-side.png",
             "./images/thann-top.png",
@@ -47,7 +49,7 @@
         "tags": [ "data vis", "data mining", "procedural modelling", "Rendering"],
         "prompt": "view",
         "description": "In the process of writing my master’s thesis <i>Exploratory Three Dimensional Cartographic Visualisation of Geolocated Datasets</i> I developed a workflow to process map data and display it in vivid 3D. This experimental research looked to find novel and aesthetically engaging ways to visualise a variety of datasets, such as meteorite falls, geotagged social media data or seismic activity.",
-        "video": "",
+        "videos": [],
         "images": [
             "./images/us_mx_meteor_hollow.png",
             "./images/us_mx_meteor_rings.png",
@@ -64,7 +66,7 @@
         "tags": [ "Branding", "Creative Lead", "Copywriting"],
         "prompt": "view",
         "description": "In my time as Creative Lead for <a href='https://www.psychoactive.co.nz/'  target='_blank'>Psychoactive Studios</a>, a Wellington-based digital design agency, I was tasked with developing a cohesive Brand Identity and Strategy that would drive the studios’ visual and written communication. As part of this process, I led a complete rebrand, basing the amphibian theme on the <i>phyllomedusa bicolor</i> psychoactive frog. This involved designing the new tadpole logo, a few variations of a tessellated frog artwork to be used across social, web and collateral, as well as the website’s copywriting and SEO.",
-        "video": "",
+        "videos": [],
         "images": [
             "./images/frogs.png",
             "./images/tadpole.png",
