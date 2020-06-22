@@ -24,6 +24,7 @@
             { "url": "https://vimeo.com/65880130", "ratio": "100%"}
         ],
         "images": [
+            "./images/canine-ritual.png",
             "./images/snakefox.png",
             "./images/frogs.png"
         ]
