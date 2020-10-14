@@ -38,19 +38,51 @@ export const query = graphql`
             tags
             images {
                 childImageSharp { 
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                    fluid(maxWidth: 1920, quality: 100) {
+                      ...GatsbyImageSharpFluid
+                      presentationWidth
                     }
                 }
             }
         }
     }
 `
+
+const Img = styled(Image)`
+      max-width: ${props => props.fluid.presentationWidth}px;
+      margin: 0 auto;
+`
+
+// const Frame = styled.div`
+//   overflow: hidden;
+//   margin-bottom: 12vw;
+//   flex-grow: 1;
+//   flex-basis: ${props => props.width > 800 ? '100%' : '30%' };
+//   @media (max-width: 768px) {
+//     margin-bottom: 40px;
+//   } 
+// `
+
 const Frame = styled.div`
   overflow: hidden;
-  margin-bottom: 150px;
+  grid-column: ${props => props.width > 800 ? 'span 3' : 'span 1' }; 
+`
+
+// const Gallery = styled.div`
+//   display: flex;
+//   flex-wrap: wrap;
+//   flex-direction: row;
+//   justify-content: space-between;
+// `
+
+const Gallery = styled.div`
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 4vw;
+  grid-row-gap: 4vw;
+  margin-bottom: 12vw;
   @media (max-width: 768px) {
-    margin-bottom: 40px;
+     margin-bottom: 40px;
   } 
 `
 
@@ -63,6 +95,7 @@ const Player = styled(ReactPlayer)`
 const Vid = styled(Frame)`
   position: relative;
   padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  grid-column: span 3;
   @media (max-width: 768px) {
     padding-top: ${props => props.ratio};
   }
@@ -141,6 +174,23 @@ const ProjectTemplate = ({ data, location : {state} }) => {
               <p>{parse(project.description)}</p>
             </Desc>
             <animated.hr style={{ transform: parallax.xy.interpolate(intHr) }}/>
+            <Gallery>
+            {project.images.map((img, i) => {
+              const imageData = img.childImageSharp.fluid
+              console.log(imageData)
+              return (
+                <Frame width={imageData.presentationWidth} key={`frame-${i}`} >
+                  <animated.div style={{ transform: parallax.xy.interpolate(intTitle) }}>
+                    <Img
+                      fluid={imageData}
+                      key={`${project.title}-${i}`}
+                      alt={`${project.title}-${i}`}
+                      loading='eager'
+                    />
+                  </animated.div>
+                </Frame>
+              )
+            })}
             {
               project.videos.map((vid, i) => {
                 return (
@@ -154,21 +204,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
                 )
               })
             }
-            {project.images.map((img, i) => {
-              const imageData = img.childImageSharp.fluid
-              return (
-                <Frame key={`frame-${i}`} >
-                  <animated.div style={{ transform: parallax.xy.interpolate(intTitle) }}>
-                    <Image
-                      fluid={imageData}
-                      key={`${project.title}-${i}`}
-                      alt={`${project.title}-${i}`}
-                      loading='eager'
-                    />
-                  </animated.div>
-                </Frame>
-              )
-            })}
+            </Gallery>
           </animated.div>
         </Wrap>
       </Layout>
