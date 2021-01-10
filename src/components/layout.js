@@ -41,7 +41,7 @@ body{
 
 
 
-const Layout = ({ title, to, top, children, parallax, setClip, ...rest }) => {
+const Layout = ({ title, description, to, top, children, parallax, setClip, ...rest }) => {
 
   useLayoutEffect(() => {
     const handleHeight = () => {
@@ -60,7 +60,7 @@ const Layout = ({ title, to, top, children, parallax, setClip, ...rest }) => {
 
   return (
     <>    
-      <SEO title={title} />
+      <SEO title={title} description={description}/>
       <GlobalStyle />
       <Trans setClip={setClip} {...rest}>
         <main>

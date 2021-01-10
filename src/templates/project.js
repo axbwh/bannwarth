@@ -31,6 +31,7 @@ export const query = graphql`
             title
             date
             description
+            seo
             videos { 
               url {
                 publicURL
@@ -158,7 +159,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
   const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(state?.linked ? 0 : Mouse.pos.r)}))
 
   return (
-      <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} color={design.white} setScroll={setScroll} setParallax={setParallax}>
+      <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} description={project.seo} color={design.white} setScroll={setScroll} setParallax={setParallax}>
       
       <Header setClip={setClip} parallax={parallax}>
         <Bookmarks setClip={setClip} scroll={scroll} projects={projects} index={index} />
@@ -185,7 +186,6 @@ const ProjectTemplate = ({ data, location : {state} }) => {
             <Gallery>
             {project.images.map((img, i) => {
               const imageData = img.childImageSharp.fluid
-              console.log(imageData)
               return (
                 <Frame width={imageData.presentationWidth} key={`frame-${i}`} >
                   <animated.div style={{ transform: parallax.xy.interpolate(intTitle) }}>

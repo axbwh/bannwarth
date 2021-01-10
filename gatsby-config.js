@@ -1,8 +1,10 @@
 module.exports = {
   siteMetadata: {
-    title: `bannwarth . design`,
-    description: ``,
+    title: `bannwarth.design`,
+    description: `Alex Bannwarth - Freelance Design, Illustration & Animation in Wellington, NZ`,
+    url: "http://www.bannwarth.design",
     author: `Alex Bannwarth`,
+    image: "/data/images/plate.png",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
