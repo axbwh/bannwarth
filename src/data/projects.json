@@ -17,11 +17,11 @@
         "title": "Tessellation",
         "slug": "tessellation",
         "date": "2013 - 2020",
-        "tags": ["Illustration", "Creative Coding"],
+        "tags": ["Illustration", "Creative Coding", "Animation"],
         "prompt": "view",
-        "description": "Inspired by Dutch graphic artist M. C. Escher’s <i>Regular Division of the Plane</i> series, this project sets out to explore how computer automation can assist in the design of complex figurative tessellations. In a synthesis of creative coding and digital illustration, these artworks were produced with the help of custom built instancing and real time drawing assists, letting me visualise the entire pattern as I draw. This project is ongoing as I continue to refine my workflow and find new ways of creating these seamlessly interlocking patterns.",
+        "description": "Inspired by Dutch graphic artist M. C. Escher’s <i>Regular Division of the Plane</i> series, this project sets out to explore how computer automation can assist in the design and animation of complex figurative tessellations. In a synthesis of creative coding, digital illustration and animation, these artworks were produced with the help of custom built instancing and real time drawing assists, letting me visualise the entire pattern as I draw.",
         "videos": [
-            { "url": "https://vimeo.com/65880130", "ratio": "100%"}
+            { "url": "./videos/metamorphoses.mp4", "ratio": "100%"}
         ],
         "images": [
             "./images/canine-ritual.png",
@@ -102,10 +102,12 @@
         "title": "Psychoactive",
         "slug": "psychoactive",
         "date": "2019",
-        "tags": [ "Branding", "Creative Lead", "Copywriting"],
+        "tags": [ "Branding", "Illustration", "Animation"],
         "prompt": "view",
-        "description": "In my time as Creative Lead for <a href='https://www.psychoactive.co.nz/'  target='_blank'>Psychoactive Studios</a>, a Wellington-based digital design agency, I was tasked with developing a cohesive Brand Identity and Strategy that would drive the studios’ visual and written communication. As part of this process, I led a complete rebrand, basing the amphibian theme on the <i>phyllomedusa bicolor</i> psychoactive frog. This involved designing the new tadpole logo, a few variations of a tessellated frog artwork to be used across social, web and collateral, as well as the website’s copywriting and SEO.",
-        "videos": [],
+        "description": "In my time as Creative Lead for <a href='https://www.psychoactive.co.nz/'  target='_blank'>Psychoactive Studios</a>, a Wellington-based digital design agency, I was tasked with developing a cohesive Brand Identity and Strategy that would drive the studios’ visual and written communication. As part of this process, I led a complete rebrand, basing the amphibian theme on the <i>phyllomedusa bicolor</i> psychoactive frog. This involved designing the new tadpole logo, a tessellated frog pattern to be used across social, web and collateral, as well as the website’s copywriting and SEO. I then animated the pattern, using the metamorphosis of the frog as a metaphor for the studio’s development process .",
+        "videos": [
+            { "url": "./videos/metamorphoses.mp4", "ratio": "100%"}
+        ],
         "images": [
             "./images/frogs.png",
             "./images/tadpole.png",

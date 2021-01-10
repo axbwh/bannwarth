@@ -32,7 +32,9 @@ export const query = graphql`
             date
             description
             videos { 
-              url
+              url {
+                publicURL
+              }
               ratio
              }
             tags
@@ -96,9 +98,15 @@ const Vid = styled(Frame)`
   position: relative;
   padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
   grid-column: span 3;
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     padding-top: ${props => props.ratio};
-  }
+  } */
+    video{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
 `
 
 const Next = styled(Link)`
@@ -193,13 +201,17 @@ const ProjectTemplate = ({ data, location : {state} }) => {
             })}
             {
               project.videos.map((vid, i) => {
+                console.log(vid.url)
                 return (
                   <Vid key={`vidframe-${i}`} ratio={vid.ratio}>
-                    <Player
+                    <video autoPlay loop controls>
+                    <source src={vid.url.publicURL} type="video/mp4" />
+                    </video>
+                    {/* <Player
                     url={vid.url}
                     width='100%'
                     height='100%'
-                    />
+                    /> */}
                 </Vid>
                 )
               })
