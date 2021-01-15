@@ -117,7 +117,16 @@
         "images": [
             "./images/frogs.png",
             "./images/tadpole.png",
-            "./images/dither.png"
+            "./images/dither.png",
+            "./images/frogs_00.png",
+            "./images/frogs_01.png",
+            "./images/frogs_02.png",
+            "./images/metamorphosis_01.png",
+            "./images/metamorphosis_02.png",
+            "./images/metamorphosis_03.png",
+            "./images/metamorphosis_04.png",
+            "./images/metamorphosis_05.png",
+            "./images/metamorphosis_06.png"
         ]
     }
 ]
