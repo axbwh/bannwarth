@@ -68,7 +68,7 @@ const Img = styled(Image)`
 
 const Frame = styled.div`
   overflow: hidden;
-  grid-column: ${props => props.width > 800 ? 'span 3' : 'span 1' }; 
+  grid-column: ${props => props.width > 1080 ? 'span 3' : 'span 1' }; 
 `
 
 // const Gallery = styled.div`
