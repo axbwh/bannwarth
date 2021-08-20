@@ -4,7 +4,7 @@ import * as Mouse from '../components/mouse'
 
 import Layout from "../components/layout"
 import Folio from "../components/folio"
-import Header from "../components/Header"
+import Header from "../components/header"
 import Bookmarks from "../components/bookmarks"
 
 import styled from "styled-components"

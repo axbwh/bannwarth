@@ -23,6 +23,7 @@
         "description": "Inspired by Dutch graphic artist M. C. Escher’s <i>Regular Division of the Plane</i> series, this project sets out to explore how computer automation can assist in the design and animation of complex figurative tessellations. In a synthesis of creative coding, digital illustration and animation, these artworks were produced with the help of custom built instancing and real time drawing assists, letting me visualise the entire pattern as I draw.",
         "seo": "Beautiful Escher-style figurative tessellations, illustrated and animated in Mesmerising motion graphics.",
         "videos": [
+            { "url": "./videos/metamorphoses_gold.mp4", "ratio": "100%"},
             { "url": "./videos/metamorphoses.mp4", "ratio": "100%"}
         ],
         "images": [

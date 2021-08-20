@@ -6,7 +6,7 @@ import * as Mouse from "../components/mouse"
 import { design } from "../components/utils"
 
 import Layout from "../components/layout"
-import Header from "../components/Header"
+import Header from "../components/header"
 import { Title, Desc, Wrap, intWrap, intTitle } from "../components/styles"
 
 const Error = styled(Desc)`

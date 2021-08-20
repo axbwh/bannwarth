@@ -4,7 +4,7 @@ import Image from "gatsby-image"
 import ReactPlayer from 'react-player'
 import { animated, useSpring } from "react-spring"
 import parse from 'html-react-parser'
-import Header from "../components/Header"
+import Header from "../components/header"
 import Bookmarks from "../components/bookmarks"
 import * as Mouse from '../components/mouse'
 
