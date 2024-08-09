@@ -1,5 +1,4 @@
 module.exports = {
-  pathPrefix:"/bannwarth",
   siteMetadata: {
     title: `bannwarth.design`,
     description: `Alex Bannwarth - 3D Artist in Wellington, NZ`,
