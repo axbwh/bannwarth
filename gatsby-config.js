@@ -1,8 +1,9 @@
 module.exports = {
+  pathPrefix:"/bannwarth",
   siteMetadata: {
     title: `bannwarth.design`,
-    description: `Alex Bannwarth - Freelance Design, Illustration & Animation in Wellington, NZ`,
-    url: "http://www.bannwarth.design",
+    description: `Alex Bannwarth - 3D Artist in Wellington, NZ`,
+    url: "https://www.bannwarth.design",
     author: `Alex Bannwarth`,
     image: "/data/images/plate.png",
   },
