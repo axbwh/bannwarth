@@ -19,14 +19,14 @@ const Image = () => {
       placeholderImage: file(relativePath: { eq: "gatsby-astronaut.png" }) {
         childImageSharp {
           fluid(maxWidth: 300) {
-            ...GatsbyImageSharpFluid_noBase64
+            ...GatsbyImageSharpFluid_withWebp_noBase64
           }
         }
       }
     }
   `)
 
-  return <Img fluid={data.placeholderImage.childImageSharp.fluid} />
+  return <Img fluid={data.placeholderImage.childImageSharp.fluid} backgroundColor={true}/>
 }
 
 export default Image

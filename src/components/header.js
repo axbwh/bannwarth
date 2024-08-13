@@ -25,7 +25,7 @@ let Nav = styled.div`
     font-size: 14px;
     font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
     
-    letter-spacing: 2px;
+    letter-spacing: 0.04em;
 
     padding: var(--nav-padding) calc(var(--nav-padding)*2);
     @media (max-width: 768px) {
@@ -36,7 +36,7 @@ let Nav = styled.div`
 
     &:hover {
       font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
-      letter-spacing: 1px;
+      letter-spacing:0.2em;
     }
   }
 `

@@ -29,7 +29,7 @@ const IndexPage = ({location : {state}, location}) => {
             images {
               childImageSharp {
                 fluid(maxWidth: 1920) {
-                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
                 }
               }
             }

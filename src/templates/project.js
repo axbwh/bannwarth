@@ -37,12 +37,13 @@ export const query = graphql`
                 publicURL
               }
               ratio
+              autoplay
              }
             tags
             images {
                 childImageSharp { 
                     fluid(maxWidth: 1920, quality: 100) {
-                      ...GatsbyImageSharpFluid_tracedSVG
+                      ...GatsbyImageSharpFluid_withWebp_noBase64
                       presentationWidth
                     }
                 }
@@ -120,17 +121,17 @@ const Next = styled(Link)`
 
     font-size: 14px;
     font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
-    letter-spacing: 2px;
+    letter-spacing: 0.04em;;
     line-height: 20px;
 
-    padding: var(--nav-padding);
+    padding: var(--nav-padding) calc(var(--nav-padding)*2);
     transition: all 1s ${design.ease};
     pointer-events: all;
     display: block;
 
     &:hover {
       font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
-      letter-spacing: 1px;
+      letter-spacing: 0.2em;
     }
     @media (max-width: 768px) {
       writing-mode: vertical-lr;
@@ -184,6 +185,29 @@ const ProjectTemplate = ({ data, location : {state} }) => {
             </Desc>
             <animated.hr style={{ transform: parallax.xy.interpolate(intHr) }}/>
             <Gallery>
+            {
+              project.videos.map((vid, i) => {
+                return (
+                  <Vid key={`vidframe-${i}`} ratio={vid.ratio}>
+                    {
+                      vid.autoplay ? 
+                      <video loop controls autoPlay muted>
+                      <source src={vid.url.publicURL} type="video/mp4" />
+                      </video> :
+                      <video loop controls>
+                      <source src={vid.url.publicURL} type="video/mp4" />
+                      </video>
+                    }
+
+                    {/* <Player
+                    url={vid.url}
+                    width='100%'
+                    height='100%'
+                    /> */}
+                </Vid>
+                )
+              })
+            }
             {project.images.map((img, i) => {
               const imageData = img.childImageSharp?.fluid
               if (!imageData) return null;
@@ -195,28 +219,12 @@ const ProjectTemplate = ({ data, location : {state} }) => {
                       key={`${project.title}-${i}`}
                       alt={`${project.title}-${i}`}
                       loading='eager'
+                      backgroundColor={true}
                     />
                   </animated.div>
                 </Frame>
               )
             })}
-            {
-              project.videos.map((vid, i) => {
-                console.log(vid.url)
-                return (
-                  <Vid key={`vidframe-${i}`} ratio={vid.ratio}>
-                    <video autoPlay loop controls>
-                    <source src={vid.url.publicURL} type="video/mp4" />
-                    </video>
-                    {/* <Player
-                    url={vid.url}
-                    width='100%'
-                    height='100%'
-                    /> */}
-                </Vid>
-                )
-              })
-            }
             </Gallery>
           </animated.div>
         </Wrap>
