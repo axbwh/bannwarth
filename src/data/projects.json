@@ -1,17 +1,24 @@
 [
     {
-        "title": "CG Art",
-        "slug": "cgart",
-        "date": "2017 - 2018",
-        "tags": ["procedural modelling", "rendering", "sculpting"],
+        "title": "Zendetta",
+        "slug": "zendetta",
+        "date": "2022",
+        "tags": ["Storytelling", "Illustration", "Art Direction","UX"],
         "prompt": "view",
-        "description": "Drawing inspiration from both natural and architectural formations, patterns and motifs, a mixture of digital sculpture and procedural modelling was employed in the creation of these intricate illustrations. Each artwork looks to reconstruct, remix and re-contextualise such structures into surreal yet seemingly photoreal cg renders.",
-        "seo": "Procedural 3D Modelling and digital sculpture meet to produce surreal CG Art.",
+        "description": "<a href='https://www.zendetta.com/' target='_blank'>Visit Zendetta.com</a><br/><br/> Award-winning interactive web experience illustrating Karam Alhamad's journey during the Syrian conflict using evocative visual storytelling.<br/><br/>An immersive, interactive WebGL experience. From student protestor through to war journalist, political detainee, refugee, and finally policy advocate, Karam’s story of survival and revolution is just one of millions like it as the Syrian conflict now spans over a decade.<br/><br/>Alongside the talented team of UI Designers and developers at Psychoactive Studios, I had the privilege to work with Karam to retell his story. My main responsibilities were to develop the narrative and visual elements through storyboarding, UX design, illustrations, and animations. I also worked closely with Karam on the English script for the website, making sure to keep the narration clear and concise while preserving the authenticity and intimacy of his personal account.<br/><br/>The goal was to condense Karam’s story into a 10-minute interactive experience using visual storytelling to evoke feelings of passion, hope, and empathy. We aimed to shed light on not only his personal story, but the plight of thousands of Syrians who are currently arbitrarily detained by the Al-Assad regime.<br/><br/>Portraying such an intimate yet politically charged story in as accurate a manner as possible meant it was critical to conduct extensive research. While I was able to base a lot of the visuals off Karam’s own photos, videos, and first-hand accounts, I had to supplement my own research and reference gathering.<br/><br/>The site won awards from Awwwards, CSS Design Awards, FWA, Muse Creative Awards, and W3 Awards. <a href='https://www.psychoactive.co.nz/work/zendetta' target='_blank'>Full list</a>",
+        "seo": "Designing Zendetta, an immersive, interactive web-experience. From political detainee to refugee and activist, a story of survival and revolution through the Syrian uprising.",
         "videos": [],
         "images": [
-            "./images/plate.png",
-            "./images/marbeled.png",
-            "./images/goldwax.png"
+            "./images/zendetta_00.png",
+            "./images/zendetta_01.png",
+            "./images/zendetta_02.png",
+            "./images/zendetta_03.png",
+            "./images/zendetta_04.png",
+            "./images/zendetta_05.png",
+            "./images/zendetta_06.png",
+            "./images/zendetta_07.png",
+            "./images/zendetta_08.png",
+            "./images/zendetta_09.png"
         ]
     },
     {

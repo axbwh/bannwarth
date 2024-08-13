@@ -119,8 +119,8 @@ const Next = styled(Link)`
     z-index: 2;
 
     font-size: 14px;
-    font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
-    letter-spacing: 1px;
+    font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
+    letter-spacing: 2px;
     line-height: 20px;
 
     padding: var(--nav-padding);
@@ -129,8 +129,8 @@ const Next = styled(Link)`
     display: block;
 
     &:hover {
-      font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
-      letter-spacing: 2px;
+      font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
+      letter-spacing: 1px;
     }
     @media (max-width: 768px) {
       writing-mode: vertical-lr;
@@ -161,7 +161,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
   return (
       <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} description={project.seo} color={design.white} setScroll={setScroll} setParallax={setParallax}>
       
-      <Header setClip={setClip} parallax={parallax}>
+      <Header to="/about" setClip={setClip} parallax={parallax}>
         <Bookmarks setClip={setClip} scroll={scroll} projects={projects} index={index} />
       </Header>
       <Next setClip={setClip} to={`/${projects[index < projects.length -1 ?  index+1 : 0].slug}`}>Next Project</Next>

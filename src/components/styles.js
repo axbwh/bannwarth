@@ -45,7 +45,7 @@ const Desc = styled(animated.div)`
   font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   margin: 0px;
   width: 100%;
   display: flex;

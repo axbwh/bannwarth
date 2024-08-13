@@ -23,16 +23,20 @@ let Nav = styled.div`
     color: inherit;
 
     font-size: 14px;
-    font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
-    letter-spacing: 1px;
+    font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
+    
+    letter-spacing: 2px;
 
-    padding: var(--nav-padding);
+    padding: var(--nav-padding) calc(var(--nav-padding)*2);
+    @media (max-width: 768px) {
+      padding: var(--nav-padding);
+    }   
     transition: all 1s ${design.ease};
     pointer-events: all;
 
     &:hover {
-      font-variation-settings: "wght" 1100, "wdth" 95, "slnt" 0;
-      letter-spacing: 2px;
+      font-variation-settings: "wght" 350, "wdth" 85, "slnt" 0;
+      letter-spacing: 1px;
     }
   }
 `
@@ -70,7 +74,7 @@ const Header = ({ to = "/", setClip, top, color= design.white , children }) => {
           setClip={setClip}
           to={to}
         >
-          {to === "/about" ? "About" : "Work"}
+          {to === "/about" ? "About Me" : "Work"}
         </Link>
       </Nav>
       {children}

@@ -1,0 +1,139 @@
+[
+    {
+        "title": "CG Art",
+        "slug": "cgart",
+        "date": "2017 - 2018",
+        "tags": ["procedural modelling", "rendering", "sculpting"],
+        "prompt": "view",
+        "description": "Drawing inspiration from both natural and architectural formations, patterns and motifs, a mixture of digital sculpture and procedural modelling was employed in the creation of these intricate illustrations. Each artwork looks to reconstruct, remix and re-contextualise such structures into surreal yet seemingly photoreal cg renders.",
+        "seo": "Procedural 3D Modelling and digital sculpture meet to produce surreal CG Art.",
+        "videos": [],
+        "images": [
+            "./images/plate.png",
+            "./images/marbeled.png",
+            "./images/goldwax.png"
+        ]
+    },
+    {
+        "title": "Tessellation",
+        "slug": "tessellation",
+        "date": "2013 - 2020",
+        "tags": ["Illustration", "Creative Coding", "Animation"],
+        "prompt": "view",
+        "description": "Inspired by Dutch graphic artist M. C. Escher’s <i>Regular Division of the Plane</i> series, this project sets out to explore how computer automation can assist in the design and animation of complex figurative tessellations. In a synthesis of creative coding, digital illustration and animation, these artworks were produced with the help of custom built instancing and real time drawing assists, letting me visualise the entire pattern as I draw.",
+        "seo": "Beautiful Escher-style figurative tessellations, illustrated and animated in Mesmerising motion graphics.",
+        "videos": [
+            { "url": "./videos/metamorphoses_gold.mp4", "ratio": "100%"},
+            { "url": "./videos/metamorphoses.mp4", "ratio": "100%"}
+        ],
+        "images": [
+            "./images/canine-ritual.png",
+            "./images/snakefox.png",
+            "./images/frogs.png",
+            "./images/metamorphosis_01.png",
+            "./images/metamorphosis_02.png",
+            "./images/metamorphosis_03.png",
+            "./images/metamorphosis_04.png",
+            "./images/metamorphosis_05.png",
+            "./images/metamorphosis_06.png"
+        ]
+    },
+    {
+        "title": "Relief Map",
+        "slug": "reliefmap",
+        "date": "2017",
+        "tags": ["procedural modelling", "Rendering", "cartography"],
+        "prompt": "view",
+        "description": "Created as part of my master’s thesis research <i>Exploratory Three Dimensional Cartographic Visualisation of Geolocated Datasets</i>, this project combines height maps from NASA’s <i>ASTER Global Digital Elevation Model</i> with vector maps from <i>OpenStreetMap.</i> After being processed in a geographic information system, the data was used to procedurally model a digital topographic diorama of Thann - the place I was born.",
+        "seo": "Beautiful custom made relief topographic map / 3D diorama.",
+        "videos": [],
+        "images": [
+            "./images/thann-side.png",
+            "./images/thann-top.png",
+            "./images/thann-tall.png"
+        ]
+    },
+    {
+        "title": "3D Cartography",
+        "slug": "3dcartography",
+        "date": "2017",
+        "tags": [ "data vis", "data mining", "procedural modelling", "Rendering", "cartography"],
+        "prompt": "view",
+        "description": "In the process of writing my master’s thesis <i>Exploratory Three Dimensional Cartographic Visualisation of Geolocated Datasets</i> I developed a workflow to process map data and display it in vivid 3D. This experimental research looked to find novel and aesthetically engaging ways to visualise a variety of datasets, such as meteorite falls, geotagged social media data or seismic activity.",
+        "seo": " 3D CG Cartography - Procedurally modelled 3D maps of geolocated data sets and geotagged social media data.",
+        "videos": [],
+        "images": [
+            "./images/us_mx_meteor_hollow.png",
+            "./images/us_mx_meteor_rings.png",
+            "./images/us_mx_meteor.png",
+            "./images/us_patriotic.png",
+            "./images/nz_seismic.png",
+            "./images/nz_seismic_voronoi.png"
+        ]
+    },
+    {
+        "title": "Fantasy Map",
+        "slug": "fantasy",
+        "date": "2020",
+        "tags": [ "illustration", "cartography", "concept art"],
+        "prompt": "view",
+        "description": "As part of a RPG worldbuilding project, this fantasy map of the 'Bay Idilica & Sunbridge' features illustrated icons of noteworthy locations in and around the medieval Kingdom of Aquardie. Counties and Duchies are marked with the heraldry of the noble houses who rule them.",
+        "seo": "Custom fantasy map, city and heraldry illustration for D&D (Dungeons & Dragons)  and RPG (Roleplaying Game)",
+        "videos": [],
+        "images": [
+            "./images/sunbridge_00.jpg",
+            "./images/sunbridge_01.jpg",
+            "./images/sunbridge_02.jpg",
+            "./images/sunbridge_03.jpg",
+            "./images/sunbridge_04.jpg",
+            "./images/sunbridge_05.jpg",
+            "./images/sunbridge_06.jpg",
+            "./images/sunbridge_07.jpg",
+            "./images/sunbridge_08.jpg",
+            "./images/sunbridge_09.jpg",
+            "./images/sunbridge_10.jpg",
+            "./images/sunbridge_11.jpg",
+            "./images/sunbridge_12.jpg",
+            "./images/sunbridge_13.jpg",
+            "./images/sunbridge_14.jpg",
+            "./images/sunbridge_15.jpg",
+            "./images/sunbridge_16.jpg",
+            "./images/sunbridge_17.jpg",
+            "./images/sunbridge_18.jpg",
+            "./images/sunbridge_19.jpg",
+            "./images/sunbridge_20.jpg",
+            "./images/sunbridge_21.jpg",
+            "./images/sunbridge_22.jpg",
+            "./images/sunbridge_23.jpg",
+            "./images/sunbridge_24.jpg",
+            "./images/sunbridge_25.jpg",
+            "./images/sunbridge_26.jpg"
+        ]
+    },
+    {
+        "title": "Psychoactive",
+        "slug": "psychoactive",
+        "date": "2019",
+        "tags": [ "Branding", "Illustration", "Animation"],
+        "prompt": "view",
+        "description": "In my time as Creative Lead for <a href='https://www.psychoactive.co.nz/'  target='_blank'>Psychoactive Studios</a>, a Wellington-based digital design agency, I was tasked with developing a cohesive Brand Identity and Strategy that would drive the studios’ visual and written communication. As part of this process, I led a complete rebrand, basing the amphibian theme on the <i>phyllomedusa bicolor</i> psychoactive frog. This involved designing the new tadpole logo, a tessellated frog pattern to be used across social, web and collateral, as well as the website’s copywriting and SEO. I then animated the pattern, using the metamorphosis of the frog as a metaphor for the studio’s development process .",
+        "seo": "Bespoke brand and logo design, baked by a comprehensive brand identity, brand strategy and mesmerising motion graphics, illustration & animation.",
+        "videos": [
+            { "url": "./videos/metamorphoses.mp4", "ratio": "100%"}
+        ],
+        "images": [
+            "./images/frogs.png",
+            "./images/tadpole.png",
+            "./images/dither.png",
+            "./images/frogs_00.png",
+            "./images/frogs_01.png",
+            "./images/frogs_02.png",
+            "./images/metamorphosis_01.png",
+            "./images/metamorphosis_02.png",
+            "./images/metamorphosis_03.png",
+            "./images/metamorphosis_04.png",
+            "./images/metamorphosis_05.png",
+            "./images/metamorphosis_06.png"
+        ]
+    }
+]

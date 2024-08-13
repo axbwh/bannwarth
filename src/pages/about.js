@@ -51,7 +51,7 @@ const About = ({location : {state}}) => {
           <animated.div style={{ transform: parallax.xy.interpolate(intWrap) }}>
             <Title>
               <animated.h1 style={{ transform: parallax.xy.interpolate(intTitle) }}>Alex Bannwarth</animated.h1>
-              <h2>Design Illustration Animation</h2> 
+              <h2>Worldbuilder. 3D Artist. Designer</h2> 
             </Title>
             <hr/>
             <Desc>
@@ -61,9 +61,11 @@ const About = ({location : {state}}) => {
                 <li><a href="mailto:alex@bannwarth.design">alex@bannwarth.design</a></li>
               </ul>
               <div>
-                <p>Hello, I’m Alex Bannwarth, a designer, illustrator and animator living in Wellington, New Zealand, by way of Alsace, France.</p>
-                <p>I’m passionate about creating beautiful digital products and experiences, from brand strategy through to design, illustration, animation and development.</p>
-                <p>Available for freelance and hire.</p>
+                <p>I’m Alex, a 3D Artist and Designer, currently based in Windy Wellington, New Zealand.</p>
+                <p>My goal in life is to create cool stuff and bring to life stories and worlds.</p>
+                <p>I've been lucky to work in heaps of different creative disciplines from creative strategy & branding through to design, illustration, sculpture, animation and development. I love learning and perfecting skills & softwares to tackle fresh creative challenges.</p>
+                <p>Whether through 3D Printing, Game Engines, or Web, I'm just keen to build immersive experiences.</p>
+                <p>If you recon I'd be a good fit for your project, I'm available for freelance or hire.</p>
               </div>
             </Desc>
             <hr/>
