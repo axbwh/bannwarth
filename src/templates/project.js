@@ -185,7 +185,8 @@ const ProjectTemplate = ({ data, location : {state} }) => {
             <animated.hr style={{ transform: parallax.xy.interpolate(intHr) }}/>
             <Gallery>
             {project.images.map((img, i) => {
-              const imageData = img.childImageSharp.fluid
+              const imageData = img.childImageSharp?.fluid
+              if (!imageData) return null;
               return (
                 <Frame width={imageData.presentationWidth} key={`frame-${i}`} >
                   <animated.div style={{ transform: parallax.xy.interpolate(intTitle) }}>
