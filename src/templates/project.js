@@ -33,11 +33,10 @@ export const query = graphql`
             description
             seo
             videos { 
-              url {
-                publicURL
-              }
+              url
               ratio
               autoplay
+              loop
              }
             tags
             images {
@@ -103,7 +102,7 @@ const Vid = styled(Frame)`
   /* @media (max-width: 768px) {
     padding-top: ${props => props.ratio};
   } */
-    video{
+    video, iframe{
       position: absolute;
       top: 0;
       left: 0;
@@ -187,25 +186,13 @@ const ProjectTemplate = ({ data, location : {state} }) => {
             <Gallery>
             {
               project.videos.map((vid, i) => {
-                return (
-                  <Vid key={`vidframe-${i}`} ratio={vid.ratio}>
-                    {
-                      vid.autoplay ? 
-                      <video loop controls autoPlay muted>
-                      <source src={vid.url.publicURL} type="video/mp4" />
-                      </video> :
-                      <video loop controls>
-                      <source src={vid.url.publicURL} type="video/mp4" />
-                      </video>
-                    }
-
-                    {/* <Player
-                    url={vid.url}
-                    width='100%'
-                    height='100%'
-                    /> */}
-                </Vid>
-                )
+                // if (vid.type === "youtube") {
+                  // const videoURL = vid.type === 'local' ? vid.url.publicURL : vid.url;
+                  return (
+                    <Vid key={`vidframe-${i}`} ratio={vid.ratio}>
+                      <ReactPlayer url={vid.url} width='100%' height='100%' playing={vid.autoplay} loop={vid.loop} controls />
+                    </Vid>
+                  )
               })
             }
             {project.images.map((img, i) => {

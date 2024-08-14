@@ -30,6 +30,13 @@ module.exports = {
         path: `${__dirname}/src/data`,
       },
     },
+        {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "videos",
+        path: `${__dirname}/static/videos`,
+      },
+    },
     `gatsby-transformer-json`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
