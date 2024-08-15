@@ -5,16 +5,31 @@
         "date": "2024",
         "tags": [ "3D Printing", "Sculpture", "Character Design"],
         "prompt": "view",
-        "description": "In the process of writing my master’s thesis <i>Exploratory Three Dimensional Cartographic Visualisation of Geolocated Datasets</i> I developed a workflow to process map data and display it in vivid 3D. This experimental research looked to find novel and aesthetically engaging ways to visualise a variety of datasets, such as meteorite falls, geotagged social media data or seismic activity.",
-        "seo": "Fantasy 3D Printable Miniatures",
-        "videos": [],
+        "description": "Fantasy 3D printables miniatures I have been designing and sculpting for use in tabletop roleplaying games or as proxies in tabletop wargaming at 32mm scale.<br><br>These were created in the context of my <a href='/somatia' target='_blank'>Somatia</a> dark-fantasy worldbuilding project. Loosely inspired by the classic fairy tale of the Sleeping Beauty, a.k.a. Briar Rose, I played around with the idea of a princess awakened from a coma through magical means. But in this case, awakened by a bewitched rose hip growing out of her skull, imbuing her with a mystical connection to her fae forebears and occult dominion over plants and vines. Galvanized by ancestral purpose, she brings back the skeletons of long-dead knights and paladins to fight alongside her, puppeteered by enchanted vines.<br><br>The thorns and roses motifs are incorporated throughout the character design, into the heraldry, ornaments, and bases of the characters, both living and dead. The armor designs mix medieval and bronze-age aesthetic, in a romantic interpretation of ancient fae-touched warriors.<br><br>Sculpted in Zbrush, rendered in Blender, and printed using Lychee Slicer on a Sonic Mini 4K.",
+        "seo": "Dark-Fantasy 32mm 3D Printable Miniatures ",
+        "videos": [
+            { "url": "/videos/princess.mp4", "ratio": "100%", "autoplay": true, "loop": true},
+            { "url": "/videos/knight.mp4", "ratio": "100%", "autoplay": true, "loop": true},
+            { "url": "/videos/uknight.mp4", "ratio": "100%", "autoplay": true, "loop": true},
+            { "url": "/videos/paladin.mp4", "ratio": "100%", "autoplay": true, "loop": true},
+            { "url": "/videos/upaladin.mp4", "ratio": "100%", "autoplay": true, "loop": true}
+        ],
         "images": [
-            "./images/us_mx_meteor_hollow.png",
-            "./images/us_mx_meteor_rings.png",
-            "./images/us_mx_meteor.png",
-            "./images/us_patriotic.png",
-            "./images/nz_seismic.png",
-            "./images/nz_seismic_voronoi.png"
+            "./images/miniatures/princess_01.png",
+            "./images/miniatures/princess_02.png",
+            "./images/miniatures/princess_03.png",
+            "./images/miniatures/knight_01.png",
+            "./images/miniatures/knight_02.png",
+            "./images/miniatures/knight_03.png",
+            "./images/miniatures/uknight_01.png",
+            "./images/miniatures/uknight_02.png",
+            "./images/miniatures/uknight_03.png",
+            "./images/miniatures/paladin_01.png",
+            "./images/miniatures/paladin_02.png",
+            "./images/miniatures/paladin_03.png",
+            "./images/miniatures/upaladin_01.png",
+            "./images/miniatures/upaladin_02.png",
+            "./images/miniatures/upaladin_03.png"
         ]
     },
     {
@@ -25,7 +40,7 @@
         "prompt": "view",
         "description": "The World of Somatia is an ongoing fantasy worldbuilding project that grew from my homebrew tabletop roleplaying setting and the maps I created for it.<br><br>In order to interactively visualize and edit various locations, and their political and religious relationships, I developed an interactive 3D map inside of Unreal Engine, synced to an online <a href='http://Notion.so' target='_blank'>Notion.so</a> database.<br><br>With a mix of Blueprint and C++ coding, I am able to easily push and pull location data to and from the note-taking online application.<br><br>The 3D terrain was created in Gaea, with further editing and optimization in Blender and Houdini, and textured in Substance Painter. Shaders are used to achieve close-up texture detail and various animations and effects.<br><br>I was then able to create a narrated fly-through of the Northern Realms using the Unreal Sequencer, with post-processing in After Effects and DaVinci Resolve, and audio production in Adobe Audition. <br><br>The video also showcases <a href='/miniatures' target='_blank'>3D Printable Miniatures</a> I have been sculpting in Zbrush and Blender.",
         "seo": "Worldbuilding Somatia: Interactive fantasy map-making for DnD & Tabletop RPG powered by Unreal Engine, Notion & Gaea.",
-        "videos": [],
+        "videos": [{ "url": "https://www.youtube.com/watch?v=itVaTr1oQo8", "ratio": "56.25%", "autoplay": false, "loop": true}],
         "images": [
             "./images/somatia/sunbridge_00.jpg",
             "./images/somatia/sunbridge_01.jpg",
@@ -105,7 +120,7 @@
         "description": "<a href='https://www.zendetta.com/' target='_blank'>Visit Zendetta.com</a><br/><br/> Award-winning interactive web experience illustrating Karam Alhamad's journey during the Syrian conflict using evocative visual storytelling.<br/><br/>An immersive, interactive WebGL experience. From student protestor through to war journalist, political detainee, refugee, and finally policy advocate, Karam’s story of survival and revolution is just one of millions like it as the Syrian conflict now spans over a decade.<br/><br/>Alongside the talented team of UI designers and developers at <a href='https://www.psychoactive.co.nz/' target='_blank'>Psychoactive Studios</a>, I had the privilege to work with Karam to retell his story. My main responsibilities were to develop the narrative and visual elements through storyboarding, UX design, illustrations, and animations. I also worked closely with Karam on the English script for the website, making sure to keep the narration clear and concise while preserving the authenticity and intimacy of his personal account.<br/><br/>The goal was to condense Karam’s story into a 10-minute interactive experience using visual storytelling to evoke feelings of passion, hope, and empathy. We aimed to shed light on not only his personal story, but the plight of thousands of Syrians who are currently arbitrarily detained by the Al-Assad regime.<br/><br/>Portraying such an intimate yet politically charged story in as accurate a manner as possible meant it was critical to conduct extensive research. While I was able to base a lot of the visuals off Karam’s own photos, videos, and first-hand accounts, I had to supplement my own research and reference gathering.<br/><br/>The site won awards from Awwwards, CSS Design Awards, FWA, Muse Creative Awards, and W3 Awards. <a href='https://www.psychoactive.co.nz/work/zendetta' target='_blank'>Full list</a>",
         "seo": "Designing Zendetta, an immersive, interactive web-experience. From political detainee to refugee and activist, a story of survival and revolution through the Syrian uprising.",
         "videos": [
-            { "url": "https://www.youtube.com/watch?v=KCAD0IAxW_s", "ratio": "100%", "autoplay": false, "loop": true}
+            { "url": "https://www.youtube.com/watch?v=KCAD0IAxW_s", "ratio": "56.25%", "autoplay": false, "loop": true}
         ],
         "images": [
             "./images/zendetta/zendetta_00.png",
@@ -129,7 +144,7 @@
         "description": "I worked at <a href='https://www.psychoactive.co.nz/' target='_blank'>Psychoactive Studios</a> to bring to life immersive and interactive web experiences, with a focus on WebGL-powered 3D websites and narrative experiences such as:<br><br><a href='https://www.psychoactive.co.nz/work/beyond-studio' target='_blank'>Beyond Studio</a> - <a href='https://www.psychoactive.co.nz/work/soul-aether' target='_blank'>Soul Aether</a> - <a href='https://www.psychoactive.co.nz/work/talent-army' target='_blank'>Talent Army</a> - <a href='/zendetta' target='_blank'>Zendetta</a><br><br>In my time as Art Director, I also took on Technical Artist responsibilities, working on Branding, 3D Modeling, UI/UX design, JavaScript & WebGL Development, Concept Art, Storyboarding, Illustration, and Animation. I leveraged my technical and development expertise to empower the studio's artistic vision and capabilities.<br><br>I also developed the studio’s Brand Identity and Strategy, basing the amphibian theme on the <a href='https://en.wikipedia.org/wiki/Phyllomedusa_bicolor' target='_blank'>phyllomedusa bicolor psychoactive frog</a>. This branding process included both tone of voice and visual elements such as the tadpole logo and a tessellated, animated frog pattern inspired by the works of <a href='https://en.wikipedia.org/wiki/M._C._Escher' target='_blank'>M.C. Escher</a>, using the metamorphosis of the frog as a metaphor for the studio’s development process.",
         "seo": "Bespoke brand and logo design, backed by a comprehensive brand identity, brand strategy and mesmerising motion graphics, illustration & animation.",
         "videos": [
-            { "url": "/videos/metamorphoses.mp4", "ratio": "100%", "autoplay": true, "loop": true}
+            { "url": "/videos/metamorphoses.mp4", "ratio": "56.25%", "autoplay": true, "loop": true}
         ],
         "images": [
             "./images/psychoactive/frogs.png",

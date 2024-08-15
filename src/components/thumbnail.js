@@ -15,6 +15,17 @@ const Project = styled(Link)`
   }
 `
 
+const Clip = styled(animated.div)`
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: calc(100vw - var(--gutter) * 2);
+  height: calc( (100vw - var(--gutter) * 2) * 9 / 16);
+  @media (max-width: 768px) {
+    height: calc((100 * var(--vh)) - var(--nav-size) - 6vw - 10px - 35px);
+  }
+`
+
 const int = (x, y) => `translate3d(${x * -0.03}px,${y * -0.03}px,0)`
 
 const Thumbnail = ({ slug, title, imageData, parallax, hovered, ...props }) =>{ 
@@ -27,7 +38,7 @@ const Thumbnail = ({ slug, title, imageData, parallax, hovered, ...props }) =>{
       to={`/${slug}`}
       {...props}
     >
-      <animated.div style={{ transform: parallax.xy.interpolate(int) }}>
+      <Clip style={{ transform: parallax.xy.interpolate(int) }}>
         <animated.div
           style={{
             transform: hover.val.interpolate({
@@ -36,13 +47,13 @@ const Thumbnail = ({ slug, title, imageData, parallax, hovered, ...props }) =>{
             }).interpolate(s => `scale(${s})`),
             opacity: hover.val.interpolate({
               range: [0, 1],
-              output: [0.5, 1]
+              output: [0.4, 0.75]
             }),
           }}
         >
           <Image loading='eager' fluid={imageData} alt={title} backgroundColor={true}/>
         </animated.div>
-      </animated.div>
+      </Clip>
     </Project>
   )}
 

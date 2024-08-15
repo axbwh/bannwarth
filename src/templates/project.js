@@ -44,6 +44,7 @@ export const query = graphql`
                     fluid(maxWidth: 1920, quality: 100) {
                       ...GatsbyImageSharpFluid_withWebp_noBase64
                       presentationWidth
+                      presentationHeight
                     }
                 }
             }
@@ -68,7 +69,8 @@ const Img = styled(Image)`
 
 const Frame = styled.div`
   overflow: hidden;
-  grid-column: ${props => props.width > 1080 ? 'span 3' : 'span 1' }; 
+  grid-column: ${props => props.width == props.height ? 'span 2' : 'span 6' };
+  flex-basis: calc(${props => props.width == props.height ? '33.3333% - (4vw * 2) / 3' : '100%' });
 `
 
 // const Gallery = styled.div`
@@ -79,10 +81,16 @@ const Frame = styled.div`
 // `
 
 const Gallery = styled.div`
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	/* display: grid;
+	grid-template-columns: repeat(auto-fill, repeat(6, 1fr));;
 	grid-column-gap: 4vw;
-  grid-row-gap: 4vw;
+  grid-row-gap: 4vw; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4vw;
+  margin-bottom: 12vw;
+
   margin-bottom: 12vw;
   @media (max-width: 768px) {
      margin-bottom: 40px;
@@ -97,16 +105,22 @@ const Player = styled(ReactPlayer)`
 
 const Vid = styled(Frame)`
   position: relative;
-  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
-  grid-column: span 3;
+  padding-top: calc( ${props => props.ratio  == "100%" ?  "50% - 2vw" : props.ratio}); /* Player ratio: 100 / (1280 / 720) */
+  grid-column:  span ${props => props.ratio == "100%" ?  3 : 6};
+  flex-basis: calc(${props => props.ratio == "100%" ?  "50% - 2vw" : "100%"});
   /* @media (max-width: 768px) {
     padding-top: ${props => props.ratio};
   } */
+    align-self: center; 
     video, iframe{
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
+    }
+    :first-child{
+      padding-top: calc( ${props => props.ratio  == "100%" ?  "100%" : props.ratio});
+      flex-basis: 100%;
     }
 `
 
@@ -199,7 +213,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
               const imageData = img.childImageSharp?.fluid
               if (!imageData) return null;
               return (
-                <Frame width={imageData.presentationWidth} key={`frame-${i}`} >
+                <Frame width={imageData.presentationWidth} height={imageData.presentationHeight} key={`frame-${i}`} >
                   <animated.div style={{ transform: parallax.xy.interpolate(intTitle) }}>
                     <Img
                       fluid={imageData}
