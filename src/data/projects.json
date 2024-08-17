@@ -15,6 +15,7 @@
             { "url": "/videos/upaladin.mp4", "ratio": "100%", "autoplay": true, "loop": true}
         ],
         "images": [
+            "./images/miniatures/minis.png",
             "./images/miniatures/princess_01.png",
             "./images/miniatures/princess_02.png",
             "./images/miniatures/princess_03.png",
