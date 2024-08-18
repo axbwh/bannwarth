@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Link from "./link"
 import Image from "gatsby-image"
 import { animated, useSpring } from "react-spring"
+import {isMobile} from 'react-device-detect'
 
 const Project = styled(Link)`
   width: 100%;
@@ -22,14 +23,16 @@ const Clip = styled(animated.div)`
   width: calc(100vw - var(--gutter) * 2);
   height: calc( (100vw - var(--gutter) * 2) * 9 / 16);
   @media (max-width: 768px) {
-    height: calc((100 * var(--vh)) - var(--nav-size) - 6vw - 10px - 35px);
+    //height: calc((100 * var(--vh)) - var(--nav-size) - 6vw - 10px - 35px);
   }
 `
 
 const int = (x, y) => `translate3d(${x * -0.03}px,${y * -0.03}px,0)`
 
-const Thumbnail = ({ slug, title, imageData, parallax, hovered, ...props }) =>{ 
-  
+const Thumbnail = ({ slug, title, imageData, parallax, hovered, ...props }) =>{
+
+ const isSmall = typeof window !== "undefined" && window.innerWidth < 768;
+
   const [hover, set] = useSpring(() => ({ val: 0, config: { mass: 1, tension: 280, friction: 200 } }))
   
   set({val: hovered === slug ? 1 : 0})
@@ -47,7 +50,7 @@ const Thumbnail = ({ slug, title, imageData, parallax, hovered, ...props }) =>{
             }).interpolate(s => `scale(${s})`),
             opacity: hover.val.interpolate({
               range: [0, 1],
-              output: [0.4, 0.75]
+              output: isMobile || isSmall ? [1, 1] : [0.5, 0.9],
             }),
           }}
         >

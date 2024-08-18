@@ -14,6 +14,7 @@ import Layout from "../components/layout"
 import Link from '../components/link'
 import { design } from "../components/utils"
 import { Title, Desc, Wrap } from "../components/styles"
+import Lightbox from "../components/lightbox"
 
 
 export const query = graphql`
@@ -53,7 +54,7 @@ export const query = graphql`
 `
 
 const Img = styled(Image)`
-      max-width: ${props => props.fluid.presentationWidth}px;
+      /* max-width: ${props => props.fluid.presentationWidth}px; */
       margin: 0 auto;
 `
 
@@ -171,10 +172,43 @@ const ProjectTemplate = ({ data, location : {state} }) => {
   }))
 
   const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(state?.linked ? 0 : Mouse.pos.r)}))
+  const [lclip, setLClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(state?.linked ? 0 : Mouse.pos.r)}))
+
+  const [lbImage, setLImage] = useState(project.images[0])
+
+  const handleLBox = (e) => {
+    console.log("here")
+    e.preventDefault()
+    Mouse.set(e)
+
+    
+
+    const options =  { to : async (next, cancel) => {
+      await next ({ mask: Mouse.calc(0), config: { immediate : true, duration: 0.0001} })
+      await next ({ mask: Mouse.calc(Mouse.pos.r), config: { immediate : false, duration: 300 }})
+    }} 
+
+
+    setLClip({ ...options, onRest: () => {
+      console.log("done")
+    }})   
+    
+  }
 
   return (
+    <> 
+    {/* <Lightbox clip={lclip} setClip={setLClip}>
+          <animated.div style={{ transform: parallax.xy.interpolate(intTitle) }}>
+            <Img
+              fluid={lbImage.childImageSharp?.fluid}
+              key={`lightbox`}
+              alt={`lightbox`}
+              loading='eager'
+              backgroundColor={true}
+            />
+          </animated.div>
+      </Lightbox> */}
       <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} description={project.seo} color={design.white} setScroll={setScroll} setParallax={setParallax}>
-      
       <Header to="/about" setClip={setClip} parallax={parallax}>
         <Bookmarks setClip={setClip} scroll={scroll} projects={projects} index={index} />
       </Header>
@@ -213,7 +247,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
               const imageData = img.childImageSharp?.fluid
               if (!imageData) return null;
               return (
-                <Frame width={imageData.presentationWidth} height={imageData.presentationHeight} key={`frame-${i}`} >
+                <Frame onClick={handleLBox} width={imageData.presentationWidth} height={imageData.presentationHeight} key={`frame-${i}`} >
                   <animated.div style={{ transform: parallax.xy.interpolate(intTitle) }}>
                     <Img
                       fluid={imageData}
@@ -230,6 +264,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
           </animated.div>
         </Wrap>
       </Layout>
+    </>
   )
 }
 

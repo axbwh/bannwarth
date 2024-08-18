@@ -13,12 +13,26 @@ const Mask = styled(animated.div)`
 const Hole = styled(animated.svg)`
   width: 100vw;
   height: calc(100 * var(--vh));
-  fill: ${design.black.bg};
+  //fill: ${design.black.bg};
   pointer-events: none;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9;
+`
+
+const LBox= styled(animated.div)`
+  width: 100vw;
+  height: calc(100 * var(--vh));
+  //fill: ${design.black.bg};
+  //pointer-events: none;
+  background-color:${design.white.bg};
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 8;
+  clip-path: url(#LHole);
 `
 
 // const Trim = styled(Hole)`
@@ -30,16 +44,35 @@ const Hole = styled(animated.svg)`
 //   pointer-events: none;
 // `
 
-const Trans = ({ children, clip, setClip, ...rest }) => {
+const Lightbox = ({ children, clip, setClip, ...rest }) => {
   const [size, setSize] = useState({x: 1920, y: 1080})
   const [isClipDone, setIsClipDone] = useState(false)
+  const [inner, setInner] = useState("not clicked")
+
+  const handleClick = (e) => {
+    setInner("clicked")
+    console.log('click')
+    e.preventDefault()
+    Mouse.set(e)
+
+    const options =  { to : async (next, cancel) => {
+      await next ({ mask: Mouse.calc(Mouse.pos.r), config: { immediate : true, duration: 0.00001} })
+      await next ({ mask: Mouse.calc(0), config: { immediate : false, duration: 300 }})
+    }}
+
+
+     setClip({ ...options, onRest: () => {
+       console.log('heyhey')
+    }})   
+    
+  }
 
   useLayoutEffect(() => {
     const handleClip = () => {
       setIsClipDone(false)
       Mouse.setRad()
       setSize({x: window.innerWidth, y: window.innerHeight})
-      setClip({ mask: Mouse.calc(Mouse.pos.r), trim: Mouse.calc(0) })
+      setClip({ mask: Mouse.calc(0), trim: Mouse.calc(0), config: { immediate : true, duration: 0.00001}})
     }
 
     handleClip()
@@ -51,12 +84,10 @@ const Trans = ({ children, clip, setClip, ...rest }) => {
 
   return (
     <>
-      <Wrap {...rest}>{children}</Wrap>
-      
-        <Hole style={{display : isClipDone ? 'none' : 'block'}} viewBox={`0 0 ${size.x} ${size.y}`}>
+        <Hole viewBox={`0 0 ${size.x} ${size.y}`}>
           <defs>
-            <mask id="hole">
-              <rect width="100%" height="100%" fill="white" />
+            <clipPath id="LHole">
+               {/* <rect width="100%" height="100%" fill="white" />  */}
               <animated.circle
                 r={clip.mask.interpolate((x, y, r) => r)}
                 cx={clip.mask.interpolate((x, y, r) => x)}
@@ -64,21 +95,12 @@ const Trans = ({ children, clip, setClip, ...rest }) => {
                 fill="black"
                 onRest={() => setIsClipDone(true)}
               />
-            </mask>
+            </clipPath>
           </defs>
-          <rect x="0" y="0" width="100%" height="100%" mask="url(#hole)" />
         </Hole>
-
-        <Hole style={{display : isClipDone ? 'none' : 'block'}} viewBox={`0 0 ${size.x} ${size.y}`}>
-          <animated.circle
-            r={clip.trim.interpolate((x, y, r) => r)}
-            cx={clip.trim.interpolate((x, y, r) => x)}
-            cy={clip.trim.interpolate((x, y, r) => y)}
-            onRest={() => setIsClipDone(true)}
-          />
-        </Hole>
+        <LBox onClick={handleClick}>{children}</LBox>
     </>
   )
 }
 
-export default Trans
+export default Lightbox

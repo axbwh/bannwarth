@@ -44,17 +44,22 @@ body{
 const Layout = ({ title, description, to, top, children, parallax, setClip, ...rest }) => {
 
   useLayoutEffect(() => {
+    let vh = 0;
     const handleHeight = () => {
       const vHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
       const vWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
-      const vh = vHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      if(vh != vHeight * 0.01){
+        vh = vHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+      }
     }
 
     handleHeight()
     window.addEventListener("resize", handleHeight)
+    window.addEventListener("gestureend", handleHeight)
     return () => {
       window.removeEventListener("resize", handleHeight)
+      window.addEventListener("gestureend", handleHeight)
     }
   }, [])
 
