@@ -17,7 +17,7 @@ import { design } from "./utils"
 const GlobalStyle = createGlobalStyle`
 :root{
   touch-action: pan-x pan-y;
-  height: 100% 
+  height: 100%;
   --nav-padding: 30px;
   --nav-size: calc( var(--nav-padding) * 2 + 19px);
   --gutter: 20vw;
@@ -59,6 +59,9 @@ const Layout = ({ title, description, to, top, children, parallax, setClip, ...r
     handleHeight()
     window.addEventListener("resize", handleHeight)
     window.addEventListener("gestureend", handleHeight)
+    document.addEventListener('gesturestart', function (e) {
+      e.preventDefault();
+    });
     return () => {
       window.removeEventListener("resize", handleHeight)
       window.addEventListener("gestureend", handleHeight)

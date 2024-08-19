@@ -175,15 +175,16 @@ const ProjectTemplate = ({ data, location : {state} }) => {
   const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(state?.linked ? 0 : Mouse.pos.r)}))
   const [lclip, setLClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(state?.linked ? 0 : Mouse.pos.r)}))
   const [lbOpen, setLbOpen] = useState(false)
+  const [lbHide, setLbHide] = useState(true)
   const [lbImage, setLImage] = useState(project.images[0])
 
   const handleLBox = (e, img) => {
-    console.log("here")
+    console.log(lbHide)
+    setLbScroll({top: 0, speed: 0})
     setLImage(img)
     e.preventDefault()
     Mouse.set(e)
-
-    
+    setLbHide(false)
 
     const options =  { to : async (next, cancel) => {
       await next ({ mask: Mouse.calc(0), config: { immediate : true, duration: 0.0001} })
@@ -199,7 +200,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
 
   return (
     <> 
-    <Lightbox clip={lclip} setClip={setLClip} open={lbOpen} setOpen={setLbOpen} setScroll={setLbScroll} setParallax={setParallax}>
+    <Lightbox clip={lclip} setClip={setLClip}  hide={lbHide} setHide={setLbHide} open={lbOpen} setOpen={setLbOpen} setScroll={setLbScroll} scroll={lbScroll} setParallax={setParallax}>
             <Img
               fluid={lbImage.childImageSharp?.fluid}
               key={`lightbox`}
