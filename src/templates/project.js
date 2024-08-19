@@ -166,6 +166,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
   const index = projects.map(p => p.slug).indexOf(project.slug)
   
   const [scroll, setScroll] = useState(() => ({top: 0, speed: 0}))
+  const [lbScroll, setLbScroll] = useState(() => ({top: 0, speed: 0}))
   const [parallax, setParallax] = useSpring(() => ({
     xy: [0, 0],
     config: { mass: 10, tension: 550, friction: 140 },
@@ -173,11 +174,12 @@ const ProjectTemplate = ({ data, location : {state} }) => {
 
   const [clip, setClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(state?.linked ? 0 : Mouse.pos.r)}))
   const [lclip, setLClip] = useSpring( () => ({trim: Mouse.calc(0), mask: Mouse.calc(state?.linked ? 0 : Mouse.pos.r)}))
-
+  const [lbOpen, setLbOpen] = useState(false)
   const [lbImage, setLImage] = useState(project.images[0])
 
-  const handleLBox = (e) => {
+  const handleLBox = (e, img) => {
     console.log("here")
+    setLImage(img)
     e.preventDefault()
     Mouse.set(e)
 
@@ -185,20 +187,19 @@ const ProjectTemplate = ({ data, location : {state} }) => {
 
     const options =  { to : async (next, cancel) => {
       await next ({ mask: Mouse.calc(0), config: { immediate : true, duration: 0.0001} })
-      await next ({ mask: Mouse.calc(Mouse.pos.r), config: { immediate : false, duration: 300 }})
+      await next ({ mask: Mouse.calc(Mouse.pos.r), open: 100, config: { immediate : false, duration: 300 }})
     }} 
 
 
     setLClip({ ...options, onRest: () => {
-      console.log("done")
+      setLbOpen(true)
     }})   
     
   }
 
   return (
     <> 
-    {/* <Lightbox clip={lclip} setClip={setLClip}>
-          <animated.div style={{ transform: parallax.xy.interpolate(intTitle) }}>
+    <Lightbox clip={lclip} setClip={setLClip} open={lbOpen} setOpen={setLbOpen} setScroll={setLbScroll} setParallax={setParallax}>
             <Img
               fluid={lbImage.childImageSharp?.fluid}
               key={`lightbox`}
@@ -206,8 +207,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
               loading='eager'
               backgroundColor={true}
             />
-          </animated.div>
-      </Lightbox> */}
+      </Lightbox>
       <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} description={project.seo} color={design.white} setScroll={setScroll} setParallax={setParallax}>
       <Header to="/about" setClip={setClip} parallax={parallax}>
         <Bookmarks setClip={setClip} scroll={scroll} projects={projects} index={index} />
@@ -247,9 +247,10 @@ const ProjectTemplate = ({ data, location : {state} }) => {
               const imageData = img.childImageSharp?.fluid
               if (!imageData) return null;
               return (
-                <Frame onClick={handleLBox} width={imageData.presentationWidth} height={imageData.presentationHeight} key={`frame-${i}`} >
+                <Frame onClick={(e) => handleLBox(e, img)} width={imageData.presentationWidth} height={imageData.presentationHeight} key={`frame-${i}`} >
                   <animated.div style={{ transform: parallax.xy.interpolate(intTitle) }}>
                     <Img
+                      style={{cursor: "zoom-in"}}
                       fluid={imageData}
                       key={`${project.title}-${i}`}
                       alt={`${project.title}-${i}`}

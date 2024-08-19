@@ -32,7 +32,11 @@ const LBox= styled(animated.div)`
   top: 0;
   left: 0;
   z-index: 8;
-  clip-path: url(#LHole);
+  cursor: zoom-out;
+  /* @media (max-width: 768px) {
+     padding: 40px;
+  }  */
+  /* clip-path: url(#LHole); */
 `
 
 // const Trim = styled(Hole)`
@@ -44,14 +48,14 @@ const LBox= styled(animated.div)`
 //   pointer-events: none;
 // `
 
-const Lightbox = ({ children, clip, setClip, ...rest }) => {
+const Lightbox = ({ children, clip, setClip, open, setOpen, ...rest }) => {
   const [size, setSize] = useState({x: 1920, y: 1080})
   const [isClipDone, setIsClipDone] = useState(false)
-  const [inner, setInner] = useState("not clicked")
 
   const handleClick = (e) => {
-    setInner("clicked")
-    console.log('click')
+    console.log("click")
+    setOpen(false)
+    setIsClipDone(false)
     e.preventDefault()
     Mouse.set(e)
 
@@ -62,7 +66,7 @@ const Lightbox = ({ children, clip, setClip, ...rest }) => {
 
 
      setClip({ ...options, onRest: () => {
-       console.log('heyhey')
+        // setOpen(true)
     }})   
     
   }
@@ -70,16 +74,17 @@ const Lightbox = ({ children, clip, setClip, ...rest }) => {
   useLayoutEffect(() => {
     const handleClip = () => {
       setIsClipDone(false)
+      setOpen(false)
       Mouse.setRad()
       setSize({x: window.innerWidth, y: window.innerHeight})
-      setClip({ mask: Mouse.calc(0), trim: Mouse.calc(0), config: { immediate : true, duration: 0.00001}})
+      setClip({ mask: Mouse.calc(0), trim: Mouse.calc(0),  config: { immediate : true, duration: 0.00001}})
     }
 
     handleClip()
-    // window.addEventListener("resize", handleClip)
-    // return () => {
-    //   window.removeEventListener("resize", handleClip)
-    // }
+    window.addEventListener("resize", handleClip)
+    return () => {
+      window.removeEventListener("resize", handleClip)
+    }
   }, [])
 
   return (
@@ -98,7 +103,11 @@ const Lightbox = ({ children, clip, setClip, ...rest }) => {
             </clipPath>
           </defs>
         </Hole>
-        <LBox onClick={handleClick}>{children}</LBox>
+        <LBox style={{clipPath : open ? 'none' : 'url(#LHole)'}} onClick={handleClick}>
+            <Wrap {...rest}>
+            {children}
+            </Wrap>
+        </LBox>
     </>
   )
 }
