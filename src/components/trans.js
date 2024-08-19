@@ -35,6 +35,16 @@ const Hole = styled(animated.svg)`
 const Trans = ({ children, clip, setClip, ...rest }) => {
   const [size, setSize] = useState({x: 1920, y: 1080})
   const {isDone, setDone} = useContext(GlobalStateContext);
+  const [href, setHref] = useState(`url(#hole)`)
+ 
+
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined') {
+      const currentURL = window.location.href;
+      const maskUrl = `url(${currentURL}#hole)`;
+      setHref(maskUrl);
+    }
+  }, []);
 
   useLayoutEffect(() => {
     const handleSize = () => {
@@ -56,7 +66,6 @@ const Trans = ({ children, clip, setClip, ...rest }) => {
       Mouse.setRad()
       setClip({ mask: Mouse.calc(Mouse.pos.r), trim: Mouse.calc(0), onRest: () => {
           setDone(true)
-          console.log(isDone)
       }})
       setDone(false)
     }
@@ -67,7 +76,7 @@ const Trans = ({ children, clip, setClip, ...rest }) => {
     <>
       <Wrap {...rest}>{children}</Wrap>
       
-        <Hole  done={isDone} viewBox={`0 0 ${size.x} ${size.y}`}>
+        <Hole  done={isDone} width="100%" height="100%" viewBox={`0 0 ${size.x} ${size.y}`}>
           <defs>
             <mask id="hole">
               <rect width="100%" height="100%" fill="white" />
@@ -79,10 +88,10 @@ const Trans = ({ children, clip, setClip, ...rest }) => {
               />
             </mask>
           </defs>
-          <rect x="0" y="0" width="100%" height="100%" mask="url(#hole)" />
+          <rect x="0" y="0" width="100%" height="100%" mask={href} />
         </Hole>
 
-        <Hole  done={isDone} viewBox={`0 0 ${size.x} ${size.y}`}>
+        <Hole  width="100%" height="100%" done={isDone} viewBox={`0 0 ${size.x} ${size.y}`}>
           <animated.circle
             r={clip.trim.interpolate((x, y, r) => r)}
             cx={clip.trim.interpolate((x, y, r) => x)}

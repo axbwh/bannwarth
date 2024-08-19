@@ -48,8 +48,8 @@ const LBox= styled(animated.div)`
   cursor: zoom-out;
   background-color: rgba(255, 255, 255, 0.8);
   pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
-  clip-path: ${({ open }) => (open ? 'none' : 'url(#LHole)')};
-  -webkit-clip-path: ${({ open }) => (open ? 'none' : 'url(#LHole)')};
+  clip-path: ${({ open, href }) => (open ? 'none' : 'url(' + href +'#LHole)')};
+  -webkit-clip-path: ${({ open, href }) => (open ? 'none' : 'url(' + href +'#LHole)')};
 `
 
 const ImgWrap = styled.div`
@@ -80,9 +80,9 @@ const ImgWrap = styled.div`
 const Lightbox = ({ children, clip, setClip, open, setOpen, hide, setHide, ...rest }) => {
   const [size, setSize] = useState({x: 1920, y: 1080})
   const scrollRef = useRef(null)
+  const [href, setHref] = useState('')
 
   const handleClick = (e) => {
-    console.log("click")
     setOpen(false)
     setHide(false)
     e.preventDefault()
@@ -102,6 +102,12 @@ const Lightbox = ({ children, clip, setClip, open, setOpen, hide, setHide, ...re
     }})   
     
   }
+
+  useLayoutEffect(() => {
+    if (typeof window !== 'undefined') {
+      setHref(window.location.href);
+    }
+  }, []);
 
   useLayoutEffect(() => {
     const handleSize = () => {
@@ -130,7 +136,7 @@ const Lightbox = ({ children, clip, setClip, open, setOpen, hide, setHide, ...re
 
   return (
     <>
-        <Clipper viewBox={`0 0 ${size.x} ${size.y}`}>
+        <Clipper width="100%" height="100%" viewBox={`0 0 ${size.x} ${size.y}`}>
           <defs>
             <clipPath id="LHole">
                {/* <rect width="100%" height="100%" fill="white" />  */}
@@ -143,7 +149,7 @@ const Lightbox = ({ children, clip, setClip, open, setOpen, hide, setHide, ...re
             </clipPath>
           </defs>
         </Clipper>
-        <LBox open={open} hide={hide} onClick={handleClick}>
+        <LBox open={open} href={href} hide={hide} onClick={handleClick} WebkitClipPath={open ? 'none' : 'url('+ href +'#LHole)'} webkitClipPath={open ? 'none' : 'url('+ href +'#LHole)'} clipPath={open ? 'none' : 'url('+ href +'#LHole)'}>
         <Wrapping
             color={design.white}
             autoHide={false}

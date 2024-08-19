@@ -179,7 +179,6 @@ const ProjectTemplate = ({ data, location : {state} }) => {
   const [lbImage, setLImage] = useState(project.images[0])
 
   const handleLBox = (e, img) => {
-    console.log(lbHide)
     setLbScroll({top: 0, speed: 0})
     setLImage(img)
     e.preventDefault()
