@@ -27,7 +27,7 @@ const Hole = styled(animated.svg)`
 let Wrapping = styled(SimpleBar)`
   width: 100vw;
   height: calc(100 * var(--vh));
-  background-color: rgba(255,255,255,0.8);
+  background-color: rgba(255,255,255,0.7);
   /* color: grey; */
   /* ${ props => `background-color: ${props.color.bg};
   color: ${props.color.fg};`} */
