@@ -1,9 +1,10 @@
-import React, { useLayoutEffect, useState } from "react"
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react"
 import * as Mouse from "../components/mouse"
 import Wrap from "../components/wrap"
 import { animated } from "react-spring"
 import styled from "styled-components"
 import { design } from "./utils"
+import { GlobalStateContext } from "./GlobalStateContext"
 
 const Mask = styled(animated.div)`
   width: 100vw;
@@ -19,6 +20,7 @@ const Hole = styled(animated.svg)`
   top: 0;
   left: 0;
   z-index: 9;
+  display : ${({ done }) => (done ? 'none' : 'block')};
 `
 
 // const Trim = styled(Hole)`
@@ -32,28 +34,40 @@ const Hole = styled(animated.svg)`
 
 const Trans = ({ children, clip, setClip, ...rest }) => {
   const [size, setSize] = useState({x: 1920, y: 1080})
-  const [isClipDone, setIsClipDone] = useState(false)
+  const {isDone, setDone} = useContext(GlobalStateContext);
 
   useLayoutEffect(() => {
-    const handleClip = () => {
-      setIsClipDone(false)
+    const handleSize = () => {
       Mouse.setRad()
       setSize({x: window.innerWidth, y: window.innerHeight})
-      setClip({ mask: Mouse.calc(Mouse.pos.r), trim: Mouse.calc(0) })
     }
+    handleSize()
+    window.addEventListener("resize", handleSize)
+    window.addEventListener("gestureend", handleSize)
+    return () => {
+      window.removeEventListener("resize", handleSize)
+      window.removeEventListener("gestureend", handleSize)
+    }
+  }, [])
 
+  useEffect(() => {
+    const handleClip = () => {
+      setSize({x: window.innerWidth, y: window.innerHeight})
+      Mouse.setRad()
+      setClip({ mask: Mouse.calc(Mouse.pos.r), trim: Mouse.calc(0), onRest: () => {
+          setDone(true)
+          console.log(isDone)
+      }})
+      setDone(false)
+    }
     handleClip()
-    // window.addEventListener("resize", handleClip)
-    // return () => {
-    //   window.removeEventListener("resize", handleClip)
-    // }
   }, [])
 
   return (
     <>
       <Wrap {...rest}>{children}</Wrap>
       
-        <Hole style={{display : isClipDone ? 'none' : 'block'}} viewBox={`0 0 ${size.x} ${size.y}`}>
+        <Hole  done={isDone} viewBox={`0 0 ${size.x} ${size.y}`}>
           <defs>
             <mask id="hole">
               <rect width="100%" height="100%" fill="white" />
@@ -62,19 +76,18 @@ const Trans = ({ children, clip, setClip, ...rest }) => {
                 cx={clip.mask.interpolate((x, y, r) => x)}
                 cy={clip.mask.interpolate((x, y, r) => y)}
                 fill="black"
-                onRest={() => setIsClipDone(true)}
               />
             </mask>
           </defs>
           <rect x="0" y="0" width="100%" height="100%" mask="url(#hole)" />
         </Hole>
 
-        <Hole style={{display : isClipDone ? 'none' : 'block'}} viewBox={`0 0 ${size.x} ${size.y}`}>
+        <Hole  done={isDone} viewBox={`0 0 ${size.x} ${size.y}`}>
           <animated.circle
             r={clip.trim.interpolate((x, y, r) => r)}
             cx={clip.trim.interpolate((x, y, r) => x)}
             cy={clip.trim.interpolate((x, y, r) => y)}
-            onRest={() => setIsClipDone(true)}
+            onRest={() => setDone(true)}
           />
         </Hole>
     </>

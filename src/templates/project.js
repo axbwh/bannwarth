@@ -207,6 +207,7 @@ const ProjectTemplate = ({ data, location : {state} }) => {
               alt={`lightbox`}
               loading='eager'
               backgroundColor={true}
+              objectFit={'contain'}
             />
       </Lightbox>
       <Layout to={`/#${project.slug}`} clip={clip} setClip={setClip} title={project.title} description={project.seo} color={design.white} setScroll={setScroll} setParallax={setParallax}>

@@ -9,10 +9,12 @@ import React, { useLayoutEffect } from "react"
 import PropTypes from "prop-types"
 import { createGlobalStyle } from "styled-components"
 
+
 import SEO from "./seo"
 import "../fonts/fonts.css"
 import Trans from "./trans"
 import { design } from "./utils"
+import { GlobalStateProvider } from "./GlobalStateContext"
 
 const GlobalStyle = createGlobalStyle`
 :root{
@@ -31,6 +33,21 @@ const GlobalStyle = createGlobalStyle`
 }
 *{
   box-sizing: border-box;
+}
+.simplebar-track{
+  cursor: pointer;
+  pointer-events: auto;
+}
+.simplebar-scrollbar::before {
+  background: grey;
+  opacity: 1;
+}
+.simplebar-scrollbar.simplebar-visible:before {
+    opacity: 1;
+    transition: opacity 0s linear;
+    right: 4px;
+    border-radius: 0px;
+    //outline: 1px solid ${design.black.fg};
 }
 
 body{
@@ -59,9 +76,9 @@ const Layout = ({ title, description, to, top, children, parallax, setClip, ...r
     handleHeight()
     window.addEventListener("resize", handleHeight)
     window.addEventListener("gestureend", handleHeight)
-    document.addEventListener('gesturestart', function (e) {
-      e.preventDefault();
-    });
+    // window.addEventListener('gesturestart', function (e) {
+    //   e.preventDefault();
+    // });
     return () => {
       window.removeEventListener("resize", handleHeight)
       window.addEventListener("gestureend", handleHeight)
@@ -72,11 +89,13 @@ const Layout = ({ title, description, to, top, children, parallax, setClip, ...r
     <>    
       <SEO title={title} description={description}/>
       <GlobalStyle />
-      <Trans setClip={setClip} {...rest}>
-        <main>
-        {children}
-        </main>
-      </Trans>
+      <GlobalStateProvider>
+        <Trans setClip={setClip} {...rest}>
+          <main>
+          {children}
+          </main>
+        </Trans>
+      </GlobalStateProvider>
     </>
   )
 }

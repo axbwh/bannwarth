@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from "react"
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react"
 import * as Mouse from "../components/mouse"
 import Wrap from "../components/wrap"
 import { animated } from "react-spring"
@@ -12,12 +12,11 @@ const Mask = styled(animated.div)`
   height: calc(100 * var(--vh));
 `
 
-const Hole = styled(animated.svg)`
+const Clipper = styled(animated.svg)`
   width: 100vw;
   height: calc(100 * var(--vh));
   //fill: ${design.black.bg};
   pointer-events: none;
-  touch-action:none;
   position: fixed;
   top: 0;
   left: 0;
@@ -48,16 +47,25 @@ const LBox= styled(animated.div)`
   z-index: 8;
   cursor: zoom-out;
   background-color: rgba(255, 255, 255, 0.8);
+  pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
   clip-path: ${({ open }) => (open ? 'none' : 'url(#LHole)')};
   -webkit-clip-path: ${({ open }) => (open ? 'none' : 'url(#LHole)')};
 `
 
 const ImgWrap = styled.div`
-    display: block;
+    display: flex;
+    flex-direction: column;
+    position: relative;
     min-height: calc(100 * var(--vh));
+    width:100%;
     
     align-content: center;
     justify-content:center;
+    div{
+       display: inline-block;
+       position: relative;
+       width: 100%;
+    }
 `
 
 // const Trim = styled(Hole)`
@@ -87,6 +95,7 @@ const Lightbox = ({ children, clip, setClip, open, setOpen, hide, setHide, ...re
 
 
      setClip({ ...options, onRest: () => {
+        setHide(true)
         if (scrollRef.current) {
             scrollRef.current.scrollTo(0,0)
         }
@@ -95,6 +104,20 @@ const Lightbox = ({ children, clip, setClip, open, setOpen, hide, setHide, ...re
   }
 
   useLayoutEffect(() => {
+    const handleSize = () => {
+      Mouse.setRad()
+      setSize({x: window.innerWidth, y: window.innerHeight})
+    }
+    handleSize()
+    window.addEventListener("resize", handleSize)
+    window.addEventListener("gestureend", handleSize)
+    return () => {
+      window.removeEventListener("resize", handleSize)
+      window.removeEventListener("gestureend", handleSize)
+    }
+  }, [])
+
+  useEffect(() => {
     const handleClip = () => {
       setOpen(false)
       setHide(true)
@@ -102,17 +125,12 @@ const Lightbox = ({ children, clip, setClip, open, setOpen, hide, setHide, ...re
       setSize({x: window.innerWidth, y: window.innerHeight})
       setClip({ mask: Mouse.calc(0), trim: Mouse.calc(0),  config: { immediate : true, duration: 0.00001}})
     }
-
     handleClip()
-    window.addEventListener("resize", handleClip)
-    return () => {
-      window.removeEventListener("resize", handleClip)
-    }
   }, [])
 
   return (
     <>
-        <Hole viewBox={`0 0 ${size.x} ${size.y}`}>
+        <Clipper viewBox={`0 0 ${size.x} ${size.y}`}>
           <defs>
             <clipPath id="LHole">
                {/* <rect width="100%" height="100%" fill="white" />  */}
@@ -124,7 +142,7 @@ const Lightbox = ({ children, clip, setClip, open, setOpen, hide, setHide, ...re
               />
             </clipPath>
           </defs>
-        </Hole>
+        </Clipper>
         <LBox open={open} hide={hide} onClick={handleClick}>
         <Wrapping
             color={design.white}
@@ -134,7 +152,9 @@ const Lightbox = ({ children, clip, setClip, open, setOpen, hide, setHide, ...re
             }}
             >
             <ImgWrap>
+                <div>
                 {children}
+                </div>
             </ImgWrap>
         </Wrapping>
         </LBox>
