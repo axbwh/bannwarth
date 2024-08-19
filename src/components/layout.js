@@ -16,6 +16,8 @@ import { design } from "./utils"
 
 const GlobalStyle = createGlobalStyle`
 :root{
+  touch-action: pan-x pan-y;
+  height: 100% 
   --nav-padding: 30px;
   --nav-size: calc( var(--nav-padding) * 2 + 19px);
   --gutter: 20vw;
