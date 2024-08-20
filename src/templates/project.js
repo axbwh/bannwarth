@@ -55,7 +55,7 @@ export const query = graphql`
 
 const Img = styled(Image)`
       /* max-width: ${props => props.fluid.presentationWidth}px; */
-      margin: 0 auto;
+      margin: 0 ;
 `
 
 // const Frame = styled.div`

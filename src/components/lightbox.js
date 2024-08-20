@@ -63,8 +63,12 @@ const ImgWrap = styled.div`
     justify-content:center;
     div{
        display: inline-block;
+       box-sizing: content-box;
        position: relative;
        width: 100%;
+       height: auto ;
+       margin: 0;
+       padding: 0 ;
     }
 `
 
@@ -158,9 +162,9 @@ const Lightbox = ({ children, clip, setClip, open, setOpen, hide, setHide, ...re
             }}
             >
             <ImgWrap>
-                <div>
+
                 {children}
-                </div>
+
             </ImgWrap>
         </Wrapping>
         </LBox>
