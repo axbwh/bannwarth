@@ -119,10 +119,10 @@ const Vid = styled(Frame)`
       left: 0;
       width: 100%;
     }
-    :first-child{
+    /* :first-child{
       padding-top: calc( ${props => props.ratio  == "100%" ?  "100%" : props.ratio});
       flex-basis: 100%;
-    }
+    } */
 `
 
 const Next = styled(Link)`

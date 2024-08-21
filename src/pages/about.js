@@ -51,7 +51,7 @@ const About = ({location : {state}}) => {
           <animated.div style={{ transform: parallax.xy.interpolate(intWrap) }}>
             <Title>
               <animated.h1 style={{ transform: parallax.xy.interpolate(intTitle) }}>Alex Bannwarth</animated.h1>
-              <h2>Worldbuilder. 3D Artist. Designer</h2> 
+              <h2>Worldbuilder. 3D Artist. Creative Director</h2> 
             </Title>
             <hr/>
             <Desc>
