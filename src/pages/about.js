@@ -56,16 +56,16 @@ const About = ({location : {state}}) => {
             <hr/>
             <Desc>
               <ul>
-                <li><a href="https://www.instagram.com/bannwarth.design/" target='_blank' rel="noopener noreferrer">Instagram</a></li>
-                <li><a href="https://vimeo.com/user18232035" target='_blank' rel="noopener noreferrer">Vimeo</a></li>
+                <li><a href="https://www.linkedin.com/in/alex-bannwarth/" target='_blank' rel="noopener noreferrer">Linkedin</a></li>
+                <li><a href="https://www.artstation.com/bannwarth" target='_blank' rel="noopener noreferrer">Artstation</a></li> 
                 <li><a href="mailto:alex@bannwarth.design">alex@bannwarth.design</a></li>
               </ul>
               <div>
                 <p>I’m Alex, a 3D Artist and Designer, currently based in Windy Wellington, New Zealand.</p>
                 <p>My goal in life is to create cool stuff and bring to life stories and worlds.</p>
-                <p>I've been lucky to work in heaps of different creative disciplines from creative strategy & branding through to design, illustration, sculpture, animation and development. I love learning and perfecting skills & softwares to tackle fresh creative challenges.</p>
+                <p>I've been lucky to work in heaps of different creative disciplines from creative strategy & branding through to design, illustration, sculpture, animation and development. I love learning and perfecting skills & software to tackle fresh creative challenges.</p>
                 <p>Whether through 3D Printing, Game Engines, or Web, I'm just keen to build immersive experiences.</p>
-                <p>If you recon I'd be a good fit for your project, I'm available for freelance or hire.</p>
+                <p>If you reckon I'd be a good fit for your project, I'm available for freelance or hire.</p>
               </div>
             </Desc>
             <hr/>

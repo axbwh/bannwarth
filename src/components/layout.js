@@ -18,7 +18,7 @@ import { GlobalStateProvider } from "./GlobalStateContext"
 
 const GlobalStyle = createGlobalStyle`
 :root{
-  touch-action: pan-x pan-y;
+  /* touch-action: pan-x pan-y; */
   height: 100%;
   --nav-padding: 30px;
   --nav-size: calc( var(--nav-padding) * 2 + 19px);

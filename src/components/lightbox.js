@@ -32,7 +32,7 @@ let Wrapping = styled(SimpleBar)`
   color: ${props.color.fg};`} */
   position: fixed;
   main{
-    touch-action: pan-x pan-y;
+    /* touch-action: pan-x pan-y; */
     position: relative;
   }
 `

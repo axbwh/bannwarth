@@ -69,7 +69,7 @@ const Desc = styled(animated.div)`
     padding: 0;
     margin: 0;
     text-transform: capitalize;
-    line-height: 30px;
+    /* line-height: 1.5; */
     a {
       padding: 10px 0;
 
@@ -77,6 +77,10 @@ const Desc = styled(animated.div)`
         font-variation-settings: "wght" 500, "wdth" 85, "slnt" 0;
         letter-spacing: 2px;
       }
+    }
+
+    li + li {
+      margin-top: 10px;
     }
 
     @media (max-width: 768px) {

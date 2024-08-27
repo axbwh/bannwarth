@@ -24,6 +24,9 @@ const Title = styled(Slide)`
       margin-top: calc(var(--nav-size));
     }
     font-weight: bold;
+    -webkit-text-stroke: 3px rgba(255,255,255,0.4);
+    text-stroke: 3px rgba(255,255,255,0.4);
+    paint-order: stroke fill;
   }
 `
 

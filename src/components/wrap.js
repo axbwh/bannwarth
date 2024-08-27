@@ -16,8 +16,8 @@ let Wrapping = styled(SimpleBar)`
   ${ props => `background-color: ${props.color.bg};
   color: ${props.color.fg};`}
   position: fixed;
+  /* touch-action: pan-x pan-y; */
   main{
-    touch-action: pan-x pan-y;
     position: relative;
   }
 `
